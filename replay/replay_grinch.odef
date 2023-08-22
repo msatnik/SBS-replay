@@ -1,6 +1,6 @@
 # Sample output definition file
-#block bb.grinch_tdc.*
-#block bb.grinch_adc.*
+block bb.grinch_tdc.*
+block bb.grinch_adc.*
 
 # for the Panguin Plots for GEn 
 th2d h_GRINCH_TDC_vs_ID 'TDC Leading Edge (LE) vs TDC Channel : GRINCH ; TDC Channel ; LE (ns)' bb.grinch_tdc.tdcelemID[I] bb.grinch_tdc.tdc[I] 510 -0.5 509.5 100 0 500
