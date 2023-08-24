@@ -266,7 +266,7 @@ void replay_gen(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=1, con
 
   // File to record cuts accounting information
   prefix = gSystem->Getenv("LOG_DIR");
-  analyzer->SetSummaryFile(Form("%s/replay_gen_%d_stream%d_%d_seg%d_%d.log", prefix.Data(), runnum,
+  analyzer->SetSummaryFile(Form("%s/%s_%d_stream%d_%d_seg%d_%d.log", prefix.Data(), fname_prefix, runnum,
 				0, maxstream, firstsegment, lastsegment));
 
   prefix = gSystem->Getenv("SBS_REPLAY");

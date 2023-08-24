@@ -1066,7 +1066,8 @@ bb.gem.suppressfirstlast = 0
 bb.gem.filterflag1D = 1 # basically, apply cluster sum thresholds and require at least 2 strips in the cluster
 bb.gem.filterflag2D = -1
 
-bb.gem.usestriptimingcut = 1
+
+bb.gem.usestriptimingcut = 1  
 bb.gem.m0.maxstrip_t0 =     85.5
 bb.gem.m0.maxstrip_tcut =     26.9
 bb.gem.m1.maxstrip_t0 =     88.2
@@ -1087,19 +1088,19 @@ bb.gem.m7.maxstrip_tcut =     25.4
 
 bb.gem.useopticsconstraint = 1
 bb.gem.useslopeconstraint = 1
+bb.gem.useforwardopticsconstraint = 0
 
 bb.gem.constraintwidth_theta = 0.1
 bb.gem.constraintwidth_phi = 0.07
 
-bb.gem.useforwardopticsconstraint = 1
 bb.gem.dxfp0 = 0
 bb.gem.dyfp0 = 0
 bb.gem.dxpfp0 = 0
 bb.gem.dypfp0 = 0
 
-bb.gem.dxfpcut = 0.01
+bb.gem.dxfpcut = 0.015
 bb.gem.dyfpcut = 0.002
-bb.gem.dxpfpcut = 0.004
+bb.gem.dxpfpcut = 0.008
 bb.gem.dypfpcut = 0.001
 
 bb.gem.ADCasym_cut = 0.5
@@ -1163,7 +1164,7 @@ bb.gem.m7.threshold_clustersum = 770
 
 ---------[ 2022-11-07 00:00:00 ] # start GEN-3:
 
-# disable timing cuts initially
+
 bb.gem.usestriptimingcut = 1
 
 # new strip time cuts reflecting latency shift for back layer:
@@ -1233,7 +1234,7 @@ bb.gem.useforwardopticsconstraint = 0
 
 bb.gem.useopticsconstraint = 1
 bb.gem.useslopeconstraint = 1
-bb.gem.useforwardopticsconstraint = 1
+bb.gem.useforwardopticsconstraint = 0
 
 
 
@@ -1253,6 +1254,7 @@ bb.gem.m4.maxstrip_t0 = 92.3
 bb.gem.m5.maxstrip_t0 = 95.7
 bb.gem.m6.maxstrip_t0 = 95.5
 bb.gem.m7.maxstrip_t0 = 92.3
+
 
 bb.gem.usestriptimingcut = 1
 bb.gem.filterflag1D = -1
@@ -1324,4 +1326,4 @@ bb.gem.useforwardopticsconstraint = 0
 
 bb.gem.useopticsconstraint = 1
 bb.gem.useslopeconstraint = 1
-bb.gem.useforwardopticsconstraint = 1
+bb.gem.useforwardopticsconstraint = 0

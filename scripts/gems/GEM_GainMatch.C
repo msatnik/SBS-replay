@@ -355,7 +355,11 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   //Populating data in the TChain branchs?
   // cout << "Setting branch addresses: ";
 
+  C->SetBranchStatus("bb.tr.n",1);
   C->SetBranchStatus("bb.tr.vz",1);
+  C->SetBranchStatus("bb.gem.track.chi2ndf",1);
+  C->SetBranchStatus("bb.gem.track.nhits",1);
+  C->SetBranchStatus("bb.etot_over_p",1);
   C->SetBranchStatus("bb.tr.p",1);
   C->SetBranchStatus("bb.ps.e",1);
   C->SetBranchStatus("bb.sh.e",1);
@@ -482,11 +486,13 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   
   long nevent=0;
   //make some 1D and 2D histograms
-  TH2D *hADCasym_module = new TH2D("hADCasym_module","",nmodules,-0.5,nmodules-0.5,500,-1.01,1.01);
+  TH2D *hADCasym_module = new TH2D("hADCasym_module","ADC Asymm vs Module Before Gain;Module;ADC Asymm",nmodules,-0.5,nmodules-0.5,500,-1.01,1.01);
   TH2D *hNstripX_module = new TH2D("hNstripX_module","",nmodules,-0.5,nmodules-0.5,12,0.5,12.5);
   TH2D *hNstripY_module = new TH2D("hNstripY_module","",nmodules,-0.5,nmodules-0.5,12,0.5,12.5);
+  TH2D *hADCasym_APV = new TH2D("hADCasym_APV","ADC Asymm vs APV Before Gain;APV;ADC Asymm",nAPVmaxX*nAPVmaxY*nmodules,-0.5,nAPVmaxX*nAPVmaxY*nmodules-0.5,500,-1.01,1.01);
+  TH2D *hADCasym_APV_corrected = new TH2D("hADCasym_APV_corrected","ADC Asymm vs APV After Gain;APV;ADC Asymm",nAPVmaxX*nAPVmaxY*nmodules,-0.5,nAPVmaxX*nAPVmaxY*nmodules-0.5,500,-1.01,1.01);
 
-  TH2D *hADCavg_module = new TH2D("hADCavg_module","",nmodules,-0.5,nmodules-0.5,1500,0,30000);
+  TH2D *hADCavg_module = new TH2D("hADCavg_module","ADC Average vs Module Before Gain;Module;0.5*(Clust U ADC + Clust V ADC)",nmodules,-0.5,nmodules-0.5,1500,0,30000);
   TH1D *hADCavg_allhits = new TH1D("hADCavg_allhits","",1500,0,30000);
 
   TH2D *hStripADCsumU_module = new TH2D("hStripADCsumU_module","",nmodules,-0.5,nmodules-0.5,1500,0,15000);
@@ -497,7 +503,6 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   //int nAPVmax = 
 
   int treenum=0, currenttreenum=0;
-  
   //cout << "starting event loop:" << endl;
   //Need to understand what this loop is for and what every conditional is for
   while( C->GetEntry( nevent++ ) ){
@@ -513,7 +518,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
     if( ngoodhits > MAXNHITS ) continue;
     if( ntracks > MAXNHITS ) continue;
     
-    if( nevent % 1000 == 0 ) cout << "event " << nevent << endl;
+    if( nevent % 100000 == 0 ) cout << "event " << nevent << endl;
     //loop over hits:
     int itrack = int(besttrack);
     //cout << "itrack = " << itrack << endl;
@@ -521,10 +526,8 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
     int NTRACKS = int(ntracks);
 
     //cout << "ntracks = " << NTRACKS << endl;
-    
     if(passedcut && NTRACKS >= 1 && itrack == 0){
-
-
+      
       int nhits = int(ngoodhits);
       //	cout << "nhits = " << nhits << endl;
       
@@ -582,9 +585,9 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 	      hit_nstripu[ihit] >= 2 && hit_nstripv[ihit] >= 2 &&
 	      xAPVmax*128 < nstripx_mod[module] && yAPVmax*128<nstripy_mod[module] ){
 
-	    // cout << "filling histograms " << endl;
+	    //cout << "filling histograms " << endl;
 
-	    // cout << "apvxy hist index = " << yAPVmax + nAPVmaxY*xAPVmax+nAPVmaxX*nAPVmaxY*module << endl;
+	    //cout << "apvxy hist index = " << yAPVmax + nAPVmaxY*xAPVmax+nAPVmaxX*nAPVmaxY*module << endl;
 	    // cout << "apvx hist index = " << xAPVmax + nAPVmaxX*module << endl;
 	    // cout << "apvy hist index = " << yAPVmax + nAPVmaxY*module << endl;
 	    //More 1D histograms    
@@ -592,7 +595,11 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 
 	    ( (TH1D*) (*hADCasym_vs_APVX)[xAPVmax + nAPVmaxX*module] )->Fill( hit_ADCasym[ihit] );
 	    ( (TH1D*) (*hADCasym_vs_APVY)[yAPVmax + nAPVmaxY*module] )->Fill( hit_ADCasym[ihit] );
+
+	    hADCasym_APV->Fill(yAPVmax + nAPVmaxY*xAPVmax+nAPVmaxX*nAPVmaxY*module,hit_ADCasym[ihit]);
+
 	    //cout << "done histogram fill" << endl;
+
 	    
 	  }
 	}
@@ -603,7 +610,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   //cout << "Event " << nevent << " done" << endl;
 
   //Fitting landau's to something
-  TFitResultPtr fitadcall = hADCavg_allhits->Fit("landau","S","",2000.0,25000.);
+  TFitResultPtr fitadcall = hADCavg_allhits->Fit("landau","qS","",2000.0,25000.);
 
   double MPV_all = ( (TF1*) hADCavg_allhits->GetListOfFunctions()->FindObject("landau") )->GetParameter("MPV");
 
@@ -651,7 +658,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
       
       
       
-      htemp->Fit("gaus","S","",htemp->GetBinCenter(binlo),htemp->GetBinCenter(binhi) );
+      htemp->Fit("gaus","qS","",htemp->GetBinCenter(binlo),htemp->GetBinCenter(binhi) );
       
       TF1 *fitfunc = (TF1*) htemp->GetListOfFunctions()->FindObject("gaus");
       
@@ -684,7 +691,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 
     if( htemp->GetEntries() >= 100. ){
 
-      TFitResultPtr ADCfit_module = htemp->Fit("landau","S","",ADCcut,25000.0);
+      TFitResultPtr ADCfit_module = htemp->Fit("landau","qS","",ADCcut,25000.0);
       double MPV_mod = ( (TF1*) (htemp->GetListOfFunctions()->FindObject("landau") ) )->GetParameter("MPV");
 
       // cout << "module " << i << " MPV = " << MPV_mod << endl;
@@ -1088,7 +1095,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   YGain_APV_all->SetMarkerStyle(kFullDotLarge);
   YGain_APV_all->SetLineColor(0);
 	
-  gStyle->SetOptStat("neMRou");
+  //gStyle->SetOptStat("neMRou");
   TH1D *Gain_histo_all = new TH1D("hGainCoefficient_Histo","",200,0,2);
   TH1D *XGain_histo_all = new TH1D("hUX_GainCoefficient_Histo","",200,0,2);	
   TH1D *YGain_histo_all = new TH1D("hVY_GainCoefficient_Histo","",200,0,2);
@@ -1179,8 +1186,8 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 
   TH1D *hADCavg_allhits_corrected = new TH1D("hADCavg_allhits_corrected","",1500,0,30000);
   TH1D *hADCasym_allhits_corrected = new TH1D("hADCasym_allhits_corrected","",250,-1.01,1.01);
-  TH2D *hADCavg_module_corrected = new TH2D("hADCavg_module_corrected","",nmodules,-0.5,nmodules-0.5,1500,0,30000);
-  TH2D *hADCasym_module_corrected = new TH2D("hADCasym_module_corrected",";module;Corrected ADC asym",nmodules,-0.5,nmodules-0.5,250,-1.01,1.01);
+  TH2D *hADCavg_module_corrected = new TH2D("hADCavg_module_corrected","ADC Average vs Module After Gain;Module;0.5*(Clust U ADC + Clust V ADC)",nmodules,-0.5,nmodules-0.5,1500,0,30000);
+  TH2D *hADCasym_module_corrected = new TH2D("hADCasym_module_corrected","ADC Asymm vs Module After Gain;Module;ADC Asymm",nmodules,-0.5,nmodules-0.5,250,-1.01,1.01);
 
   TH2D *hADCasym_vs_ADCavg_allhits_corrected = new TH2D("hADCasym_vs_ADCavg_allhits_corrected",";ADC average; ADC asym",1000,0,30000,250,-1.01,1.01);
   
@@ -1235,7 +1242,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
     if( ngoodhits > MAXNHITS ) continue;
     if( ntracks > MAXNHITS ) continue;
     
-    if( nevent % 1000 == 0 ) cout << "event " << nevent << endl;
+    if( nevent % 100000 == 0 ) cout << "event " << nevent << endl;
     //loop over hits:
     int itrack = int(besttrack);
     //cout << "itrack = " << itrack << endl;
@@ -1310,7 +1317,8 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 	      
 	    hADCavg_allhits_corrected->Fill( 0.5*(hit_ADCU[ihit]*Xgaintemp+hit_ADCV[ihit]*Ygaintemp) );
 	    hADCavg_module_corrected->Fill( hit_module[ihit], 0.5*(hit_ADCU[ihit]*Xgaintemp+hit_ADCV[ihit]*Ygaintemp) );
-
+	    hADCasym_APV_corrected->Fill(yAPVmax + nAPVmaxY*xAPVmax+nAPVmaxX*nAPVmaxY*hit_module[ihit],(hit_ADCU[ihit]*Xgaintemp-hit_ADCV[ihit]*Ygaintemp) / (hit_ADCU[ihit]*Xgaintemp+hit_ADCV[ihit]*Ygaintemp));
+	    
 	    hADCasym_allhits_corrected->Fill( (hit_ADCU[ihit]*Xgaintemp-hit_ADCV[ihit]*Ygaintemp) /
 					      (hit_ADCU[ihit]*Xgaintemp+hit_ADCV[ihit]*Ygaintemp) );
 
@@ -1321,6 +1329,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 	    hADCasym_vs_ADCavg_allhits_corrected->Fill( 0.5*(hit_ADCU[ihit]*Xgaintemp+hit_ADCV[ihit]*Ygaintemp),
 							(hit_ADCU[ihit]*Xgaintemp-hit_ADCV[ihit]*Ygaintemp) /
 							(hit_ADCU[ihit]*Xgaintemp+hit_ADCV[ihit]*Ygaintemp) );
+
 	    // hADCasym_module->Fill( hit_module[ihit], hit_ADCasym[ihit] );
 	    // hNstripX_module->Fill( hit_module[ihit], hit_nstripu[ihit] );
 	    // hNstripY_module->Fill( hit_module[ihit], hit_nstripv[ihit] );
@@ -1372,7 +1381,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
 
   outfile_db << endl << "# Module average gains relative to target ADC peak position of " << target_ADC << endl;
 
-  TFitResultPtr ADCfit_all = hADCavg_allhits_corrected->Fit("landau","S","",2000,25000.0);
+  TFitResultPtr ADCfit_all = hADCavg_allhits_corrected->Fit("landau","qS","",2000,25000.0);
 
   MPV_all = ( (TF1*) hADCavg_allhits_corrected->GetListOfFunctions()->FindObject("landau") )->GetParameter("MPV");
 
@@ -1416,7 +1425,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
     htemp = hADCavg_module_corrected->ProjectionY( hname.Data(), i+1, i+1 );
 
     if( htemp->GetEntries() >= 5000 ){
-      TFitResultPtr ADCfit_module = htemp->Fit("landau","S","",2000,25000.0);
+      TFitResultPtr ADCfit_module = htemp->Fit("landau","qS","",2000,25000.0);
       
       double MPV_mod = ( (TF1*) (htemp->GetListOfFunctions()->FindObject("landau") ) )->GetParameter("MPV");
       
@@ -1435,26 +1444,26 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
       thresh_strip_all->SetPoint(i,i+1,thresh_strip_mod);
       thresh_cluster_all->SetPoint(i,i+1,thresh_cluster_mod);
 
-      cout << "# Module " << i << " average gain relative to target ADC of " << target_ADC << " = " << Gmod << endl;
+      //cout << "# Module " << i << " average gain relative to target ADC of " << target_ADC << " = " << Gmod << endl;
       TString dbentry;
       dbentry.Form("%s.m%d.modulegain = %g",detname.Data(),i,Gmod);
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
-
+      //cout << dbentry << endl;
+      /*  Thresholds are no longer set by this script
       dbentry.Form( "%s.m%d.threshold_sample = %g", detname.Data(), i, thresh_sample_mod );
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
+      //cout << dbentry << endl;
 
       dbentry.Form( "%s.m%d.threshold_stripsum = %g", detname.Data(), i, thresh_strip_mod );
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
+      //cout << dbentry << endl;
 
       dbentry.Form( "%s.m%d.threshold_clustersum = %g", detname.Data(), i, thresh_cluster_mod );
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
-
-      outfile_db << endl << endl;
+      //cout << dbentry << endl;
       
+      outfile_db << endl << endl;
+      */
     } else {
       thresh_sample_all->SetPoint(i,i+1,thresh_sample);
       thresh_strip_all->SetPoint(i,i+1,thresh_strip);
@@ -1463,22 +1472,22 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
       TString dbentry;
       dbentry.Form("%s.m%d.modulegain = %g",detname.Data(),i,1.0);
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
-
+      //cout << dbentry << endl;
+      /*  Thresholds are no longer set by this script
       dbentry.Form( "%s.m%d.threshold_sample = %g", detname.Data(), i, thresh_sample );
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
+      //cout << dbentry << endl;
 
       dbentry.Form( "%s.m%d.threshold_stripsum = %g", detname.Data(), i, thresh_strip );
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
+      //cout << dbentry << endl;
 
       dbentry.Form( "%s.m%d.threshold_clustersum = %g", detname.Data(), i, thresh_cluster );
       outfile_db << dbentry << endl;
-      cout << dbentry << endl;
+      //cout << dbentry << endl;
 
       outfile_db << endl << endl;
-      
+      */
     }
   }
   thresh_sample_all ->Draw("AP");
@@ -1491,4 +1500,29 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   outfile_db << endl;
   fout->Write();
 
+  TString outfilepdf(outfname);
+  outfilepdf.ReplaceAll(".root",".pdf");
+
+
+  ////// Here we create all the plots for the output PDF ///////
+  TCanvas *c2 = new TCanvas("c2","",1200,1000);
+  c2->Divide(2,2);
+
+  c2->cd(1);
+  hADCasym_module->Draw("colz");
+
+  c2->cd(2);
+  hADCasym_module_corrected->Draw("colz");
+
+  c2->cd(3);
+  hADCasym_APV->Draw("colz");
+
+  c2->cd(4);
+  hADCasym_APV_corrected->Draw("colz");
+  
+  TCanvas *c3 = new TCanvas("c3","",800,600);
+  Gain_APV_all->Draw("AP");
+
+  c2->Print(outfilepdf + "(");
+  c3->Print(outfilepdf + ")");
 }

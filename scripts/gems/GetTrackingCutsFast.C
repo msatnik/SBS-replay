@@ -11,6 +11,41 @@
 #include "TString.h"
 #include "TClonesArray.h"
 
+
+void DrawHist(TH1D *hist, vector<double> value, int flag = 0){
+
+  //flag = 0 for calorimeter plots
+  //flag = 1 for ADC plots
+  //flag = 2 for time plots
+
+  hist->Draw();
+
+  TPaveText *pt;
+  if(flag == 0){
+    pt = new TPaveText(0.12,0.75,0.35,0.88,"ndc");
+    pt->AddText(Form("Center = %g",value[0]));
+    pt->AddText(Form("Width = %g",value[1]));
+  }
+  else if(flag == 1){
+    pt = new TPaveText(0.55,0.75,0.75,0.88,"ndc");
+    pt->AddText(Form("Threshold = %g",value[0]));
+  }
+  else if(flag == 2){
+    pt = new TPaveText(0.12,0.75,0.35,0.88,"ndc");
+    if(value.size() == 2){
+      pt->AddText(Form("Mean = %g",value[0]));
+      pt->AddText(Form("#sigma = %g",value[1]));
+    }
+    if(value.size() == 1){
+      pt->AddText(Form("Cut = %g",value[0]));
+    }
+ }
+  pt->SetFillColor(0);
+  pt->Draw("same");
+
+
+}
+
 void FitGaus_FWHM( TH1D *htest, double thresh=0.5 ){
   int binmax = htest->GetMaximumBin();
   int binlow = binmax, binhigh = binmax;
@@ -23,10 +58,10 @@ void FitGaus_FWHM( TH1D *htest, double thresh=0.5 ){
   double xlow = htest->GetBinCenter(binlow);
   double xhigh = htest->GetBinCenter(binhigh);
 
-  htest->Fit("gaus","S","",xlow, xhigh);
+  htest->Fit("gaus","q0S","",xlow, xhigh);
 }
 
-void GetTrackingCutsFast( const char *configfilename, const char *outfilename="GMNtrackingcuts_temp.root", int nmodules=12 ){
+void GetTrackingCutsFast( const char *configfilename, const char *outfilename="GENtrackingcuts.root", int nmodules=8 ){
 
   ifstream infile(configfilename);
   
@@ -56,11 +91,11 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
   const int MAXNHITS = 1000;
   const int MAXNCLUST = 1;
 
-  //C->SetBranchStatus("bb.etot_over_p",1);
 
   C->SetBranchStatus("*",0);
   
   double EPS, ESH;
+  C->SetBranchStatus("bb.etot_over_p",1);
   C->SetBranchStatus("bb.ps.e",1);
   C->SetBranchStatus("bb.sh.e",1);
   C->SetBranchAddress("bb.ps.e",&EPS);
@@ -245,16 +280,16 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
   TFile *fout = new TFile(outfilename,"RECREATE");
   
   //Next: initialize histograms and output file:
-  TH1D *hdxfcp = new TH1D("hdxfcp", ";x_{track}-x_{fcp} (m);", 500, -0.15, 0.15 );
-  TH1D *hdyfcp = new TH1D("hdyfcp", ";y_{track}-y_{fcp} (m);", 500, -0.15, 0.15 );
-  TH1D *hdxbcp = new TH1D("hdxbcp", ";x_{track}+x'_{track}z_{bcp}-x_{bcp} (m);", 500, -0.15, 0.15 );
-  TH1D *hdybcp = new TH1D("hdybcp", ";y_{track}+y'_{track}z_{bcp}-y_{bcp} (m);", 500, -0.15, 0.15 );
+  TH1D *hdxfcp = new TH1D("hdxfcp", "Front Constraint X;x_{track}-x_{fcp} (m);", 500, -0.15, 0.15 );
+  TH1D *hdyfcp = new TH1D("hdyfcp", "Front Constraint Y;y_{track}-y_{fcp} (m);", 500, -0.15, 0.15 );
+  TH1D *hdxbcp = new TH1D("hdxbcp", "Back Constraint X;x_{track}+x'_{track}z_{bcp}-x_{bcp} (m);", 500, -0.15, 0.15 );
+  TH1D *hdybcp = new TH1D("hdybcp", "Back Constraint Y;y_{track}+y'_{track}z_{bcp}-y_{bcp} (m);", 500, -0.15, 0.15 );
 
   TH2D *hdxdyfcp = new TH2D("hdxdyfcp", ";y_{track}-y_{fcp} (m);x_{track}-x_{fcp} (m)", 150, -0.15, 0.15, 150, -0.15, 0.15 );
   TH2D *hdxdybcp = new TH2D("hdxdybcp", ";y_{track}+y'_{track}z_{bcp}-y_{bcp} (m);x_{track}+x'_{track}z_{bcp}-x_{bcp} (m)", 150, -0.15, 0.15, 150, -0.15, 0.15 );
 
-  TH1D *hdthcp = new TH1D("hdthcp", "; x'_{track}-x'_{constraint};", 300, -0.1, 0.1 );
-  TH1D *hdphcp = new TH1D("hdphcp", "; y'_{track}-y'_{constraint};", 300, -0.1, 0.1 );
+  TH1D *hdthcp = new TH1D("hdthcp", "Track #theta Constraint; x'_{track}-x'_{constraint};", 300, -0.1, 0.1 );
+  TH1D *hdphcp = new TH1D("hdphcp", "Track #phi Constraint; y'_{track}-y'_{constraint};", 300, -0.1, 0.1 );
 
   //Forget TClonesArrays, use TH2D for module-dependent stuff:
   TH2D *hADCmaxsamp_vs_module = new TH2D("hADCmaxsamp_vs_module",";module;max strip max ADC sample", nmodules, -0.5, nmodules-0.5, 1500,0,3000);
@@ -263,11 +298,11 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
   TH2D *hADCclust_vs_module = new TH2D("hADCclust_vs_module",";module;cluster sum", nmodules, -0.5, nmodules-0.5, 1500,0,30000);
 
 
-  TH2D *hdeltat_mod = new TH2D("hdeltat_mod", "Standard hit times ;module;#Delta t (ns)", nmodules, -0.5, nmodules-0.5, 200,-50,50);
-  TH2D *hdeltat_deconv_mod = new TH2D("hdeltat_deconv_mod", "Deconvoluted hit times ;module;#Delta t (ns)", nmodules, -0.5, nmodules-0.5, 200,-100,100);
-  TH2D *hdeltat_fit_mod = new TH2D("hdeltat_fit_mod", "Fitted hit times ;module;#Delta t (ns)", nmodules, -0.5, nmodules-0.5, 200,-50,50);
+  TH2D *hdeltat_mod = new TH2D("hdeltat_mod", "Standard hit times ;module;#Delta t (ns)", nmodules, -0.5, nmodules-0.5, 200,-30,30);
+  TH2D *hdeltat_deconv_mod = new TH2D("hdeltat_deconv_mod", "Deconvoluted hit times ;module;#Delta t (ns)", nmodules, -0.5, nmodules-0.5, 200,-80,80);
+  TH2D *hdeltat_fit_mod = new TH2D("hdeltat_fit_mod", "Fitted hit times ;module;#Delta t (ns)", nmodules, -0.5, nmodules-0.5, 200,-30,30);
 
-  TH2D *hADCasym_mod = new TH2D("hADCasym_mod", ";module; ADC asymmetry", nmodules,-0.5,nmodules-0.5, 200,-1.0,1.0);
+  TH2D *hADCasym_mod = new TH2D("hADCasym_mod", ";module; ADC asymmetry", nmodules,-0.5,nmodules-0.5, 200,-0.8,0.8);
   TH2D *hADCasym_deconv_mod = new TH2D("hADCasym_deconv_mod", ";module; ADC asymmetry", nmodules,-0.5,nmodules-0.5, 200,-1.0,1.0);
 
   TH2D *hADCratio_mod = new TH2D("hADCratio_mod", ";module; ADC V/U ratio", nmodules,-0.5,nmodules-0.5, 200,0.0,2.0);
@@ -314,7 +349,7 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       GlobalCut->UpdateFormulaLeaves();
     }
 
-    if( nevent % 10000 == 0 ) cout << nevent << endl;
+    if( nevent % 100000 == 0 ) cout << nevent << endl;
 
     bool passedcut = GlobalCut->EvalInstance(0) != 0;
 
@@ -386,6 +421,32 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
     }
   }
 
+  //// Here we create a pdf which will be filled in the following loop ////
+
+  TString outfilepdf = outfilename;
+  outfilepdf.ReplaceAll(".root",".pdf");
+
+  TString outfilepdf_time = outfilename;
+  outfilepdf_time.ReplaceAll(".root","_timecuts.pdf");
+
+  TCanvas *c1 = new TCanvas("c1","",1600,1200);
+  c1->Divide(2,3);
+  c1->cd(1);
+  DrawHist(hdxfcp,{hdxfcp->GetMean(),hdxfcp->GetRMS()*4.5});
+  c1->cd(2);
+  DrawHist(hdyfcp,{hdyfcp->GetMean(),hdyfcp->GetRMS()*4.5});
+  c1->cd(3);
+  DrawHist(hdxbcp,{hdxbcp->GetMean(),hdxbcp->GetRMS()*4.5});
+  c1->cd(4);
+  DrawHist(hdybcp,{hdybcp->GetMean(),hdybcp->GetRMS()*4.5});
+  c1->cd(5);
+  DrawHist(hdthcp,{hdthcp->GetMean(),hdthcp->GetRMS()*4.5});
+  c1->cd(6);
+  DrawHist(hdphcp,{hdphcp->GetMean(),hdphcp->GetRMS()*4.5});
+
+  c1->Print(outfilepdf + "(");  //Open the pdf and make the first page
+
+  ///////////////////////////////////////////////////////////////////
   double nsigma = 4.5;
   
   double maxstrip_t0[nmodules][2];
@@ -408,6 +469,9 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
   for( int imod=0; imod<nmodules; imod++ ){
 
     TH1D *hADCtemp = hADCmaxsamp_vs_module->ProjectionY("hADCtemp",imod+1,imod+1);
+    ///Create canvas which will hold the ADC plots //////
+    TCanvas *c= new TCanvas("c","",1200,1200);
+    c->Divide(1,3);
 
     if( hADCtemp->GetEntries() >= 300 ){
 
@@ -415,10 +479,18 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
 
       while( hADCtemp->Integral(1,binlow) < 0.001*hADCtemp->GetEntries() ){binlow++;}
 
-      double threshsamp = hADCtemp->GetBinLowEdge(binlow);
+      vector<double> threshsamp;
+      threshsamp.push_back(hADCtemp->GetBinLowEdge(binlow));
       
       TString dbline;
-      dbfile << dbline.Format("bb.gem.m%d.threshold_sample = %12.5g", imod, threshsamp ) << endl;
+      dbfile << dbline.Format("bb.gem.m%d.threshold_sample = %12.5g", imod, threshsamp[0] ) << endl;
+
+      ///// Add this histogram to the pdf output
+      TH1D *htemp = hADCtemp;
+      htemp->SetName(Form("hsample_m%i",imod));
+      htemp->SetTitle(Form("Module %i Sample ADC",imod));
+      c->cd(1);
+      DrawHist(htemp,threshsamp,1);
     }
 
     hADCtemp = hADCmaxstrip_vs_module->ProjectionY("hADCtemp",imod+1,imod+1);
@@ -428,11 +500,18 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       
       while( hADCtemp->Integral(1,binlow) < 0.001*hADCtemp->GetEntries() ){binlow++;}
       
-      double threshstrip = hADCtemp->GetBinLowEdge(binlow);
+      vector<double> threshstrip;
+      threshstrip.push_back(hADCtemp->GetBinLowEdge(binlow));
       
       TString dbline;
-      dbfile << dbline.Format("bb.gem.m%d.threshold_stripsum = %12.5g", imod, threshstrip ) << endl;
-      //dbfile << dbline.Format("bb.gem.m%d.threshold_clustersum = %12.5g", imod, 2.0*threshstrip ) << endl << endl;
+      dbfile << dbline.Format("bb.gem.m%d.threshold_stripsum = %12.5g", imod, threshstrip[0] ) << endl;
+
+      ///// Add this histogram to the pdf output
+      TH1D *htemp = hADCtemp;
+      htemp->SetName(Form("hstrip_m%i",imod));
+      htemp->SetTitle(Form("Module %i Strip Sum ADC",imod));
+      c->cd(2);
+      DrawHist(htemp,threshstrip,1);
     }
 
     hADCtemp = hADCclust_vs_module->ProjectionY("hADCtemp",imod+1,imod+1);
@@ -442,14 +521,24 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       
       while( hADCtemp->Integral(1,binlow) < 0.001*hADCtemp->GetEntries() ){binlow++;}
       
-      double thresh = hADCtemp->GetBinLowEdge(binlow);
+      vector<double> thresh;
+      thresh.push_back(hADCtemp->GetBinLowEdge(binlow));
       
       TString dbline;
-      dbfile << dbline.Format("bb.gem.m%d.threshold_clustersum = %12.5g", imod, thresh ) << endl << endl;
+      dbfile << dbline.Format("bb.gem.m%d.threshold_clustersum = %12.5g", imod, thresh[0] ) << endl << endl;
+
+      ///// Add this histogram to the pdf output
+      TH1D *htemp = hADCtemp;
+      htemp->SetName(Form("hclust_m%i",imod));
+      htemp->SetTitle(Form("Module %i Cluster Sum ADC",imod));
+      c->cd(3);
+      DrawHist(htemp,thresh,1);
     }
     
-   
-    
+
+    TCanvas *c2= new TCanvas("c2","",1600,1200);
+    c2->Divide(2,3);
+
     TString hname;
     TH1D *htempU, *htempV;
 
@@ -457,7 +546,7 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
     htempV = hmaxstrip_tV_mod->ProjectionY( "htempV", imod+1, imod+1 );
     
     if( htempU->GetEntries() >= 300 ){
-    
+      
       FitGaus_FWHM( htempU, 0.3 );
       FitGaus_FWHM( htempV, 0.3 );
       
@@ -473,6 +562,27 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_t0 = %10.4g %10.4g",imod,maxstrip_t0[imod][0], maxstrip_t0[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_tsigma = %10.4g %10.4g",imod,maxstrip_tsigma[imod][0], maxstrip_tsigma[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_tcut = %10.4g %10.4g", imod, nsigma, nsigma ) << endl << endl;
+      
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> resultsU, resultsV;
+      resultsU.push_back(maxstrip_t0[imod][0]);
+      resultsU.push_back(maxstrip_tsigma[imod][0]);
+      resultsV.push_back(maxstrip_t0[imod][1]);
+      resultsV.push_back(maxstrip_tsigma[imod][1]);
+
+      TH1D *htU = htempU;
+      htU->SetName(Form("htmaxstripU_m%i",imod));
+      htU->SetTitle(Form("Module %i U Time;time (ns)",imod));
+      c2->cd(1);
+      DrawHist(htU,resultsU,2);
+      fitfuncU->Draw("same");
+
+      TH1D *htV = htempV;
+      htV->SetName(Form("htmaxstripV_m%i",imod));
+      htV->SetTitle(Form("Module %i V Time;time (ns)",imod));
+      c2->cd(2);
+      DrawHist(htV,resultsV,2);
+      fitfuncV->Draw("same");
     }
 
     htempU = hmaxstrip_tU_deconv_mod->ProjectionY("htempU", imod+1,imod+1);
@@ -495,8 +605,29 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_t0_deconv = %10.4g %10.4g",imod,maxstrip_t0_deconv[imod][0], maxstrip_t0_deconv[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_tsigma_deconv = %10.4g %10.4g",imod,maxstrip_tsigma_deconv[imod][0], maxstrip_tsigma_deconv[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_tcut_deconv = %10.4g %10.4g", imod, nsigma, nsigma ) << endl << endl;
-    }
 
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> resultsU, resultsV;
+      resultsU.push_back(maxstrip_t0_deconv[imod][0]);
+      resultsU.push_back(maxstrip_tsigma_deconv[imod][0]);
+      resultsV.push_back(maxstrip_t0_deconv[imod][1]);
+      resultsV.push_back(maxstrip_tsigma_deconv[imod][1]);
+      
+      TH1D *htU = htempU;
+      htU->SetName(Form("htstripdeconU_m%i",imod));
+      htU->SetTitle(Form("Module %i U Deconvolution;deconv time (ns)",imod));
+      c2->cd(3);
+      DrawHist(htU,resultsU,2);
+      fitfuncU->Draw("same");
+
+      TH1D *htV = htempV;
+      htV->SetName(Form("htstripdeconV_m%i",imod));
+      htV->SetTitle(Form("Module %i V Deconvolution;deconv time (ns)",imod));
+      c2->cd(4);
+      DrawHist(htV,resultsV,2);
+      fitfuncV->Draw("same");
+    }
+ 
     htempU = hmaxstrip_tU_fit_mod->ProjectionY("htempU", imod+1,imod+1);
     htempV = hmaxstrip_tV_fit_mod->ProjectionY("htempV", imod+1,imod+1);
     
@@ -517,7 +648,33 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_t0_fit = %10.4g %10.4g",imod,maxstrip_t0_fit[imod][0], maxstrip_t0_fit[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_tsigma_fit = %10.4g %10.4g",imod,maxstrip_tsigma_fit[imod][0], maxstrip_tsigma_fit[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.maxstrip_tcut_fit = %10.4g %10.4g", imod, nsigma, nsigma ) << endl << endl;
+
+
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> resultsU, resultsV;
+      resultsU.push_back(maxstrip_t0_fit[imod][0]);
+      resultsU.push_back(maxstrip_tsigma_fit[imod][0]);
+      resultsV.push_back(maxstrip_t0_fit[imod][1]);
+      resultsV.push_back(maxstrip_tsigma_fit[imod][1]);
+      
+      TH1D *htU = htempU;
+      htU->SetName(Form("htstripfitU_m%i",imod));
+      htU->SetTitle(Form("Module %i U Fit Time;deconv time (ns)",imod));
+      c2->cd(5);
+      DrawHist(htU,resultsU,2);
+      fitfuncU->Draw("same");
+
+      TH1D *htV = htempV;
+      htV->SetName(Form("htstripfitV_m%i",imod));
+      htV->SetTitle(Form("Module %i V Fit Time;deconv time (ns)",imod));
+      c2->cd(6);
+      DrawHist(htV,resultsV,2);
+      fitfuncV->Draw("same");
     }
+
+    TCanvas *c3= new TCanvas("c3","",1200,800);
+    c3->Divide(2,2);
+
 
     TH1D *htemp;
 
@@ -534,6 +691,15 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.deltat_sigma = %12.5g", imod, sigma ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.deltat_cut = %12.5g", imod, 10.0*sigma ) << endl;
+
+      vector<double> results = {10.0*sigma};
+
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hdeltat_m%i",imod));
+      hplot->SetTitle(Form("Module %i #Deltat; #Deltat (ns)",imod));
+      c3->cd(1);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
     }
 
     htemp = hdeltat_deconv_mod->ProjectionY("htemp", imod+1,imod+1 );
@@ -549,6 +715,15 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.deltat_sigma_deconv = %12.5g", imod, sigma ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.deltat_cut_deconv = %12.5g", imod, 10.0*sigma ) << endl;
+
+      vector<double> results = {10.0*sigma};
+
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hdeltatdeconv_m%i",imod));
+      hplot->SetTitle(Form("Module %i Deconv #Deltat;deconv #Deltat(ns)",imod));
+      c3->cd(2);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
     }
 
     htemp = hdeltat_fit_mod->ProjectionY("htemp", imod+1,imod+1 );
@@ -564,7 +739,20 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.deltat_sigma_fit = %12.5g", imod, sigma ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.deltat_cut_fit = %12.5g", imod, 10.0*sigma ) << endl << endl;
+
+      vector<double> results = {10.0*sigma};
+
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hdeltatfit_m%i",imod));
+      hplot->SetTitle(Form("Module %i Fit #Deltat;Fit #Deltat (ns)",imod));
+      c3->cd(3);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
     }
+
+
+    TCanvas *c4= new TCanvas("c4","",1600,1200);
+    c4->Divide(2,3);
 
     htempU = htU_mod->ProjectionY("htempU",imod+1,imod+1);
     htempV = htV_mod->ProjectionY("htempV",imod+1,imod+1);
@@ -584,6 +772,27 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
 
       dbfile_tcuts << dbline.Format("bb.gem.m%d.HitTimeMean = %12.5g %12.5g", imod, tmean[imod][0], tmean[imod][1] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.HitTimeSigma = %12.5g %12.5g", imod, tsigma[imod][0], tsigma[imod][1] ) << endl;
+
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> resultsU, resultsV;
+      resultsU.push_back(tmean[imod][0]);
+      resultsU.push_back(tsigma[imod][0]);
+      resultsV.push_back(tmean[imod][1]);
+      resultsV.push_back(tsigma[imod][1]);
+
+      TH1D *htU = htempU;
+      htU->SetName(Form("htclustU_m%i",imod));
+      htU->SetTitle(Form("Module %i U Cluster Time;deconv time (ns)",imod));
+      c4->cd(1);
+      DrawHist(htU,resultsU,2);
+      fitfuncU->Draw("same");
+
+      TH1D *htV = htempV;
+      htV->SetName(Form("htclustV_m%i",imod));
+      htV->SetTitle(Form("Module %i V Cluster Time;deconv time (ns)",imod));
+      c4->cd(2);
+      DrawHist(htV,resultsV,2);
+      fitfuncV->Draw("same");
       
     }
 
@@ -605,6 +814,27 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
 
       dbfile_tcuts << dbline.Format("bb.gem.m%d.HitTimeMeanDeconv = %12.5g %12.5g", imod, tmean[imod][2], tmean[imod][3] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.HitTimeSigmaDeconv = %12.5g %12.5g", imod, tsigma[imod][2], tsigma[imod][3] ) << endl;
+
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> resultsU, resultsV;
+      resultsU.push_back(tmean[imod][0]);
+      resultsU.push_back(tsigma[imod][0]);
+      resultsV.push_back(tmean[imod][1]);
+      resultsV.push_back(tsigma[imod][1]);
+
+      TH1D *htU = htempU;
+      htU->SetName(Form("htclustdeconU_m%i",imod));
+      htU->SetTitle(Form("Module %i U Cluster Deconv Time;deconv time (ns)",imod));
+      c4->cd(3);
+      DrawHist(htU,resultsU,2);
+      fitfuncU->Draw("same");
+
+      TH1D *htV = htempV;
+      htV->SetName(Form("htclustdeconV_m%i",imod));
+      htV->SetTitle(Form("Module %i V Cluster Deconv Time;deconv time (ns)",imod));
+      c4->cd(4);
+      DrawHist(htV,resultsV,2);
+      fitfuncV->Draw("same");
       
     }
 
@@ -626,18 +856,53 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
 
       dbfile_tcuts << dbline.Format("bb.gem.m%d.HitTimeMeanFit = %12.5g %12.5g", imod, tmean[imod][4], tmean[imod][5] ) << endl;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.HitTimeSigmaFit = %12.5g %12.5g", imod, tsigma[imod][4], tsigma[imod][5] ) << endl << endl;
+
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> resultsU, resultsV;
+      resultsU.push_back(tmean[imod][0]);
+      resultsU.push_back(tsigma[imod][0]);
+      resultsV.push_back(tmean[imod][1]);
+      resultsV.push_back(tsigma[imod][1]);
+
+      TH1D *htU = htempU;
+      htU->SetName(Form("htclustfitU_m%i",imod));
+      htU->SetTitle(Form("Module %i U Cluster Fit Time;deconv time (ns)",imod));
+      c4->cd(5);
+      DrawHist(htU,resultsU,2);
+      fitfuncU->Draw("same");
+
+      TH1D *htV = htempV;
+      htV->SetName(Form("htclustfitV_m%i",imod));
+      htV->SetTitle(Form("Module %i V Cluster Fit Time;deconv time (ns)",imod));
+      c4->cd(6);
+      DrawHist(htV,resultsV,2);
+      fitfuncV->Draw("same");
       
     }
+
+    TCanvas *c5= new TCanvas("c5","",1200,800);
+    c5->Divide(2,2);
 
     htemp = hADCasym_mod->ProjectionY("htemp",imod+1,imod+1);
 
     if( htemp->GetEntries() >= 300 ){
       FitGaus_FWHM( htemp, 0.4 );
-
-      double sigma = ( (TF1*) htemp->GetListOfFunctions()->FindObject("gaus") )->GetParameter("Sigma");
+      TF1 *fitfunc = (TF1*) (htemp->GetListOfFunctions()->FindObject("gaus"));
+      double mean = fitfunc->GetParameter("Mean");
+      double sigma = fitfunc->GetParameter("Sigma");
 
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.ADCasym_sigma = %12.5g", imod, sigma ) << endl;
+      
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> results = {mean,sigma};
+      
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hADCasym_m%i",imod));
+      hplot->SetTitle(Form("Module %i ADC Asymmetry;ADC Asym",imod));
+      c5->cd(1);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
       
     }
 
@@ -646,11 +911,22 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
     if( htemp->GetEntries() >= 300 ){
       FitGaus_FWHM( htemp, 0.4 );
 
-      double sigma = ( (TF1*) htemp->GetListOfFunctions()->FindObject("gaus") )->GetParameter("Sigma");
+      TF1 *fitfunc = (TF1*) (htemp->GetListOfFunctions()->FindObject("gaus"));
+      double mean = fitfunc->GetParameter("Mean");
+      double sigma = fitfunc->GetParameter("Sigma");
 
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.ADCratio_sigma = %12.5g", imod, sigma ) << endl;
       
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> results = {mean,sigma};
+      
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hADCratio_m%i",imod));
+      hplot->SetTitle(Form("Module %i ADC Ratio;Clust ADC V/U",imod));
+      c5->cd(2);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
     }
 
     htemp = hADCratio_deconv_mod->ProjectionY("htemp",imod+1,imod+1);
@@ -658,10 +934,22 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
     if( htemp->GetEntries() >= 300 ){
       FitGaus_FWHM( htemp, 0.4 );
 
-      double sigma = ( (TF1*) htemp->GetListOfFunctions()->FindObject("gaus") )->GetParameter("Sigma");
-
+      TF1 *fitfunc = (TF1*) (htemp->GetListOfFunctions()->FindObject("gaus"));
+      double mean = fitfunc->GetParameter("Mean");
+      double sigma = fitfunc->GetParameter("Sigma");
+      
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.ADCratio_sigma_deconv = %12.5g", imod, sigma ) << endl << endl;
+
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> results = {mean,sigma};
+      
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hADCratiodecon_m%i",imod));
+      hplot->SetTitle(Form("Module %i Deconvolution ADC Ratio;Clust V ADC / Clust U ADC",imod));
+      c5->cd(3);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
       
     }
 
@@ -670,11 +958,47 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
     if( htemp->GetEntries() >= 300 ){
       FitGaus_FWHM( htemp, 0.3 );
 
-      double sigma = ( (TF1*) htemp->GetListOfFunctions()->FindObject("gaus") )->GetParameter("Sigma");
+      TF1 *fitfunc = (TF1*) (htemp->GetListOfFunctions()->FindObject("gaus"));
+      double mean = fitfunc->GetParameter("Mean");
+      double sigma = fitfunc->GetParameter("Sigma");
 
       TString dbline;
       dbfile_tcuts << dbline.Format("bb.gem.m%d.sigma_tcorr = %12.5g", imod, sigma ) << endl << endl;
+      
+      ///// Now we create the histograms for the pdf results//////
+      vector<double> results = {mean,sigma};
+      
+      TH1D *hplot = htemp;
+      hplot->SetName(Form("hADCratiodecon_m%i",imod));
+      hplot->SetTitle(Form("Module %i Hit Corrected Time Difference;t_{corr}-t_{0}^{track} (ns);",imod));
+      c5->cd(4);
+      DrawHist(hplot,results,2);
+      fitfunc->Draw("same");
     }
+    
+    ///// Now we will plot the ADC threshold histograms /////
+    if(imod == nmodules - 1) c->Print(outfilepdf + ")");
+    else c->Print(outfilepdf);
+
+    if(imod == 0) {
+      c2->Print(outfilepdf_time + "(");
+      c3->Print(outfilepdf_time);
+      c4->Print(outfilepdf_time);
+      c5->Print(outfilepdf_time);
+    }
+    else if(imod == nmodules - 1){
+      c2->Print(outfilepdf_time);
+      c3->Print(outfilepdf_time);
+      c4->Print(outfilepdf_time);
+      c5->Print(outfilepdf_time + ")");
+    }
+    else{
+      c2->Print(outfilepdf_time);
+      c3->Print(outfilepdf_time);
+      c4->Print(outfilepdf_time);
+      c5->Print(outfilepdf_time);
+    }
+    /////////////////////////////////////////////////////////////
     
   }
 
@@ -692,9 +1016,9 @@ void GetTrackingCutsFast( const char *configfilename, const char *outfilename="G
   dbfile << "bb.gem.constraintwidth_theta = " << hdthcp->GetRMS() * 4.5 << endl;
   dbfile << "bb.gem.constraintwidth_phi = " << hdphcp->GetRMS() * 4.5 << endl;
   
-  hdeltat_mod->Draw("colz");
+  //hdeltat_mod->Draw("colz");
 
   fout->Write();
-  //fout->Close();
+
   
 }

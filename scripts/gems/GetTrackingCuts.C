@@ -13,6 +13,51 @@
 
 //using namespace ROOT;
 
+vector<double> threshsamp_module;
+vector<double> threshstrip_module;
+vector<double> threshclust_module;
+vector<TH1D*> hsamp;
+vector<TH1D*> hstrip;
+vector<TH1D*> hclust;
+vector<TH1D*> htmaxU;
+vector<TH1D*> htmaxV;
+
+
+void DrawHist(TH1D *hist, int flag = 0, double value = 0){
+
+  //flag = 0 for calorimeter plots
+  //flag = 1 for ADC plots
+
+  hist->Draw();
+
+  TPaveText *pt;
+  if(flag == 0){
+    pt = new TPaveText(0.12,0.75,0.35,0.88,"ndc");
+    pt->AddText(Form("Center = %g",hist->GetMean()));
+    pt->AddText(Form("Width = %g",hist->GetRMS() * 4.5));
+  }
+  else if(flag == 1){
+    pt = new TPaveText(0.55,0.75,0.75,0.88,"ndc");
+    pt->AddText(Form("Threshold = %g",value));
+  }
+  pt->SetFillColor(0);
+  pt->Draw("same");
+
+
+}
+
+void DrawThreshPlots(TCanvas *c,vector<TH1D*> hsamp,vector<TH1D*> hstrip,vector<TH1D*> hclust,int imod){
+
+  c->cd(1);
+  hsamp[imod]->Draw();
+  
+  c->cd(2);
+  hstrip[imod]->Draw();
+
+  c->cd(3);
+  hclust[imod]->Draw();
+}
+
 void FitGaus_FWHM( TH1D *htest, double thresh=0.5 ){
   int binmax = htest->GetMaximumBin();
   int binlow = binmax, binhigh = binmax;
@@ -25,10 +70,10 @@ void FitGaus_FWHM( TH1D *htest, double thresh=0.5 ){
   double xlow = htest->GetBinCenter(binlow);
   double xhigh = htest->GetBinCenter(binhigh);
 
-  htest->Fit("gaus","S","",xlow, xhigh);
+  htest->Fit("gaus","qS","",xlow, xhigh);
 }
 
-void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrackingcuts.root", int nmodules=12 ){
+void GetTrackingCuts( const char *rootfilename, const char *outfilename="GENtrackingcuts.root", const int nmodules=2 ){
 
   ROOT::EnableImplicitMT(10);
   //We want this macro to do several things:
@@ -45,7 +90,7 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
   //ROOT::RDataFrame F(*C);
 
 
-  TCut global_cut =  "bb.tr.n>=1&&abs(bb.tr.vz[0])<0.08&&bb.gem.track.chi2ndf[0]<10&&bb.gem.track.nhits[0]>3&&bb.ps.e>0.2&&abs(bb.etot_over_p-1.)<0.25";
+  TCut global_cut =  "bb.tr.n>=1&&abs(bb.tr.vz[0])<0.27&&bb.gem.track.chi2ndf[0]<10&&bb.gem.track.nhits[0]>3&&bb.ps.e>0.2&&abs(bb.etot_over_p-1.)<0.25";
   
   //TCut global_cut = "bb.tr.n==1&&abs(bb.tr.vz)<0.08&&bb.gem.track.chi2ndf<10&&bb.gem.track.nhits>3&&bb.ps.e>0.25&&abs(bb.etot_over_p-1.)<0.25";
 
@@ -59,16 +104,16 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
   
   TFile *fout = new TFile( outfilename, "RECREATE" );
   
-  TH1D *hdxfcp = new TH1D("hdxfcp", ";x_{track}-x_{fcp} (m);", 300, -0.75, 0.75 );
-  TH1D *hdyfcp = new TH1D("hdyfcp", ";y_{track}-y_{fcp} (m);", 300, -0.30, 0.30 );
-  TH1D *hdxbcp = new TH1D("hdxbcp", ";x_{track}+x'_{track}z_{bcp}-x_{bcp} (m);", 300, -0.30, 0.50 );
-  TH1D *hdybcp = new TH1D("hdybcp", ";y_{track}+y'_{track}z_{bcp}-y_{bcp} (m);", 300, -0.30, 0.30 );
+  TH1D *hdxfcp = new TH1D("hdxfcp", "Front Constraint X;x_{track}-x_{fcp} (m);", 300, -0.75, 0.75 );
+  TH1D *hdyfcp = new TH1D("hdyfcp", "Front Constraint Y;y_{track}-y_{fcp} (m);", 300, -0.30, 0.30 );
+  TH1D *hdxbcp = new TH1D("hdxbcp", "Back Constraint X;x_{track}+x'_{track}z_{bcp}-x_{bcp} (m);", 300, -0.30, 0.50 );
+  TH1D *hdybcp = new TH1D("hdybcp", "Back Constrant Y;y_{track}+y'_{track}z_{bcp}-y_{bcp} (m);", 300, -0.30, 0.30 );
 
   TH2D *hdxdyfcp = new TH2D("hdxdyfcp", ";y_{track}-y_{fcp} (m);x_{track}-x_{fcp} (m)", 150, -0.15, 0.15, 150, -0.15, 0.15 );
   TH2D *hdxdybcp = new TH2D("hdxdybcp", ";y_{track}+y'_{track}z_{bcp}-y_{bcp} (m);x_{track}+x'_{track}z_{bcp}-x_{bcp} (m)", 150, -0.15, 0.15, 150, -0.15, 0.15 );
 
-  TH1D *hdthcp = new TH1D("hdthcp", "; x'_{track}-x'_{constraint};", 300, -0.1, 0.1 );
-  TH1D *hdphcp = new TH1D("hdphcp", "; y'_{track}-y'_{constraint};", 300, -0.1, 0.1 );
+  TH1D *hdthcp = new TH1D("hdthcp", "Track #theta Constraint; x'_{track}-x'_{constraint};", 300, -0.1, 0.1 );
+  TH1D *hdphcp = new TH1D("hdphcp", "Track #phi Constraint; y'_{track}-y'_{constraint};", 300, -0.1, 0.1 );
   
   T->Project( "hdxbcp", "bb.tr.x+bb.tr.th*bb.z_bcp-bb.x_bcp" );
   T->Project( "hdybcp", "bb.tr.y+bb.tr.ph*bb.z_bcp-bb.y_bcp" );
@@ -103,12 +148,20 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
 
   
 
-  double threshsamp_module[nmodules], threshstrip_module[nmodules], threshclust_module[nmodules];
+  threshsamp_module.resize(nmodules);
+  threshstrip_module.resize(nmodules);
+  threshclust_module.resize(nmodules);
+  hsamp.resize(nmodules);
+  hstrip.resize(nmodules);
+  hclust.resize(nmodules);
+  htmaxU.resize(nmodules);
+  htmaxV.resize(nmodules);
 
+  
   dbfile << endl;
 
   
-
+  
   
   //clustercut += ;
   
@@ -143,7 +196,7 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
       
       
       if( htemp->GetEntries() >= 100 ){
-	htemp->Fit("gaus", "", "", htemp->GetBinCenter(binlow), htemp->GetBinCenter(binhigh) );
+	htemp->Fit("gaus", "q", "", htemp->GetBinCenter(binlow), htemp->GetBinCenter(binhigh) );
 	
 	sigmaU = ( ( (TF1*) htemp->GetListOfFunctions()->FindObject("gaus") ) )->GetParameter("Sigma");
       }
@@ -153,7 +206,7 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
       
     TH1D *htempV;
     fin->GetObject( histname.Data(), htempV );
-
+    
     if( htempV ){
       
       binmax = htempV->GetMaximumBin();
@@ -167,14 +220,14 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
       while( htempV->GetBinContent(binhigh) >= 0.4*max && binhigh < htempV->GetNbinsX() ){binhigh++; }
       
       if( htempV->GetEntries() >= 100 ){
-	htempV->Fit("gaus", "", "", htempV->GetBinCenter(binlow), htempV->GetBinCenter(binhigh) );
+	htempV->Fit("gaus", "q", "", htempV->GetBinCenter(binlow), htempV->GetBinCenter(binhigh) );
 	
 	sigmaV = ( (TF1*) (htempV->GetListOfFunctions()->FindObject("gaus") ) )->GetParameter("Sigma");
       }
     }
-
-    double sigma = 0.5*(sigmaU+sigmaV);
     
+    double sigma = 0.5*(sigmaU+sigmaV);
+
     threshsamp_module[imod] =  5.0*sigma;
       
     TString hsampname,hstripname,hclustname;
@@ -184,9 +237,9 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
     
     //fout->cd();
     
-    TH1D *hADCmaxsamp = new TH1D(hsampname.Data(),";max ADC sample;", 1500, 0, 3000 );
-    TH1D *hADCmaxstrip = new TH1D(hstripname.Data(), ";strip ADC sum;", 1500, 0, 15000 );
-    TH1D *hADCclust = new TH1D(hclustname.Data(), ";cluster ADC sum;", 1500, 0, 30000 );
+    TH1D *hADCmaxsamp = new TH1D(hsampname.Data(),Form("Module %i Sample ADC;max ADC sample;",imod), 1500, 0, 3000 );
+    TH1D *hADCmaxstrip = new TH1D(hstripname.Data(), Form("Module %i Strip Sum ADC;strip ADC sum;",imod), 1500, 0, 15000 );
+    TH1D *hADCclust = new TH1D(hclustname.Data(), Form("Module %i Cluster Sum ADC;cluster ADC sum;",imod), 1500, 0, 30000 );
     
     T->Project( hsampname.Data(), "0.5*(bb.gem.hit.ADCmaxsampU+bb.gem.hit.ADCmaxsampV)", clustercut );
 
@@ -201,25 +254,30 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
     double threshsamp_avg = hADCmaxsamp->GetBinCenter( ibin );
 
     threshsamp_module[imod] = std::max( 3.5*sigma, std::min( threshsamp_avg, 5.0*sigma ) );
-
+    
     TString samplecut;
     samplecut.Form("0.5*(bb.gem.hit.ADCmaxsampU+bb.gem.hit.ADCmaxsampV)>%g",threshsamp_module[imod]);
 
-    cout << "\"" << samplecut << "\"" << endl;
+    //cout << "\"" << samplecut << "\"" << endl;
     
     TCut modulecut = clustercut;
     modulecut += samplecut;
 
-    cout << "\"" << modulecut << "\"" << endl;
+    //cout << "\"" << modulecut << "\"" << endl;
     
 					
     T->Project( hstripname.Data(), "0.5*(bb.gem.hit.ADCmaxstripU+bb.gem.hit.ADCmaxstripV)", modulecut );
     T->Project( hclustname.Data(), "bb.gem.hit.ADCavg", modulecut );
 
-    hADCmaxsamp->Print();
-    hADCmaxstrip->Print();
-    hADCclust->Print();
+    //hADCmaxsamp->Print();
+    //hADCmaxstrip->Print();
+    //hADCclust->Print();
     
+    hsamp[imod] = hADCmaxsamp;
+    hstrip[imod] = hADCmaxstrip;
+    hclust[imod] = hADCclust;
+
+
     fraction = 0.002;
     
     ibin=1;
@@ -271,9 +329,9 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
     T->Project( hdeltat_deconv->GetName(), "bb.gem.hit.deltat_deconv", hitqualitycut );
     T->Project( hdeltat_fit->GetName(), "bb.gem.hit.deltat_fit", hitqualitycut );
 
-    hdeltat->Fit( "gaus", "S", "", hdeltat->GetMean()-hdeltat->GetRMS(), hdeltat->GetMean() + hdeltat->GetRMS() );
-    hdeltat_deconv->Fit( "gaus", "S", "", hdeltat_deconv->GetMean()-hdeltat_deconv->GetRMS(), hdeltat_deconv->GetMean() + hdeltat_deconv->GetRMS() );
-    hdeltat_fit->Fit( "gaus", "S", "", hdeltat_fit->GetMean()-hdeltat_fit->GetRMS(), hdeltat_fit->GetMean() + hdeltat_fit->GetRMS() );
+    hdeltat->Fit( "gaus", "qS", "", hdeltat->GetMean()-hdeltat->GetRMS(), hdeltat->GetMean() + hdeltat->GetRMS() );
+    hdeltat_deconv->Fit( "gaus", "qS", "", hdeltat_deconv->GetMean()-hdeltat_deconv->GetRMS(), hdeltat_deconv->GetMean() + hdeltat_deconv->GetRMS() );
+    hdeltat_fit->Fit( "gaus", "qS", "", hdeltat_fit->GetMean()-hdeltat_fit->GetRMS(), hdeltat_fit->GetMean() + hdeltat_fit->GetRMS() );
 
     FitGaus_FWHM( hdeltat, 0.4 );
     FitGaus_FWHM( hdeltat_deconv, 0.4 );
@@ -414,7 +472,7 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
 
     dbfile_tcut << dbline.Format( "bb.gem.m%d.HitTimeMeanDeconv = %10.5g %10.5g", imod, tmeanU, tmeanV ) << endl;
     dbfile_tcut << dbline.Format( "bb.gem.m%d.HitTimeSigmaDeconv = %10.5g %10.5g", imod, tsigmaU, tsigmaV ) << endl;
-
+    
     tmeanU = ( (TF1*) (htUhitFit->GetListOfFunctions()->FindObject("gaus") ) )->GetParameter("Mean");
     tmeanV = ( (TF1*) (htVhitFit->GetListOfFunctions()->FindObject("gaus") ) )->GetParameter("Mean");
     tsigmaU = ( (TF1*) (htUhitFit->GetListOfFunctions()->FindObject("gaus") ) )->GetParameter("Sigma");
@@ -441,17 +499,65 @@ void GetTrackingCuts( const char *rootfilename, const char *outfilename="GMNtrac
     dbfile_tcut << dbline.Format("bb.gem.m%d.ADCratio_sigma = %10.5g", imod, ADCratio_sigma ) << endl;
     dbfile_tcut << dbline.Format( "bb.gem.m%d.ADCasym_sigma = %10.5g", imod, sigmaASYM ) << endl << endl;
     dbfile_tcut << dbline.Format("bb.gem.m%d.ADCratio_sigma_deconv = %10.5g", imod, ADCratio_sigma_deconv ) << endl << endl;
+
+
+    htmaxU = hmaxstrip_tU
     
     
   }
   
-
-  
-  
-  //  double fraction = 1.0-0.999;
-  
-  
-
   fout->Write();
   
+
+  ///// Here we pring out all the pdfs for the calorimeter and thresholds /////
+  TString outfilepdf = outfilename;
+  outfilepdf.ReplaceAll(".root",".pdf");
+
+  TCanvas *c1 = new TCanvas("c1","",1600,1200);
+  c1->Divide(2,3);
+
+  c1->cd(1);
+  DrawHist(hdxfcp);
+
+  c1->cd(2);
+  DrawHist(hdyfcp);
+
+  c1->cd(3);
+  DrawHist(hdxbcp);
+  
+  c1->cd(4);
+  DrawHist(hdybcp);
+
+  c1->cd(5);
+  DrawHist(hdthcp);
+  
+  c1->cd(6);
+  DrawHist(hdphcp);
+
+  c1->Print(outfilepdf + "(");
+  
+  for(int imod=0; imod < nmodules; imod++){
+    TCanvas *c= new TCanvas("c","",1200,1200);
+    c->Divide(1,3);
+    
+    c->cd(1);
+    DrawHist(hsamp[imod],1,threshsamp_module[imod]);
+    
+    c->cd(2);
+    DrawHist(hstrip[imod],1,threshstrip_module[imod]);
+
+    c->cd(3);
+    DrawHist(hclust[imod],1,threshclust_module[imod]);
+
+    if(imod == nmodules - 1) c->Print(outfilepdf + ")");
+    else c->Print(outfilepdf);
+  }
+  
+  ///// Here we print out all the plots for the timing cuts ///////
+  TString outfilepdf_time = outfilename;
+  outfilepdf_time.ReplaceAll(".root","_timecuts.pdf");
+
+  TCanvas *c2 = new TCanvas("c2","",1600,1200);
+  
+
 }

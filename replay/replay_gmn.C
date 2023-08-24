@@ -308,6 +308,7 @@ void replay_gmn(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=0, con
   // analyzer->SetSummaryFile(Form("%s/replay_gmn_%d_stream%d_seg%d_%d.log", prefix.Data(), runnum, 
   // 				stream, firstsegment, lastsegment));
   analyzer->SetSummaryFile(Form("%s/%s.log", prefix.Data(), outfilebase.Data()));
+
   prefix = gSystem->Getenv("SBS_REPLAY");
   
   prefix += "/replay/";

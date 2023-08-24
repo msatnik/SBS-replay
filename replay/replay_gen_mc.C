@@ -1,9 +1,3 @@
-R__ADD_INCLUDE_PATH($SBS/include)
-R__ADD_LIBRARY_PATH($SBS/lib64)
-R__ADD_LIBRARY_PATH($SBS/lib)
-R__LOAD_LIBRARY(libsbs.so)
-
-#if !defined(__CLING__) || defined(__ROOTCLING__)
 #include <iostream>
 #include <unordered_map> 
 
@@ -30,7 +24,7 @@ R__LOAD_LIBRARY(libsbs.so)
 #include "SBSTimingHodoscope.h"
 
 #include "SBSSimDecoder.h"
-#endif
+
 
 TDatime get_datime(uint genconfig)
 /* Returns TDatime for a given GEn configuration */
@@ -44,7 +38,7 @@ TDatime get_datime(uint genconfig)
   return m[genconfig];
 }
 
-void replay_gen_mc(const char* filebase, uint genconfig, uint nev = -1, TString experiment="gmn")
+void replay_gen_mc(const char* filebase, uint genconfig, uint nev = -1, TString experiment="gen")
 {
   SBSBigBite* bigbite = new SBSBigBite("bb", "BigBite spectrometer" );
   //bigbite->AddDetector( new SBSBBShower("ps", "BigBite preshower") );
