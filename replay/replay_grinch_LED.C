@@ -34,7 +34,7 @@
 #include "SBSScalerEvtHandler.h"
 //#endif
 
-void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=0, const char *fname_prefix="e1209019", UInt_t firstsegment=0, UInt_t maxsegments=1, Int_t pedestalmode=0, Int_t cmplots=0)
+void replay_grinch_LED(UInt_t runnum=13453, Long_t nevents=50000, Long_t firstevent=0, const char *fname_prefix="e1209019", UInt_t firstsegment=0, UInt_t maxsegments=1, Int_t pedestalmode=0, Int_t cmplots=0)
 {
 
   THaAnalyzer* analyzer = new THaAnalyzer;
@@ -74,7 +74,7 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
   //grinch_tdc->SetModeTDC(SBSModeTDC::kCommonStartTDC);
   grinch_tdc->SetModeADC(SBSModeADC::kNone);
   grinch_tdc->SetStoreEmptyElements(kFALSE);
-  grinch_tdc->SetStoreRawHits(kFALSE);
+  grinch_tdc->SetStoreRawHits(kTRUE);// set to kTRUE for all the hits
   grinch_tdc->SetDisableRefTDC(true);
   bigbite->AddDetector(grinch_adc);
   bigbite->AddDetector(grinch_tdc);
@@ -94,14 +94,14 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
   // //bigbite->AddDetector( new THaShower("ps", "BigBite preshower") );
   // bigbite->AddDetector(hodotdc);
   // bigbite->AddDetector(hodoadc);
-  // //bigbite->AddDetector( new SBSGEMSpectrometerTracker("gem", "GEM tracker") );
+  //bigbite->AddDetector( new SBSGEMSpectrometerTracker("gem", "GEM tracker") );
   // SBSGEMSpectrometerTracker *bbgem = new SBSGEMSpectrometerTracker("gem", "BigBite Hall A GEM data");
   // bool pm =  ( pedestalmode != 0 );
   // //this will override the database setting:
   // ( static_cast<SBSGEMTrackerBase *> (bbgem) )->SetPedestalMode( pm );
   // ( static_cast<SBSGEMTrackerBase *> (bbgem) )->SetMakeCommonModePlots( cmplots );
   // bigbite->AddDetector(bbgem);
-  // gHaApps->Add(bigbite);
+  gHaApps->Add(bigbite);
     
   // SBSEArm *harm = new SBSEArm("sbs","Hadron Arm with HCal");
   // SBSHCal* hcal =  new SBSHCal("hcal","HCAL");
@@ -117,34 +117,34 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
   
   // gHaApps->Add(harm);
 
-  // // add decoder
-  // THaApparatus* decL = new THaDecData("DL","Misc. Decoder Data");
-  // gHaApps->Add( decL );
+  // add decoder
+  THaApparatus* decL = new THaDecData("DL","Misc. Decoder Data");
+  gHaApps->Add( decL );
   
-  // // add *rastered* beam
-  // THaApparatus* Lrb = new SBSRasteredBeam("Lrb","Raster Beamline for FADC");
-  // gHaApps->Add(Lrb);
+  // add *rastered* beam
+  THaApparatus* Lrb = new SBSRasteredBeam("Lrb","Raster Beamline for FADC");
+  gHaApps->Add(Lrb);
   
-  // THaApparatus* sbs = new SBSRasteredBeam("SBSrb","Raster Beamline for FADC");
-  // gHaApps->Add(sbs);
+  THaApparatus* sbs = new SBSRasteredBeam("SBSrb","Raster Beamline for FADC");
+  gHaApps->Add(sbs);
   
-  // gHaPhysics->Add( new THaGoldenTrack( "BB.gold", "BigBite golden track", "bb" ));
-  // gHaPhysics->Add( new THaPrimaryKine( "e.kine", "electron kinematics", "bb", 0.0, 0.938272 ));
+  gHaPhysics->Add( new THaGoldenTrack( "BB.gold", "BigBite golden track", "bb" ));
+  gHaPhysics->Add( new THaPrimaryKine( "e.kine", "electron kinematics", "bb", 0.0, 0.938272 ));
   
-  // //gHaEvtHandlers->Add (new THaScalerEvtHandler("Left","HA scaler event type 140"));
-  // //gHaEvtHandlers->Add (new THaScalerEvtHandler("SBS","HA scaler event type 141"));
+  //gHaEvtHandlers->Add (new THaScalerEvtHandler("Left","HA scaler event type 140"));
+  //gHaEvtHandlers->Add (new THaScalerEvtHandler("SBS","HA scaler event type 141"));
   
-  // //bigbite->SetDebug(2);
-  // //harm->SetDebug(2);
+  //bigbite->SetDebug(2);
+  //harm->SetDebug(2);
 
-  // LHRSScalerEvtHandler *lScaler = new LHRSScalerEvtHandler("Left","HA scaler event type 140");
-  // // lScaler->SetDebugFile(&debugFile);
-  // gHaEvtHandlers->Add(lScaler);
+  LHRSScalerEvtHandler *lScaler = new LHRSScalerEvtHandler("Left","HA scaler event type 140");
+  // lScaler->SetDebugFile(&debugFile);
+  gHaEvtHandlers->Add(lScaler);
 
-  // SBSScalerEvtHandler *sbsScaler = new SBSScalerEvtHandler("sbs","SBS Scaler Bank event type 1");
-  // //sbsScaler->AddEvtType(1);             // Repeat for each event type with scaler banks
-  // sbsScaler->SetUseFirstEvent(kTRUE);
-  // gHaEvtHandlers->Add(sbsScaler);
+  SBSScalerEvtHandler *sbsScaler = new SBSScalerEvtHandler("sbs","SBS Scaler Bank event type 1");
+  //sbsScaler->AddEvtType(1);             // Repeat for each event type with scaler banks
+  sbsScaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(sbsScaler);
    
   //THaInterface::SetDecoder( SBSSimDecoder::Class() );
   THaEvent* event = new THaEvent;
@@ -192,27 +192,27 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
 
   int segcounter=0;
   
-  if( firstsegment > 0 ){
-    TString codafilename;
-    codafilename.Form( "%s_%d.evio.%d.%d", fname_prefix, runnum, stream, 0 );
+  // if( firstsegment > 0 ){
+  //   TString codafilename;
+  //   codafilename.Form( "%s_%d.evio.%d.%d", fname_prefix, runnum, stream, 0 );
     
-    TString ftest(fname_prefix);
+  //   TString ftest(fname_prefix);
 
-    if( ftest == "bbgem" || ftest == "e1209019_trigtest" ){
-      codafilename.Form("%s_%d.evio.%d", fname_prefix, runnum, 0 );
-    }
+  //   if( ftest == "bbgem" || ftest == "e1209019_trigtest" ){
+  //     codafilename.Form("%s_%d.evio.%d", fname_prefix, runnum, 0 );
+  //   }
 
-    new( (THaRun*) (*filelist)[segcounter] ) THaRun( pathlist, codafilename.Data(), "GMN run" );
+  //   new( (THaRun*) (*filelist)[segcounter] ) THaRun( pathlist, codafilename.Data(), "GMN run" );
 
-    ( (THaRun*) (*filelist)[segcounter] )->SetDataRequired(THaRunBase::kDate|THaRunBase::kRunNumber);
-    //( (THaRun*) (*filelist)[segcounter] )->Init();
-    //Not sure if we need to call Init()
-    ( (THaRun*) (*filelist)[segcounter] )->Init();
-    RunDate = ( (THaRun*) (*filelist)[segcounter] )->GetDate();
+  //   ( (THaRun*) (*filelist)[segcounter] )->SetDataRequired(THaRunBase::kDate|THaRunBase::kRunNumber);
+  //   //( (THaRun*) (*filelist)[segcounter] )->Init();
+  //   //Not sure if we need to call Init()
+  //   ( (THaRun*) (*filelist)[segcounter] )->Init();
+  //   RunDate = ( (THaRun*) (*filelist)[segcounter] )->GetDate();
 
-    segcounter++;
-    max1++;
-  }
+  //   segcounter++;
+  //   max1++;
+  // }
   
   //This loop adds all file segments found to the list of THaRuns to process:
   while( segcounter < max1 && segment - firstsegment < maxsegments ){
@@ -284,11 +284,11 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
 
   if( nevents > 0 ){ 
 
-    outfilebase.Form( "%s_replayed_gr_%d_stream%d_seg%d_%d_firstevent%d_nevent%d", fname_prefix, runnum,
+    outfilebase.Form( "%s_replayed_grinch_%d_stream%d_seg%d_%d_firstevent%d_nevent%d", fname_prefix, runnum,
 		      stream, firstsegment, lastsegment, firstevent, nevents );
     outfilename.Form( "%s/%s.root", prefix.Data(), outfilebase.Data());
   } else {
-    outfilebase.Form( "%s_fullreplay_gr_%d_stream%d_seg%d_%d", fname_prefix, runnum,
+    outfilebase.Form( "%s_fullreplay_grinch_%d_stream%d_seg%d_%d", fname_prefix, runnum,
 		      stream, firstsegment, lastsegment );
     outfilename.Form( "%s/%s.root", prefix.Data(), outfilebase.Data());
   }
@@ -334,7 +334,8 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
   //   odef_filename = "replay_gmn_1.odef";	
   // }
 
-  odef_filename = "replay_grinch.odef";
+  odef_filename = "replay_grinch_LED.odef";
+
 
   odef_filename.Prepend(prefix);
   //odef_filename.Prepend("/work/halla/sbs/ewertz/SBS-replay/replay/");
@@ -342,9 +343,8 @@ void replay_grinch_LED(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent
   analyzer->SetOdefFile( odef_filename );
   
   //added cut list in order to have 
-  //TString cdef_filename = "replay_gmn_farm.cdef";
-   TString cdef_filename = "replay_grinch.cdef";
-
+  TString cdef_filename = "replay_grinch_LED.cdef";
+  
   cdef_filename.Prepend( prefix );
   
   analyzer->SetCutFile( cdef_filename );
