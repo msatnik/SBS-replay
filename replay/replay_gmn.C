@@ -74,7 +74,7 @@ void replay_gmn(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=0, con
   //grinch_tdc->SetModeTDC(SBSModeTDC::kCommonStartTDC);
   grinch_tdc->SetModeADC(SBSModeADC::kNone);
   grinch_tdc->SetStoreEmptyElements(kFALSE);
-  grinch_tdc->SetStoreRawHits(kFALSE);
+  grinch_tdc->SetStoreRawHits(kTRUE);// kTRUE to get all the hits in the multi-hits tdc
   grinch_tdc->SetDisableRefTDC(true);
   bigbite->AddDetector(grinch_adc);
   bigbite->AddDetector(grinch_tdc);

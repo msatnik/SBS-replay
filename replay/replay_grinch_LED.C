@@ -182,6 +182,9 @@ void replay_grinch_LED(UInt_t runnum=13453, Long_t nevents=50000, Long_t firstev
   if( prefix != "/cache/mss/halla/sbs/raw" )
     pathlist.push_back( "/cache/mss/halla/sbs/raw" );
 
+  if( prefix != "/cache/mss/halla/sbs/GEnII/raw" )
+    pathlist.push_back( "/cache/mss/halla/sbs/GEnII/raw" );
+
   for( int i=0; i<pathlist.size(); i++ ){
     cout << "search paths = " << pathlist[i] << endl;
   }
