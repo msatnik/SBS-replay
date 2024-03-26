@@ -1,192 +1,192 @@
 950101
 
 ## A chamber is a "Tracker-Plane" composed of vertically stacked modules
-sbs.prpolgem_farside.is_mc = 1
-sbs.prpolgem_farside.onlinezerosuppress = 0
-sbs.prpolgem_farside.pedestalmode = 0
-sbs.prpolgem_farside.commonmode_flag = -1
-sbs.prpolgem_farside.modules = m0 m1 m2 m3  m4 m5 m6 m7  
+sbs.gemPR.is_mc = 1
+sbs.gemPR.onlinezerosuppress = 0
+sbs.gemPR.pedestalmode = 0
+sbs.gemPR.commonmode_flag = -1
+sbs.gemPR.modules = m0 m1 m2 m3  m4 m5 m6 m7  
 
-sbs.prpolgem_farside.useconstraint = 0
+sbs.gemPR.useconstraint = 0
 
-sbs.prpolgem_farside.gridbinwidthx = 0.01
-sbs.prpolgem_farside.gridbinwidthy = 0.01
-sbs.prpolgem_farside.gridedgetolerancex = 0.003
-sbs.prpolgem_farside.gridedgetolerancey = 0.003
+sbs.gemPR.gridbinwidthx = 0.01
+sbs.gemPR.gridbinwidthy = 0.01
+sbs.gemPR.gridedgetolerancex = 0.003
+sbs.gemPR.gridedgetolerancey = 0.003
 
-sbs.prpolgem_farside.minhitsontrack = 3
+sbs.gemPR.minhitsontrack = 3
 
-sbs.prpolgem_farside.corrcoeff_cut = 0.5
-sbs.prpolgem_farside.ADCasym_cut = 0.5
-sbs.prpolgem_farside.deltat_cut = 30.0
-sbs.prpolgem_farside.filterflag1D = 0
-sbs.prpolgem_farside.filterflag2D = 0
+sbs.gemPR.corrcoeff_cut = 0.5
+sbs.gemPR.ADCasym_cut = 0.5
+sbs.gemPR.deltat_cut = 30.0
+sbs.gemPR.filterflag1D = 0
+sbs.gemPR.filterflag2D = 0
 
-sbs.prpolgem_farside.threshold_stripsum = 240
-sbs.prpolgem_farside.threshold_sample = 100
-sbs.prpolgem_farside.threshold_clustersum = 400.0
+sbs.gemPR.threshold_stripsum = 240
+sbs.gemPR.threshold_sample = 100
+sbs.gemPR.threshold_clustersum = 400.0
 
-sbs.prpolgem_farside.peakprominence_minsigma = 5.0
-sbs.prpolgem_farside.peakprominence_minfraction = 0.2
-sbs.prpolgem_farside.trackchi2cut = 150.0
+sbs.gemPR.peakprominence_minsigma = 5.0
+sbs.gemPR.peakprominence_minfraction = 0.2
+sbs.gemPR.trackchi2cut = 150.0
 
-sbs.prpolgem_farside.maxnu_charge = 4
-sbs.prpolgem_farside.maxnv_charge = 4
+sbs.gemPR.maxnu_charge = 4
+sbs.gemPR.maxnv_charge = 4
 
-sbs.prpolgem_farside.maxnu_pos = 2
-sbs.prpolgem_farside.maxnv_pos = 2
+sbs.gemPR.maxnu_pos = 2
+sbs.gemPR.maxnv_pos = 2
 
-sbs.prpolgem_farside.m0.pedu = 1500
-sbs.prpolgem_farside.m0.rmsu = 8
-sbs.prpolgem_farside.m0.pedv = 1500
-sbs.prpolgem_farside.m0.rmsv = 8
+sbs.gemPR.m0.pedu = 1500
+sbs.gemPR.m0.rmsu = 8
+sbs.gemPR.m0.pedv = 1500
+sbs.gemPR.m0.rmsv = 8
 
-sbs.prpolgem_farside.m1.pedu = 1500
-sbs.prpolgem_farside.m1.rmsu = 8
-sbs.prpolgem_farside.m1.pedv = 1500
-sbs.prpolgem_farside.m1.rmsv = 8
+sbs.gemPR.m1.pedu = 1500
+sbs.gemPR.m1.rmsu = 8
+sbs.gemPR.m1.pedv = 1500
+sbs.gemPR.m1.rmsv = 8
 
-sbs.prpolgem_farside.m2.pedu = 1500
-sbs.prpolgem_farside.m2.rmsu = 8
-sbs.prpolgem_farside.m2.pedv = 1500
-sbs.prpolgem_farside.m2.rmsv = 8
+sbs.gemPR.m2.pedu = 1500
+sbs.gemPR.m2.rmsu = 8
+sbs.gemPR.m2.pedv = 1500
+sbs.gemPR.m2.rmsv = 8
 
-sbs.prpolgem_farside.m3.pedu = 1500
-sbs.prpolgem_farside.m3.rmsu = 8
-sbs.prpolgem_farside.m3.pedv = 1500
-sbs.prpolgem_farside.m3.rmsv = 8
+sbs.gemPR.m3.pedu = 1500
+sbs.gemPR.m3.rmsu = 8
+sbs.gemPR.m3.pedv = 1500
+sbs.gemPR.m3.rmsv = 8
 
-sbs.prpolgem_farside.m4.pedu = 1500
-sbs.prpolgem_farside.m4.rmsu = 8
-sbs.prpolgem_farside.m4.pedv = 1500
-sbs.prpolgem_farside.m4.rmsv = 8
+sbs.gemPR.m4.pedu = 1500
+sbs.gemPR.m4.rmsu = 8
+sbs.gemPR.m4.pedv = 1500
+sbs.gemPR.m4.rmsv = 8
 
-sbs.prpolgem_farside.m5.pedu = 1500
-sbs.prpolgem_farside.m5.rmsu = 8
-sbs.prpolgem_farside.m5.pedv = 1500
-sbs.prpolgem_farside.m5.rmsv = 8
+sbs.gemPR.m5.pedu = 1500
+sbs.gemPR.m5.rmsu = 8
+sbs.gemPR.m5.pedv = 1500
+sbs.gemPR.m5.rmsv = 8
 
-sbs.prpolgem_farside.m6.pedu = 1500
-sbs.prpolgem_farside.m6.rmsu = 8
-sbs.prpolgem_farside.m6.pedv = 1500
-sbs.prpolgem_farside.m6.rmsv = 8
+sbs.gemPR.m6.pedu = 1500
+sbs.gemPR.m6.rmsu = 8
+sbs.gemPR.m6.pedv = 1500
+sbs.gemPR.m6.rmsv = 8
 
-sbs.prpolgem_farside.m7.pedu = 1500
-sbs.prpolgem_farside.m7.rmsu = 8
-sbs.prpolgem_farside.m7.pedv = 1500
-sbs.prpolgem_farside.m7.rmsv = 8
+sbs.gemPR.m7.pedu = 1500
+sbs.gemPR.m7.rmsu = 8
+sbs.gemPR.m7.pedv = 1500
+sbs.gemPR.m7.rmsv = 8
 
-sbs.prpolgem_farside.m0.layer = 0
-sbs.prpolgem_farside.m1.layer = 0
-sbs.prpolgem_farside.m2.layer = 0
-sbs.prpolgem_farside.m3.layer = 0
+sbs.gemPR.m0.layer = 0
+sbs.gemPR.m1.layer = 0
+sbs.gemPR.m2.layer = 0
+sbs.gemPR.m3.layer = 0
 
-sbs.prpolgem_farside.m4.layer = 1
-sbs.prpolgem_farside.m5.layer = 1
-sbs.prpolgem_farside.m6.layer = 1
-sbs.prpolgem_farside.m7.layer = 1
+sbs.gemPR.m4.layer = 1
+sbs.gemPR.m5.layer = 1
+sbs.gemPR.m6.layer = 1
+sbs.gemPR.m7.layer = 1
 
 #MC
-sbs.prpolgem_farside.m0.apvmap = 3
-sbs.prpolgem_farside.m1.apvmap = 3
-sbs.prpolgem_farside.m2.apvmap = 3
-sbs.prpolgem_farside.m3.apvmap = 3
+sbs.gemPR.m0.apvmap = 3
+sbs.gemPR.m1.apvmap = 3
+sbs.gemPR.m2.apvmap = 3
+sbs.gemPR.m3.apvmap = 3
 
-sbs.prpolgem_farside.m4.apvmap = 3
-sbs.prpolgem_farside.m5.apvmap = 3
-sbs.prpolgem_farside.m6.apvmap = 3
-sbs.prpolgem_farside.m7.apvmap = 3
+sbs.gemPR.m4.apvmap = 3
+sbs.gemPR.m5.apvmap = 3
+sbs.gemPR.m6.apvmap = 3
+sbs.gemPR.m7.apvmap = 3
 
 #sizes
-sbs.prpolgem_farside.m0.size = 0.512 0.6144 0.001
-sbs.prpolgem_farside.m1.size = 0.512 0.6144 0.001
-sbs.prpolgem_farside.m2.size = 0.512 0.6144 0.001
-sbs.prpolgem_farside.m3.size = 0.512 0.6144 0.001
+sbs.gemPR.m0.size = 0.512 0.6144 0.001
+sbs.gemPR.m1.size = 0.512 0.6144 0.001
+sbs.gemPR.m2.size = 0.512 0.6144 0.001
+sbs.gemPR.m3.size = 0.512 0.6144 0.001
 
-sbs.prpolgem_farside.m4.size = 0.512 0.6144 0.001
-sbs.prpolgem_farside.m5.size = 0.512 0.6144 0.001
-sbs.prpolgem_farside.m6.size = 0.512 0.6144 0.001
-sbs.prpolgem_farside.m7.size = 0.512 0.6144 0.001
+sbs.gemPR.m4.size = 0.512 0.6144 0.001
+sbs.gemPR.m5.size = 0.512 0.6144 0.001
+sbs.gemPR.m6.size = 0.512 0.6144 0.001
+sbs.gemPR.m7.size = 0.512 0.6144 0.001
 
 #positions #m0 and m4 have a temporary offset
-sbs.prpolgem_farside.m0.position = -0.768 0.0 0.0
-sbs.prpolgem_farside.m1.position = -0.256 0.0 0.0
-sbs.prpolgem_farside.m2.position =  0.256 0.0 0.0
-sbs.prpolgem_farside.m3.position =  0.768 0.0 0.0
+sbs.gemPR.m0.position = -0.768 0.0 0.0
+sbs.gemPR.m1.position = -0.256 0.0 0.0
+sbs.gemPR.m2.position =  0.256 0.0 0.0
+sbs.gemPR.m3.position =  0.768 0.0 0.0
 
-sbs.prpolgem_farside.m4.position = -0.768 0.0 0.1
-sbs.prpolgem_farside.m5.position = -0.256 0.0 0.1
-sbs.prpolgem_farside.m6.position =  0.256 0.0 0.1
-sbs.prpolgem_farside.m7.position =  0.768 0.0 0.1
+sbs.gemPR.m4.position = -0.768 0.0 0.1
+sbs.gemPR.m5.position = -0.256 0.0 0.1
+sbs.gemPR.m6.position =  0.256 0.0 0.1
+sbs.gemPR.m7.position =  0.768 0.0 0.1
 
-sbs.prpolgem_farside.m0.angle = 0.0 0.0 0.0
-sbs.prpolgem_farside.m1.angle = 0.0 0.0 0.0
-sbs.prpolgem_farside.m2.angle = 0.0 0.0 0.0
-sbs.prpolgem_farside.m3.angle = 0.0 0.0 0.0
+sbs.gemPR.m0.angle = 0.0 0.0 0.0
+sbs.gemPR.m1.angle = 0.0 0.0 0.0
+sbs.gemPR.m2.angle = 0.0 0.0 0.0
+sbs.gemPR.m3.angle = 0.0 0.0 0.0
 
-sbs.prpolgem_farside.m4.angle = 0.0 0.0 0.0
-sbs.prpolgem_farside.m5.angle = 0.0 0.0 0.0
-sbs.prpolgem_farside.m6.angle = 0.0 0.0 0.0
-sbs.prpolgem_farside.m7.angle = 0.0 0.0 0.0
+sbs.gemPR.m4.angle = 0.0 0.0 0.0
+sbs.gemPR.m5.angle = 0.0 0.0 0.0
+sbs.gemPR.m6.angle = 0.0 0.0 0.0
+sbs.gemPR.m7.angle = 0.0 0.0 0.0
 
 #angles
 # for the UVA X/Y modules the "X" axis coincides with the direction of transport coordinates but the "Y" axis is opposite the direction of transport coordinates:
 # as confirmed by Sean Jeffas:
 
-sbs.prpolgem_farside.m0.uangle =  0.0
-sbs.prpolgem_farside.m0.vangle = 90.0
-sbs.prpolgem_farside.m1.uangle =  0.0
-sbs.prpolgem_farside.m1.vangle = 90.0
-sbs.prpolgem_farside.m2.uangle =  0.0
-sbs.prpolgem_farside.m2.vangle = 90.0
-sbs.prpolgem_farside.m3.uangle =  0.0
-sbs.prpolgem_farside.m3.vangle = 90.0
+sbs.gemPR.m0.uangle =  0.0
+sbs.gemPR.m0.vangle = 90.0
+sbs.gemPR.m1.uangle =  0.0
+sbs.gemPR.m1.vangle = 90.0
+sbs.gemPR.m2.uangle =  0.0
+sbs.gemPR.m2.vangle = 90.0
+sbs.gemPR.m3.uangle =  0.0
+sbs.gemPR.m3.vangle = 90.0
 
-sbs.prpolgem_farside.m4.uangle =  0.0
-sbs.prpolgem_farside.m4.vangle = 90.0
-sbs.prpolgem_farside.m5.uangle =  0.0
-sbs.prpolgem_farside.m5.vangle = 90.0
-sbs.prpolgem_farside.m6.uangle =  0.0
-sbs.prpolgem_farside.m6.vangle = 90.0
-sbs.prpolgem_farside.m7.uangle =  0.0
-sbs.prpolgem_farside.m7.vangle = 90.0
+sbs.gemPR.m4.uangle =  0.0
+sbs.gemPR.m4.vangle = 90.0
+sbs.gemPR.m5.uangle =  0.0
+sbs.gemPR.m5.vangle = 90.0
+sbs.gemPR.m6.uangle =  0.0
+sbs.gemPR.m6.vangle = 90.0
+sbs.gemPR.m7.uangle =  0.0
+sbs.gemPR.m7.vangle = 90.0
 
 #nstrips
-sbs.prpolgem_farside.m0.nstripsu = 1280
-sbs.prpolgem_farside.m0.nstripsv = 1536
-sbs.prpolgem_farside.m1.nstripsu = 1280
-sbs.prpolgem_farside.m1.nstripsv = 1536
-sbs.prpolgem_farside.m2.nstripsu = 1280
-sbs.prpolgem_farside.m2.nstripsv = 1536
-sbs.prpolgem_farside.m3.nstripsu = 1280
-sbs.prpolgem_farside.m3.nstripsv = 1536
+sbs.gemPR.m0.nstripsu = 1280
+sbs.gemPR.m0.nstripsv = 1536
+sbs.gemPR.m1.nstripsu = 1280
+sbs.gemPR.m1.nstripsv = 1536
+sbs.gemPR.m2.nstripsu = 1280
+sbs.gemPR.m2.nstripsv = 1536
+sbs.gemPR.m3.nstripsu = 1280
+sbs.gemPR.m3.nstripsv = 1536
 
-sbs.prpolgem_farside.m4.nstripsu = 1280
-sbs.prpolgem_farside.m4.nstripsv = 1536
-sbs.prpolgem_farside.m5.nstripsu = 1280
-sbs.prpolgem_farside.m5.nstripsv = 1536
-sbs.prpolgem_farside.m6.nstripsu = 1280
-sbs.prpolgem_farside.m6.nstripsv = 1536
-sbs.prpolgem_farside.m7.nstripsu = 1280
-sbs.prpolgem_farside.m7.nstripsv = 1536
+sbs.gemPR.m4.nstripsu = 1280
+sbs.gemPR.m4.nstripsv = 1536
+sbs.gemPR.m5.nstripsu = 1280
+sbs.gemPR.m5.nstripsv = 1536
+sbs.gemPR.m6.nstripsu = 1280
+sbs.gemPR.m6.nstripsv = 1536
+sbs.gemPR.m7.nstripsu = 1280
+sbs.gemPR.m7.nstripsv = 1536
 
 
 # all modules have the same strip pitch along both dimensions, 0.4 mm:
-sbs.prpolgem_farside.upitch = 0.0004
-sbs.prpolgem_farside.vpitch = 0.0004
+sbs.gemPR.upitch = 0.0004
+sbs.gemPR.vpitch = 0.0004
 
 # tracking parameters:
-sbs.prpolgem_farside.threshold_sample = 50.0
-sbs.prpolgem_farside.threshold_stripsum = 250.0
-sbs.prpolgem_farside.threshold_clustersum = 500.0
+sbs.gemPR.threshold_sample = 50.0
+sbs.gemPR.threshold_stripsum = 250.0
+sbs.gemPR.threshold_clustersum = 500.0
 
-sbs.prpolgem_farside.ADCasym_cut = 0.5
-sbs.prpolgem_farside.deltat_cut = 30.0
-sbs.prpolgem_farside.corrcoeff_cut = 0.5
-sbs.prpolgem_farside.filterflag1D = 1
-sbs.prpolgem_farside.filterflag2D = 0
+sbs.gemPR.ADCasym_cut = 0.5
+sbs.gemPR.deltat_cut = 30.0
+sbs.gemPR.corrcoeff_cut = 0.5
+sbs.gemPR.filterflag1D = 1
+sbs.gemPR.filterflag2D = 0
 
-sbs.prpolgem_farside.m0.chanmap = 
+sbs.gemPR.m0.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    0   0   0   0   0   0   0    0 # Strip    0- 127
       22    0   0   0   1   0   1   0    0 # Strip  128- 255
@@ -211,7 +211,7 @@ sbs.prpolgem_farside.m0.chanmap =
       22    1   1   0   4   0  10   0    1 # Strip 1280-1407
       22    1   1   0   5   0  11   0    1 # Strip 1408-1535
 
-sbs.prpolgem_farside.m1.chanmap = 
+sbs.gemPR.m1.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    1   1   0   6   0   0   0    0 # Strip 
       22    1   1   0   7   0   1   0    0 # Strip 
@@ -236,7 +236,7 @@ sbs.prpolgem_farside.m1.chanmap =
       22    2   2   0  10   0  10   0    1 # Strip 
       22    2   2   0  11   0  11   0    1 # Strip 
 
-sbs.prpolgem_farside.m2.chanmap = 
+sbs.gemPR.m2.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    2   2   0  12   0   0   0    0 # Strip 
       22    2   2   0  13   0   1   0    0 # Strip 
@@ -261,7 +261,7 @@ sbs.prpolgem_farside.m2.chanmap =
       22    4   4   0   0   0  10   0    1 # Strip 
       22    4   4   0   1   0  11   0    1 # Strip 
 
-sbs.prpolgem_farside.m3.chanmap = 
+sbs.gemPR.m3.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    4   4   0   2   0   0   0    0 # Strip 
       22    4   4   0   3   0   1   0    0 # Strip 
@@ -287,7 +287,7 @@ sbs.prpolgem_farside.m3.chanmap =
       22    5   5   0   7   0  11   0    1 # Strip 
 
 
-sbs.prpolgem_farside.m4.chanmap = 
+sbs.gemPR.m4.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    5   5   0   8   0   0   0    0 # Strip 
       22    5   5   0   9   0   1   0    0 # Strip 
@@ -312,7 +312,7 @@ sbs.prpolgem_farside.m4.chanmap =
       22    6   6   0  12   0  10   0    1 # Strip 
       22    6   6   0  13   0  11   0    1 # Strip 
 
-sbs.prpolgem_farside.m5.chanmap = 
+sbs.gemPR.m5.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    6   6   0  14   0   0   0    0 # Strip    0- 127
       22    6   6   0  15   0   1   0    0 # Strip  128- 255
@@ -337,7 +337,7 @@ sbs.prpolgem_farside.m5.chanmap =
       22    8   8   0   2   0  10   0    1 # Strip 
       22    8   8   0   3   0  11   0    1 # Strip 
 
-sbs.prpolgem_farside.m6.chanmap = 
+sbs.gemPR.m6.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    8   8   0   4   0   0   0    0 # Strip 
       22    8   8   0   5   0   1   0    0 # Strip 
@@ -362,7 +362,7 @@ sbs.prpolgem_farside.m6.chanmap =
       22    9   9   0   8   0  10   0    1 # Strip 1280-1407
       22    9   9   0   9   0  11   0    1 # Strip 1408-1535
 
-sbs.prpolgem_farside.m7.chanmap = 
+sbs.gemPR.m7.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       22    9   9   0  10   0   0   0    0 # Strip    0- 127
       22    9   9   0  11   0   1   0    0 # Strip  128- 255
