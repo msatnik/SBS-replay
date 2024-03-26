@@ -49,6 +49,10 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
   //Note that the default "fiducial" limits correspond to the neutron case; i.e., no deflection:
   double W2min=0.6, W2max=1.0, fid_xmin=-2.5, fid_xmax=1.0, fid_ymin=-0.6, fid_ymax=0.6;
 
+  int protondeflectionflag = 0; //1 = use protondeflection from tree, 2 = use mean from config file:
+
+  double pdeflectmean=0.0;
+  
   while( currentline.ReadLine(setupfile) && !currentline.BeginsWith("endconfig")){
     if( !currentline.BeginsWith("#") ){
       TObjArray *currentline_tokens = currentline.Tokenize(" ");
@@ -82,6 +86,14 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
 	if( skey == "fid_xmax" ){
 	  fid_ymax = sval.Atof();
 	}
+
+	if( skey == "protondeflectionflag" ){
+	  protondeflectionflag = sval.Atoi();
+	}
+
+	if( skey == "protondeflectionmean" ){
+	  pdeflectmean = sval.Atof();
+	}
 	
 	
       }
@@ -97,17 +109,17 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
   TH1D *hW2_hcalcut = new TH1D("hW2_hcalcut","Global+fiducial+HCAL;W^{2} (GeV^{2});",300,-0.5,2.5);
   TH1D *hW2_anticut = new TH1D("hW2_anticut","Global+fiducial+!HCAL;W^{2} (GeV^{2});", 300,-0.5,2.5);
 
-  TH1D *hxHCAL_expect_all = new TH1D("hxHCAL_expect_all","Global cut; Expected x_{HCAL} (m);", 250,-2.5,2.5);
-  TH1D *hxHCAL_expect_cut = new TH1D("hxHCAL_expect_cut","Global+HCAL cuts; Expected x_{HCAL} (m);", 250,-2.5,2.5);
-  TH1D *hxHCAL_expect_acut = new TH1D("hxHCAL_expect_acut","Global + !HCAL cuts; Expected x_{HCA} (m);", 250,-2.5,2.5);
+  TH1D *hxHCAL_expect_all = new TH1D("hxHCAL_expect_all","Global cut; Expected x_{HCAL} (m);", 250,-3.25,1.75);
+  TH1D *hxHCAL_expect_cut = new TH1D("hxHCAL_expect_cut","Global+HCAL cuts; Expected x_{HCAL} (m);", 250,-3.25,1.75);
+  TH1D *hxHCAL_expect_acut = new TH1D("hxHCAL_expect_acut","Global + !HCAL cuts; Expected x_{HCA} (m);", 250,-3.25,1.75);
  
   TH1D *hyHCAL_expect_all = new TH1D("hyHCAL_expect_all","Global cut; Expected y_{HCAL} (m);", 250, -1.25,1.25);
   TH1D *hyHCAL_expect_cut = new TH1D("hyHCAL_expect_cut","Global+HCAL cuts; Expected y_{HCAL} (m);", 250,-1.25,1.25);
   TH1D *hyHCAL_expect_acut = new TH1D("hyHCAL_expect_acut","Global+HCAL cuts; Expected y_{HCAL} (m);", 250,-1.25,1.25);
   
-  TH2D *hxyHCAL_expect_all = new TH2D("hxyHCAL_expect_all","Global cut; Expected y_{HCAL} (m); Expected x_{HCAL} (m)", 125,-1.25,1.25,125,-2.5,2.5);
-  TH2D *hxyHCAL_expect_cut = new TH2D("hxyHCAL_expect_cut","Global+HCAL cuts; Expected y_{HCAL} (m); Expected x_{HCAL} (m)", 125,-1.25,1.25,125,-2.5,2.5);
-  TH2D *hxyHCAL_expect_acut = new TH2D("hxyHCAL_expect_acut","Global+HCAL cuts; Expected y_{HCAL} (m); Expected x_{HCAL} (m)", 125,-1.25,1.25,125,-2.5,2.5);
+  TH2D *hxyHCAL_expect_all = new TH2D("hxyHCAL_expect_all","Global cut; Expected y_{HCAL} (m); Expected x_{HCAL} (m)", 125,-1.25,1.25,125,-3.25,1.75);
+  TH2D *hxyHCAL_expect_cut = new TH2D("hxyHCAL_expect_cut","Global+HCAL cuts; Expected y_{HCAL} (m); Expected x_{HCAL} (m)", 125,-1.25,1.25,125,-3.25,1.75);
+  TH2D *hxyHCAL_expect_acut = new TH2D("hxyHCAL_expect_acut","Global+HCAL cuts; Expected y_{HCAL} (m); Expected x_{HCAL} (m)", 125,-1.25,1.25,125,-3.25,1.75);
 
   TH1D *hxHCAL_all = new TH1D("hxHCAL_all","Global cut; Observed x_{HCAL} (m);", 500,-3,2);
   TH1D *hyHCAL_all = new TH1D("hyHCAL_all","Global cut; Observed y_{HCAL} (m);", 250,-1.25,1.25);  
@@ -183,7 +195,15 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
     bool passed_global_cut = GlobalCut->EvalInstance(0) != 0;
     bool passed_hcalcut = HCalCut->EvalInstance(0) != 0;
 
-    bool fidcutx = T->xHCAL_expect >= fid_xmin && T->xHCAL_expect <= fid_xmax;
+    double protondeflection = 0.0;
+
+    if( protondeflectionflag == 1 ){
+      protondeflection = T->protondeflection;
+    } else if ( protondeflectionflag == 2 ){
+      protondeflection = pdeflectmean;
+    }
+    
+    bool fidcutx = T->xHCAL_expect - protondeflection >= fid_xmin && T->xHCAL_expect - protondeflection <= fid_xmax;
     bool fidcuty = T->yHCAL_expect >= fid_ymin && T->yHCAL_expect <= fid_ymax;
 
     if( passed_global_cut ){
@@ -200,15 +220,15 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
       if( T->W2 >= W2min && T->W2 <= W2max ){
 
 	if( fidcuty ){	
-	  hxHCAL_expect_all->Fill( T->xHCAL_expect );
+	  hxHCAL_expect_all->Fill( T->xHCAL_expect - protondeflection );
 	  hxHCAL_all->Fill( T->xHCAL );
 	  hrowHCAL_all->Fill( T->rowblkHCAL[0] );
 	  if( passed_hcalcut ){
-	    hxHCAL_expect_cut->Fill( T->xHCAL_expect );
+	    hxHCAL_expect_cut->Fill( T->xHCAL_expect - protondeflection );
 	    hxHCAL_cut->Fill( T->xHCAL );
 	    hrowHCAL_cut->Fill( T->rowblkHCAL[0] );
 	  } else {
-	    hxHCAL_expect_acut->Fill( T->xHCAL_expect );
+	    hxHCAL_expect_acut->Fill( T->xHCAL_expect - protondeflection );
 	    hxHCAL_acut->Fill( T->xHCAL );
 	    hrowHCAL_acut->Fill( T->rowblkHCAL[0] );
 	  }
@@ -229,11 +249,11 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
 	  }
 	}
 
-	hxyHCAL_expect_all->Fill(T->yHCAL_expect, T->xHCAL_expect);
+	hxyHCAL_expect_all->Fill(T->yHCAL_expect, T->xHCAL_expect - protondeflection );
 	if( passed_hcalcut ){
-	  hxyHCAL_expect_cut->Fill( T->yHCAL_expect, T->xHCAL_expect);
+	  hxyHCAL_expect_cut->Fill( T->yHCAL_expect, T->xHCAL_expect - protondeflection );
 	} else {
-	  hxyHCAL_expect_acut->Fill( T->yHCAL_expect, T->xHCAL_expect );
+	  hxyHCAL_expect_acut->Fill( T->yHCAL_expect, T->xHCAL_expect - protondeflection );
 	}
 	//Fill xHCAL, yHCAL, and row and column histograms only for events passing fiducial cut:
 

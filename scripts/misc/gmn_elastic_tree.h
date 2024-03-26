@@ -1,7 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon Jan  1 02:13:56 2024 by ROOT version 6.26/10
-// from TChain Tout/
+// Sun Feb  4 14:47:04 2024 by ROOT version 6.26/10
+// from TTree Tout/Tree containing variables for momentum calibration
+// found on file: /Users/puckett/SBSrootfiles3/pass2/SBS4/LH2/Elastic_SBS4_LH2_SBS0percent.root
 //////////////////////////////////////////////////////////
 
 #ifndef gmn_elastic_tree_h
@@ -55,7 +56,8 @@ public :
    Double_t        bbtrchi2;
    Double_t        bbtrchi2hits;
    Double_t        bbtrnhits;
-   Double_t        bb_trngoodhits;
+   Double_t        bbtrngoodhits;
+   Double_t        bbtrt0;
    Double_t        vx;
    Double_t        vy;
    Double_t        vz;
@@ -109,14 +111,14 @@ public :
    Double_t        protondeflection;
    Int_t           ibest_HCAL;
    Int_t           nblkHCAL;
-   Double_t        againblkHCAL[221];   //[nblkHCAL]
-   Double_t        atimeblkHCAL[221];   //[nblkHCAL]
-   Double_t        eblkHCAL[221];   //[nblkHCAL]
-   Double_t        idblkHCAL[221];   //[nblkHCAL]
-   Double_t        rowblkHCAL[221];   //[nblkHCAL]
-   Double_t        colblkHCAL[221];   //[nblkHCAL]
-   Double_t        xblkHCAL[221];   //[nblkHCAL]
-   Double_t        yblkHCAL[221];   //[nblkHCAL]
+   Double_t        againblkHCAL[42];   //[nblkHCAL]
+   Double_t        atimeblkHCAL[42];   //[nblkHCAL]
+   Double_t        eblkHCAL[42];   //[nblkHCAL]
+   Double_t        idblkHCAL[42];   //[nblkHCAL]
+   Double_t        rowblkHCAL[42];   //[nblkHCAL]
+   Double_t        colblkHCAL[42];   //[nblkHCAL]
+   Double_t        xblkHCAL[42];   //[nblkHCAL]
+   Double_t        yblkHCAL[42];   //[nblkHCAL]
    Int_t           grinch_clsize;
    Int_t           grinch_tridx;
    Double_t        grinch_tmean;
@@ -160,6 +162,7 @@ public :
    TBranch        *b_bbtrchi2hits;   //!
    TBranch        *b_bbtrnhits;   //!
    TBranch        *b_bbtrngoodhits;   //!
+   TBranch        *b_bbtrt0;   //!
    TBranch        *b_vx;   //!
    TBranch        *b_vy;   //!
    TBranch        *b_vz;   //!
@@ -247,25 +250,11 @@ gmn_elastic_tree::gmn_elastic_tree(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-
-#ifdef SINGLE_TREE
-      // The following code should be used if you want this class to access
-      // a single tree instead of a chain
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("Memory Directory");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/Users/puckett/SBSrootfiles3/pass2/SBS4/LH2/Elastic_SBS4_LH2_SBS0percent.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("Memory Directory");
+         f = new TFile("/Users/puckett/SBSrootfiles3/pass2/SBS4/LH2/Elastic_SBS4_LH2_SBS0percent.root");
       }
       f->GetObject("Tout",tree);
-
-#else // SINGLE_TREE
-
-      // The following code should be used if you want this class to access a chain
-      // of trees.
-      TChain * chain = new TChain("Tout","");
-      chain->Add("/volatile/halla/sbs/sbs-gmn/Elastic_SBS4_LH2_SBS30percent.root/Tout");
-      chain->Add("/volatile/halla/sbs/sbs-gmn/Elastic_SBS4_LH2_SBS30percent__1.root/Tout");
-      tree = chain;
-#endif // SINGLE_TREE
 
    }
    Init(tree);
@@ -346,7 +335,8 @@ void gmn_elastic_tree::Init(TTree *tree)
    fChain->SetBranchAddress("bbtrchi2", &bbtrchi2, &b_bbtrchi2);
    fChain->SetBranchAddress("bbtrchi2hits", &bbtrchi2hits, &b_bbtrchi2hits);
    fChain->SetBranchAddress("bbtrnhits", &bbtrnhits, &b_bbtrnhits);
-   fChain->SetBranchAddress("bb.trngoodhits", &bb_trngoodhits, &b_bbtrngoodhits);
+   fChain->SetBranchAddress("bbtrngoodhits", &bbtrngoodhits, &b_bbtrngoodhits);
+   fChain->SetBranchAddress("bbtrt0", &bbtrt0, &b_bbtrt0);
    fChain->SetBranchAddress("vx", &vx, &b_vx);
    fChain->SetBranchAddress("vy", &vy, &b_vy);
    fChain->SetBranchAddress("vz", &vz, &b_vz);

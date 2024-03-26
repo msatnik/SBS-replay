@@ -918,8 +918,9 @@ void ElasticEventSelection_MultiCluster( const char *configfilename, const char 
   long ievent = 0;
   while( C->GetEntry(ievent) ){
   
-    if( ievent % 100000 == 0 ) cout << ievent << endl;
-
+    if( ievent % 100000 == 0 ) {
+      cout << ievent << ", run number = " << runnumber << endl;
+    }
     //Long64_t chainEntry = ievent;
 
     //    C->GetEntry(ievent);
