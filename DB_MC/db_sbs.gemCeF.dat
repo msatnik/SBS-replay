@@ -1,4 +1,5 @@
 950101
+-------[ 2023-12-31 00:00:00 ]
 
 ## A chamber is a "Tracker-Plane" composed of vertically stacked modules
 sbs.gemCeF.is_mc = 1
@@ -7,7 +8,7 @@ sbs.gemCeF.pedestalmode = 0
 sbs.gemCeF.commonmode_flag = -1
 sbs.gemCeF.modules = m0     m1     m2 m3 m4 m5     m6 m7 m8 m9
 
-sbs.gemCeF.useconstraint = 0
+sbs.gemCeF.useconstraint = 1
 
 sbs.gemCeF.gridbinwidthx = 0.01
 sbs.gemCeF.gridbinwidthy = 0.01

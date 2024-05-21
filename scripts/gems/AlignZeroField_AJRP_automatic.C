@@ -22,6 +22,7 @@
 #include "TF1.h"
 #include "TEllipse.h"
 #include "TFitResult.h"
+#include "TTreeFormula.h"
 #include <iostream>
 #include <fstream>
 

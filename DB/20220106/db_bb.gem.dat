@@ -46,7 +46,7 @@ bb.gem.commonmode_niter = 3
 bb.gem.commonmode_minstrips = 20
 bb.gem.plot_common_mode = 1
 bb.gem.pedsub_online = 1 # normally this should always be set to 1
-bb.gem.dump_geometry_info = 0
+bb.gem.dump_geometry_info = 1
 bb.gem.efficiency_bin_width_1D = 0.02
 bb.gem.efficiency_bin_width_2D = 0.02
 bb.gem.commonmode_range_nsigma = 5.0
@@ -2240,9 +2240,9 @@ bb.gem.usestriptimingcut = 1
 bb.gem.addstrip_tcut = 35.0
 bb.gem.addstrip_ccor_cut = 0.4
 
-bb.gem.useopticsconstraint = 1
-bb.gem.useslopeconstraint = 1
-bb.gem.useforwardopticsconstraint = 1
+bb.gem.useopticsconstraint = 0
+bb.gem.useslopeconstraint = 0
+bb.gem.useforwardopticsconstraint = 0
 
 bb.gem.dxfp0 = 0
 bb.gem.dyfp0 = 7.5e-5
@@ -2595,6 +2595,7 @@ bb.gem.suppressfirstlast = 0
 bb.gem.useconstraint = 0
 bb.gem.useopticsconstraint = 0
 bb.gem.useslopeconstraint = 0
+bb.gem.useforwardopticsconstraint = 0
 
 bb.gem.usestriptimingcut = 0
 

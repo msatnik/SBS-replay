@@ -1,0 +1,44 @@
+block sbs.tr.*
+
+# so we can check constraints
+variable sbs.x_fcp
+variable sbs.y_fcp
+variable sbs.z_fcp
+variable sbs.x_bcp
+variable sbs.y_bcp
+variable sbs.z_bcp
+
+variable sbs.HCALth_n
+variable sbs.HCALph_n
+variable sbs.HCALdir_x
+variable sbs.HCALdir_y
+variable sbs.HCALdir_z
+
+th1d hsbs_tg_th 'SBS target theta; thetatar (rad);' sbs.tr.tg_th 250 -0.5 0.5
+th1d hsbs_tg_ph 'SBS target phi; phitar (rad);' sbs.tr.tg_ph 200 -0.2 0.2
+th1d hsbs_tg_y  'SBS target y; ytar (m);' sbs.tr.tg_y 200 -0.2 0.2
+th1d hsbs_p 'SBS p (GeV); p_{SBS} (GeV);' sbs.tr.p 200 0 4
+
+th1d hsbs_thetaFPP 'SBS theta FPP; polar theta (rad);' sbs.gemCeR.track.theta 200 0 0.5
+th1d hsbs_phiFPP 'SBS phi FPP; azimuthal phi (rad);' sbs.gemCeR.track.phi 180 -3.1415927 3.1415927
+th1d hsbs_sclose 'SBS DOCA; s_{close} (m);' sbs.gemCeR.track.sclose 200 0 0.01
+th1d hsbs_zclose 'SBS z of closest approach; z_{close} (m);' sbs.gemCeR.track.zclose 200 0 0.8
+
+th1d hsbs_gemCeF_residu_allhits 'SBS front GEMs; U/X residuals (m);' sbs.gemCeF.hit.residu 300 -0.0015 0.0015
+th1d hsbs_gemCeF_residv_allhits 'SBS front GEMs; V/Y/W residuals (m);' sbs.gemCeF.hit.residv 300 -0.0015 0.0015
+
+th1d hsbs_gemCeR_residu_allhits 'SBS rear GEMs; U/X residuals (m);' sbs.gemCeR.hit.residu 300 -0.0015 0.0015
+th1d hsbs_gemCeR_residv_allhits 'SBS rear GEMs; V/Y/W residuals (m);' sbs.gemCeR.hit.residv 300 -0.0015 0.0015
+
+th2d hsbs_gemCeF_residu_vs_mod 'SBS front GEMs; module; U/X residual (m)' sbs.gemCeF.hit.module sbs.gemCeF.hit.residu 10 -0.5 9.5 150 -0.003 0.003
+th2d hsbs_gemCeF_residv_vs_mod 'SBS front GEMs; module; V/Y/W residual (m)' sbs.gemCeF.hit.module sbs.gemCeF.hit.residv 10 -0.5 9.5 150 -0.003 0.003
+
+th2d hsbs_gemCeR_residu_vs_mod 'SBS rear GEMs; module; U/X residual (m)' sbs.gemCeR.hit.module sbs.gemCeR.hit.residu 16 -0.5 15.5 150 -0.003 0.003
+th2d hsbs_gemCeR_residv_vs_mod 'SBS rear GEMs; module; V/Y/W residual (m)' sbs.gemCeR.hit.module sbs.gemCeR.hit.residv 16 -0.5 15.5 150 -0.003 0.003
+
+th2d hsbs_gemCeF_residu_vs_layer 'SBS front GEMs; layer; U/X residual (m)' sbs.gemCeF.hit.layer sbs.gemCeF.hit.residu 4 -0.5 3.5 150 -0.003 0.003
+th2d hsbs_gemCeF_residv_vs_layer 'SBS front GEMs; layer; V/Y/W residual (m)' sbs.gemCeF.hit.layer sbs.gemCeF.hit.residv 4 -0.5 3.5 150 -0.003 0.003
+
+th2d hsbs_gemCeR_residu_vs_layer 'SBS rear GEMs; layer; U/X residual (m)' sbs.gemCeR.hit.layer sbs.gemCeR.hit.residu 4 -0.5 3.5 150 -0.003 0.003
+th2d hsbs_gemCeR_residv_vs_layer 'SBS rear GEMs; layer; V/Y/W residual (m)' sbs.gemCeR.hit.layer sbs.gemCeR.hit.residv 4 -0.5 3.5 150 -0.003 0.003
+

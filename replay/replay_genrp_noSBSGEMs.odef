@@ -1,0 +1,38 @@
+# # output variable definition for analysis of all detectors replay_gmn.C
+
+#include "replay_beam.odef"
+#include "replay_BBGEM.odef"
+#include "replay_BBCal.odef"
+#include "replay_grinch.odef"
+#include "replay_hcal.odef"
+#include "replay_hodo.odef"
+#include "replay_bb.odef"
+#include "replay_helicity.odef"
+#include "replay_activeAna.odef"
+#include "replay_hodoPR.odef"
+
+# # eg 
+# variable 1 4 1  TSbcmu1  BCM x1 counts
+# variable 1 4 2  TSbcmu1r  BCM x1 rate
+# variable 1 5 1  TSbcmu3  BCM u3 counts
+# variable 1 5 2  TSbcmu3r  BCM u3 rate
+
+block g.*
+
+begin epics
+HALLA:p
+hac_bcm_average
+IPM1H04A.XPOS
+IPM1H04A.YPOS
+IPM1H04E.XPOS	
+IPM1H04E.YPOS	
+IGL1I00OD16_16 IN=1 OUT=-1
+end epics
+
+# begin epics
+#   hac_bcm_average
+#   IPM1H04A.XPOS
+#   IPM1H04A.YPOS
+#   IPM1H04B.XPOS
+#   IPM1H04B.YPOS
+# end epics

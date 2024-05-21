@@ -1091,8 +1091,6 @@ sbs.hcal.adc.timeoffset =
 41.558 42.3771 41.9484 41.6752 53.2973 52.3151 55.4495 58.6227 41.6263 42.7902 43.5686 40.9917
 
 
-
-
 --------[ 2023-09-01 00:00:00 ]
 
 
@@ -1153,3 +1151,17 @@ sbs.hcal.tdc.offset =
 
 
 
+--------[ 2023-11-01 00:00:00 ] # Begin pion-A_LL: HCAL to 11 m:
+
+
+sbs.hcal.position = 0 0 6.175
+
+
+--------[ 2024-04-01 00:00:00 ] 
+# GEN-RP: HCAL is at 9.007 m, while front GEM layer is at 4.324 m
+# so relative to internal detector coordinates we should put HCAL at 4.683 m
+# this information goes into the back constraint point for tracking
+sbs.hcal.position = 0 0 4.683
+
+
+sbs.hcal.adc.timeoffset = 0.0

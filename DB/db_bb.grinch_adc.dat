@@ -1,3 +1,4 @@
+--------[ 2021-01-01 00:00:00 ]
 #grinch detector map (adc only)
 ## crate slot start_channel end_channel
 bb.grinch_adc.detmap =

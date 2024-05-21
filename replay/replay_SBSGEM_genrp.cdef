@@ -1,0 +1,21 @@
+# Sample cut definition file
+Block: RawDecode
+BBCALtrig		g.trigbits==1
+RawDecode_master        BBCALtrig
+
+Block: Decode
+# GoodGoldenTrack                1
+# GoodPhi                        abs(R.gold.ph)<0.05
+# GoodTheta              abs(R.gold.th)<0.1
+# InAcceptance           GoodPhi&&GoodTheta
+# BBCALtrig               Event_Branch.fEvtHdr.fTrigBits==1
+Decode_master   1
+
+Block: CoarseReconstruct
+# Goodtrack bb.gem.track.ntrack>0
+# CoarseReconstruct_master Goodtrack
+CoarseReconstruct_master 1
+
+# Block: Physics
+# GoodTrack BB.gold.index>-1
+Physics_master 1

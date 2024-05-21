@@ -241,7 +241,7 @@ bb.grinch_tdc.ypos =
 1.0 -1.0
 
 # max separation between PMTs for grouping into clusters:
-bb.grinch_tdc.maxsep = 0.07 # this is twice the separation between neighboring PMTs in the matrix, to account for clusters with "holes"
+bb.grinch_tdc.maxsep = 0.072 # this is twice the separation between neighboring PMTs in the matrix, to account for clusters with "holes"
 
 bb.grinch_tdc.nmirror = 4
 

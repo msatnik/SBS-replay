@@ -1,0 +1,20 @@
+# Sample output definition file
+block bb.grinch_tdc.*
+block bb.grinch_adc.*
+
+# # for the Panguin Plots for GEn 
+# th2d h_GRINCH_TDC_vs_ID 'TDC Leading Edge (LE) vs TDC Channel : GRINCH ; TDC Channel ; LE (ns)' bb.grinch_tdc.tdcelemID[I] bb.grinch_tdc.tdc[I] 510 -0.5 509.5 100 0 500
+# th1d h_GRINCH_elemID  'TDC Channel : GRINCH' bb.grinch_tdc.tdcelemID 510 -0.5 509.5
+# th1d h_GRINCH_time_1D_all 'GRINCH hits (all events with a track); LE (ns)' bb.grinch_tdc.hit.time 200 100 300 GoodTrack 
+# th1d h_GRINCH_time_1D_electron 'GRINCH hits (good electrons); LE (ns)' bb.grinch_tdc.hit.time 200 100 300 GoodElectron
+# #th2d h_GRINCH_xhit_vs_xtrack 'GRINCH hits (good electrons); track x at GRINCH entry window (m); GRINCH hit x position (m)'
+
+# variable bb.grinch_tdc.ngoodhits
+
+# variable bb.grinch_tdc.nclus 
+# variable bb.grinch_tdc.ntrackmatch
+# variable bb.grinch_tdc.bestcluster
+# block bb.grinch_tdc.allclus.*
+# block bb.grinch_tdc.clus.*
+# block bb.grinch_tdc.hit.*
+

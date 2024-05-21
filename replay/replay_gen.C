@@ -4,6 +4,7 @@
 // Requires Podd 1.7.4
 
 //#if !defined(__CLING__) || defined(__ROOTCLING__)
+R__LOAD_LIBRARY($SBSOFFLINE/lib64/libsbs.so);
 #include <iostream>
 
 #include "TSystem.h"
@@ -84,7 +85,7 @@ void replay_gen(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=1, con
   grinch_tdc->SetStoreEmptyElements(kFALSE);
   grinch_tdc->SetStoreRawHits(kFALSE);
   grinch_tdc->SetDisableRefTDC(true);
-  bigbite->AddDetector(grinch_adc);
+  //  bigbite->AddDetector(grinch_adc);
   bigbite->AddDetector(grinch_tdc);
 
   SBSTimingHodoscope* hodotdc = new  SBSTimingHodoscope("hodotdc", "BigBite hodo");

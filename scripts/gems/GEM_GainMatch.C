@@ -157,7 +157,7 @@ void GEM_GainMatch( const char *configfilename, const char *outfname="GEM_gainma
   vector<int> nstripx_mod(nmodules);
   vector<int> nstripy_mod(nmodules);
 
-  TString detname = "bb.gem.";
+  TString detname = "bb.gem";
 
   double target_ADC = 4000.;
 

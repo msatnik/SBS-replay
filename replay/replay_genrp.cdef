@@ -1,0 +1,35 @@
+# # example cut file for gmn replay.
+# #include "replay_BBGEM.cdef"
+# #include "replay_BBCal.cdef"
+# #include "replay_grinch.cdef"
+# #include "replay_hcal.cdef"
+# #include "replay_hodo.cdef"
+
+# cut file for "standard" GENRP replay
+
+Block: RawDecode 
+RawDecode_master 1
+
+Block: Decode 
+Decode_master 1
+
+Block: CoarseReconstruct 
+CoarseReconstruct_master 1
+
+Block: Physics
+BigBiteSingles g.trigbits==1
+Coincidence g.trigbits==4
+GoodPreShower bb.ps.ngoodADChits>0
+GoodShower    bb.sh.ngoodADChits>0
+GoodBBCAL     GoodPreShower||GoodShower
+CutPreShower  bb.ps.e>0.2
+GoodTrack BB.gold.index>-1
+GoodElectron  GoodTrack&&CutPreShower
+GoodHCAL      sbs.hcal.nclus>0
+# GoodSBSTrack  sbs.gem.track.ntrack>0
+HitsGrinchAndTrack bb.grinch_tdc.ngoodhits>0&&bb.tr.n>=1.
+HitsGrinchAndElectron bb.grinch_tdc.ngoodhits>0&&bb.tr.n>=1.&&bb.ps.e>0.2
+# Physics_master GoodBBCAL
+# Physics_master (BigBiteSingles||Coincidence)
+Physics_master 1
+# Physics_master GoodTrack

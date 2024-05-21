@@ -747,7 +747,7 @@ bb.gem.minhitsontrack = 3
 
 bb.gem.maxhitcombos = 5000
 bb.gem.maxhitcombos_inner = 25000
-bb.gem.maxhitcombos_total = 1000000000000000
+bb.gem.maxhitcombos_total = 1.e16
 
 bb.gem.tryfasttrack = 1
 
@@ -1049,9 +1049,144 @@ bb.gem.m6.angle =        2.150863      -0.9955862      -0.2454232
 bb.gem.m7.position =       0.7719042     -0.01264669        1.535455
 bb.gem.m7.angle =      -0.2715125    -0.006344476       -0.140722
 
+----------[ 2023-11-03 12:00:00 ] # after working on layer 4
+
+bb.gem.m0.position =               0               0               0
+bb.gem.m0.angle =               0               0               0
+bb.gem.m1.position =    -0.001919386     -0.01144272       0.1649936
+bb.gem.m1.angle =      0.03422861      0.06241709      0.05741344
+bb.gem.m2.position =    -0.007506479     0.005146195       0.2790084
+bb.gem.m2.angle =      0.07098153      0.08901122       -0.305315
+bb.gem.m3.position =     -0.00904901     0.004677822       0.4569755
+bb.gem.m3.angle =       0.1055534       0.1216376       -0.462159
+bb.gem.m4.position =      -0.7642844     0.001928759        1.575393
+bb.gem.m4.angle =      -0.3754582       0.1502524      -0.4553106
+bb.gem.m5.position =      -0.2515145    -0.002563955        1.530898
+bb.gem.m5.angle =      -0.6721636       0.2225307      -0.3566657
+bb.gem.m6.position =       0.2592403    -0.008729522        1.579154
+bb.gem.m6.angle =       0.5585925      -0.7344034      -0.2644649
+bb.gem.m7.position =       0.7725647     -0.01280843        1.537327
+bb.gem.m7.angle =     -0.07392376      0.09624983      -0.2649668
+
+
 #################### END TIME-DEPENDENT ALIGNMENT PARAMETERS ##############################
 
-################ BEGIN TIME-DEPENDENT GAIN MATCH AND THRESHOLD PARAMETERS ###############
+#################### BEGIN TIME-DEPENDENT GAIN MATCH PARAMETERS ##############################
+# these are cleared out at the beginning of GEN, we will put in later:
+
+
+########################### END TIME-DEPENDENT GAIN-MATCH PARAMETERS #########################
+
+###################### TIME-DEPENDENT PEDESTAL FILES ###############################
+#      NOTE: cleared out older GMN pedestal files from this version of the DB:     #
+####################################################################################
+
+--------[ 2024-04-08 18:30:00 ] #after replacing Layer 1 backplane
+bb.gem.pedfile = 20220701/gemped/daq_ped_bb_gem_run7096.dat
+bb.gem.cmfile = 20220701/gemped/db_cmr_bb_gem_run7096.dat
+
+--------[ 2022-07-01 14:30:00 ] # new pedestal after replacing multiple APVs and backplanes during the break after GMn
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run14035.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run14035.dat
+
+--------[ 2022-08-01 16:10:00 ] # new pedestal after some APVs has shifted
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run1039.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run1039.dat
+
+--------[ 2022-08-25 16:35:00 ] # new pedestal after some APVs has shifted
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run1224.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run1224.dat
+
+--------[ 2022-10-04 14:00:00 ] # new pedestal after some APVs has shifted
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run1653.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run1653.dat
+
+--------[ 2022-10-07 14:00:00 ] # new pedestal after some APVs have been fixed
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run1670.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run1670.dat
+
+--------[ 2022-10-12 13:50:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run1899.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run1899.dat
+
+--------[ 2022-11-03 10:30:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run2360.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run2360.dat
+
+--------[ 2023-01-10 21:30:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run3433.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run3433.dat
+
+--------[ 2023-01-18 17:06:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run3648.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run3648.dat
+
+--------[ 2023-01-20 17:00:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run3691.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run3691.dat
+
+--------[ 2023-01-24 13:22:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run3772.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run3772.dat
+
+--------[ 2023-08-21 0:00:00  ]
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run4739.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run4739.dat
+
+--------[ 2023-09-01 13:04:00 ]
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run4845.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run4845.dat
+
+--------[ 2023-09-20 19:00:00 ] #new pedestal after replacing a backplane
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run5228.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run5228.dat
+
+--------[ 2023-10-05 15:35:00 ] #new pedestal after replacing layer2 backplane in BigBite
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run5566.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run5566.dat
+
+--------[ 2023-10-25 20:15:00 ] 
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run5963.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run5963.dat
+
+--------[ 2023-11-04 23:15:00 ] #new pedestals after swapping L4 G0
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run6124.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run6124.dat
+
+--------[ 2023-11-09 20:30:00 ] #sbs_changes
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run6187.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run6187.dat
+
+--------[ 2023-11-13 17:00:00 ] #sbs_changes
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run6215.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run6215.dat
+
+
+--------[ 2024-04-01 00:00:00 ] #after hv upgrades
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run6916.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run6916.dat
+
+--------[ 2024-04-08 18:30:00 ] #after replacing Layer 1 backplane
+bb.gem.pedfile = gemped/daq_ped_bb_gem_run7096.dat
+bb.gem.cmfile = gemped/db_cmr_bb_gem_run7096.dat
+
+######################  END TIME-DEPENDENT PEDESTAL FILES #####################
+
+-------[ 2022-01-01 00:00:00 ]
+
+bb.gem.suppressfirstlast=0
+
+#bb.gem.m5.suppressfirstlast=0
+
+bb.gem.usestriptimingcut = 0
+bb.gem.maxstrip_t0 = 85.0 
+bb.gem.maxstrip_tcut = 40.0
+
+bb.gem.addstrip_tcut = 80.0
+bb.gem.addstrip_ccor_cut = -1.1
+
+bb.gem.m1.suppressfirstlast = 0
+bb.gem.m1.maxstrip_tcut = 85.0
 
 -------[ 2022-10-14 20:00:00 ] # start GEN-2 kinematics
 
@@ -2745,94 +2880,6 @@ bb.gem.m7.ADCratio_sigma_deconv =      0.11601
 
 bb.gem.m7.sigma_tcorr =       4.9066
 
-###################### TIME-DEPENDENT PEDESTAL FILES ###############################
-####################################################################################
-
---------[ 2022-07-01 14:30:00 ] # new pedestal after replacing multiple APVs and backplanes during the break after GMn
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run14035.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run14035.dat
-
---------[ 2022-08-01 16:10:00 ] # new pedestal after some APVs has shifted
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run1039.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run1039.dat
-
---------[ 2022-08-25 16:35:00 ] # new pedestal after some APVs has shifted
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run1224.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run1224.dat
-
---------[ 2022-10-04 14:00:00 ] # new pedestal after some APVs has shifted
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run1653.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run1653.dat
-
---------[ 2022-10-07 14:00:00 ] # new pedestal after some APVs have been fixed
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run1670.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run1670.dat
-
---------[ 2022-10-12 13:50:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run1899.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run1899.dat
-
---------[ 2022-11-03 10:30:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run2360.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run2360.dat
-
---------[ 2023-01-10 21:30:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run3433.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run3433.dat
-
---------[ 2023-01-18 17:06:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run3648.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run3648.dat
-
---------[ 2023-01-20 17:00:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run3691.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run3691.dat
-
---------[ 2023-01-24 13:22:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run3772.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run3772.dat
-
---------[ 2023-08-21 0:00:00  ]
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run4739.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run4739.dat
-
---------[ 2023-09-01 13:04:00 ]
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run4845.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run4845.dat
-
---------[ 2023-09-20 19:00:00 ] #new pedestal after replacing a backplane
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run5228.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run5228.dat
-
---------[ 2023-10-05 15:35:00 ] #new pedestal after replacing layer2 backplane in BigBite
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run5566.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run5566.dat
-
---------[ 2023-10-05 15:35:00 ] #new pedestal after replacing layer2 backplane in BigBite
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run5566.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run5566.dat
-
---------[ 2023-10-25 20:15:00 ] 
-bb.gem.pedfile = gemped/daq_ped_bb_gem_run5963.dat
-bb.gem.cmfile = gemped/db_cmr_bb_gem_run5963.dat
-
-######################  END TIME-DEPENDENT PEDESTAL FILES #####################
-
--------[ 2022-01-01 00:00:00 ]
-
-bb.gem.suppressfirstlast=0
-
-#bb.gem.m5.suppressfirstlast=0
-
-bb.gem.usestriptimingcut = 0
-bb.gem.maxstrip_t0 = 85.0 
-bb.gem.maxstrip_tcut = 40.0
-
-bb.gem.addstrip_tcut = 80.0
-bb.gem.addstrip_ccor_cut = -1.1
-
-bb.gem.m1.suppressfirstlast = 0
-bb.gem.m1.maxstrip_tcut = 85.0
 
 -------[ 2022-10-14 20:00:00 ] # start GEN-2 kinematics
 
@@ -3098,5 +3145,92 @@ bb.gem.useforwardopticsconstraint = 0
 
 bb.gem.useopticsconstraint = 1
 bb.gem.useslopeconstraint = 1
-bb.gem.useforwardopticsconstraint = 0  #Set to 1 later
+
+bb.gem.useforwardopticsconstraint = 1
+bb.gem.useconstraint = 1
+
+---------[ 2023-11-02 00:00:00 ] # Cosmic data before A_LL
+
+bb.gem.useconstraint = 0
+bb.gem.useopticsconstraint = 0
+bb.gem.useslopeconstraint = 0
+bb.gem.useforwardopticsconstraint = 0
+
+---------[ 2023-11-16 14:30:00 ] # Back to Beam A_LL
+
+bb.gem.gridbinwidthx = 0.02
+bb.gem.gridbinwidthy = 0.02
+
+bb.gem.gridedgetolerancex = 0.005
+bb.gem.gridedgetolerancey = 0.005
+
+bb.gem.useopticsconstraint = 1
+bb.gem.useslopeconstraint = 1
+bb.gem.useforwardopticsconstraint = 0
+bb.gem.useconstraint = 1
+
+
+bb.gem.constraintwidth_theta = 0.2
+bb.gem.constraintwidth_phi = 0.1
+
+bb.gem.xpfp_min = -0.6
+bb.gem.xpfp_max = 0.4
+
+bb.gem.ypfp_min = -0.15
+bb.gem.ypfp_max = 0.15
+
+bb.gem.pmin = 0.1 
+bb.gem.pmax = 4.5
+
+bb.gem.xptar_min = -0.35
+bb.gem.xptar_max = 0.35
+
+
+bb.gem.yptar_min = -0.15
+bb.gem.yptar_max = 0.15
+
+bb.gem.ytar_min = -0.25
+bb.gem.ytar_max = 0.25
+
+bb.gem.trackchi2cut = 150.0
+
+bb.gem.use_enhanced_chi2 = 0
+bb.gem.minhighqualityhitsontrack = 0
+bb.gem.trackchi2cut_hitquality = 100.0
+
+---------[ 2024-04-01 00:00:00 ] # Cosmic data before GEN-RP
+
+bb.gem.useconstraint = 0
+bb.gem.useopticsconstraint = 0
+bb.gem.useslopeconstraint = 0
+bb.gem.useforwardopticsconstraint = 0
+
+bb.gem.dump_geometry_info = 1
+
+# below are wider values to use if we don't have a good initial alignment:
+bb.gem.gridbinwidthx = 0.05
+bb.gem.gridbinwidthy = 0.05
+bb.gem.gridedgetolerancex = 0.02
+bb.gem.gridedgetolerancey = 0.02
+bb.gem.trackchi2cut = 300.0
+
+
+# this will need to be adjusted before beam; at minimum, turn on the main constraint.
+
+---------[ 2024-04-16 18:00:00 ] # Before Beam Checkout before GEN-RP
+bb.gem.useopticsconstraint = 1
+bb.gem.useslopeconstraint = 1
+bb.gem.useforwardopticsconstraint = 0
+bb.gem.useconstraint = 1
+
+bb.gem.dump_geometry_info = 0
+
+# typical values after alignment:
+
+bb.gem.gridbinwidthx = 0.01
+bb.gem.gridbinwidthy = 0.01
+bb.gem.gridedgetolerancex = 0.0025
+bb.gem.gridedgetolerancey = 0.0025
+
+bb.gem.trackchi2cut = 50.0
 

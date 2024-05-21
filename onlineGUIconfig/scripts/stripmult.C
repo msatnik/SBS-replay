@@ -1,7 +1,7 @@
 #include <algorithm>
 
 //Plot raw strip multiplicity and occupancy:
-void stripmult( int layer=0, int axis=0, int nstrips=3840 ){
+void stripmult( int layer=0, int axis=0, int nstrips=3840, const char *detname="bb_gem" ){
   //TTree *T = (TTree*) gFile->Get("T");
 
   //gStyle->SetPalette(kRainBow);
@@ -13,10 +13,12 @@ void stripmult( int layer=0, int axis=0, int nstrips=3840 ){
 
   TH2D *htemp;
 
+  TString hname; 
+  
   if( axis == 0 ){
-    gFile->GetObject( "hbb_gem_NstripsU_layer", htemp );
+    gFile->GetObject( hname.Format("h%s_NstripsU_layer",detname), htemp );
   } else {
-    gFile->GetObject( "hbb_gem_NstripsV_layer", htemp );
+    gFile->GetObject( hname.Format("h%s_NstripsV_layer",detname), htemp );
   }
 
   TString hnametemp;

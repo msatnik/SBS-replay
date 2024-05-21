@@ -1,43 +1,43 @@
-#SBSrb.raster.target.x
-#SBSrb.raster.target.y
+# SBSrb.raster.target.x
+# SBSrb.raster.target.y
 
-#SBSrb.raster.bpma.x
-#SBSrb.raster.bpma.y
-#SBSrb.raster.bpmb.x
-#SBSrb.raster.bpmb.y
+# SBSrb.raster.bpma.x
+# SBSrb.raster.bpma.y
+# SBSrb.raster.bpmb.x
+# SBSrb.raster.bpmb.y
 
-#sbs.bcm.4MHz_CLK.scaler
-#sbs.bcm.unser.cnt
-#sbs.bcm.u1.cnt
-#sbs.bcm.unew.cnt
-#sbs.bcm.dnew.cnt
-#sbs.bcm.d1.cnt
-#sbs.bcm.d3.cnt
-#sbs.bcm.d10.cnt
+# sbs.bcm.4MHz_CLK.scaler
+# sbs.bcm.unser.cnt
+# sbs.bcm.u1.cnt
+# sbs.bcm.unew.cnt
+# sbs.bcm.dnew.cnt
+# sbs.bcm.d1.cnt
+# sbs.bcm.d3.cnt
+# sbs.bcm.d10.cnt
 
 block Lrb.Raster*
 block SBSrb.Raster*
 block SBSrb.BPM*
 block Lrb.BPM*
 
-#th2d h_beam_yVs_bpma 'Beam position at BPM A: x : y' SBSrb.Raster.bpma.x SBSrb.Raster.bpma.y 100 -1.0, 1.0, 100 -1.0, 1.0
-#th2d h_beam_yVs_bpmb 'Beam position at BPM B: x : y' SBSrb.Raster.bpmb.x SBSrb.Raster.bpmb.y 100 -1.0, 1.0, 100 -1.0, 1.0
-#th2d h_beam_yVs_target 'Beam position at target: x : y' SBSrb.Raster.target.x SBSrb.Raster.target.y 100 -2.0, 2.0, 100 -2.0, 2.0
+# th2d h_beam_yVs_bpma 'Beam position at BPM A: x : y' SBSrb.Raster.bpma.x SBSrb.Raster.bpma.y 100 -1.0, 1.0, 100 -1.0, 1.0
+# th2d h_beam_yVs_bpmb 'Beam position at BPM B: x : y' SBSrb.Raster.bpmb.x SBSrb.Raster.bpmb.y 100 -1.0, 1.0, 100 -1.0, 1.0
+# th2d h_beam_yVs_target 'Beam position at target: x : y' SBSrb.Raster.target.x SBSrb.Raster.target.y 100 -2.0, 2.0, 100 -2.0, 2.0
 
-#FORMULA frbax 1000.*SBSrb.BPMA.x
-#FORMULA frbay 1000.*SBSrb.BPMA.y
-#FORMULA frbbx 1000.*SBSrb.BPMB.x
-#FORMULA frbby 1000.*SBSrb.BPMB.y
+# FORMULA frbax 1000.*SBSrb.BPMA.x
+# FORMULA frbay 1000.*SBSrb.BPMA.y
+# FORMULA frbbx 1000.*SBSrb.BPMB.x
+# FORMULA frbby 1000.*SBSrb.BPMB.y
 
-#TH2F fbpma_xy 'BPMA y vs x'  frbax frbay 1000 -5. 5. 1000 -5. 5.
-#TH2F fbpmb_xy 'BPMB y vs x'  frbbx frbby 1000 -5. 5. 1000 -5. 5.
+# TH2F fbpma_xy 'BPMA y vs x'  frbax frbay 1000 -5. 5. 1000 -5. 5.
+# TH2F fbpmb_xy 'BPMB y vs x'  frbbx frbby 1000 -5. 5. 1000 -5. 5.
 
-#FORMULA targx 1000.*(SBSrb.BPMB.x-SBSrb.BPMA.x)/4.083*5.969+1000.*SBSrb.BPMA.x
-#FORMULA targy 1000.*(SBSrb.BPMB.y-SBSrb.BPMA.y)/4.083*5.969+1000.*SBSrb.BPMA.y
-#TH2F targ_xy 'Postion at target [mm]' targx targy 1000 -5. 5. 1000 -5. 5.
+# FORMULA targx 1000.*(SBSrb.BPMB.x-SBSrb.BPMA.x)/4.083*5.969+1000.*SBSrb.BPMA.x
+# FORMULA targy 1000.*(SBSrb.BPMB.y-SBSrb.BPMA.y)/4.083*5.969+1000.*SBSrb.BPMA.y
+# TH2F targ_xy 'Postion at target [mm]' targx targy 1000 -5. 5. 1000 -5. 5.
 
-#TH2F frastxy1 'Fast Raster 1 X vs Y (current)' SBSrb.Raster.rawcur.y SBSrb.Raster.rawcur.x     500 20000 70000 500 20000 70000
-#TH2F frastxy2 'Fast Raster 2 X vs Y (current)' SBSrb.Raster2.rawcur.y SBSrb.Raster2.rawcur.x   500 20000 70000 500 20000 70000 
+# TH2F frastxy1 'Fast Raster 1 X vs Y (current)' SBSrb.Raster.rawcur.y SBSrb.Raster.rawcur.x     500 20000 70000 500 20000 70000
+# TH2F frastxy2 'Fast Raster 2 X vs Y (current)' SBSrb.Raster2.rawcur.y SBSrb.Raster2.rawcur.x   500 20000 70000 500 20000 70000 
 
 # for GEN
 TH2F frastxy1 'Fast Raster 1 Y vs X (current)' SBSrb.Raster.rawcur.x SBSrb.Raster.rawcur.y     120 25000 62000 120 25000 62000
@@ -48,43 +48,43 @@ TH1F frasty1 'Fast Raster 1 Y (current)' Lrb.Raster.rawcur.y 120 25000 62000
 TH1F frastx2 'Fast Raster 2 X (current)' Lrb.Raster2.rawcur.x 120 25000 62000 
 TH1F frasty2 'Fast Raster 2 Y (current)' Lrb.Raster2.rawcur.y 120 25000 62000 
 
-FORMULA rast12x (Lrb.Raster.rawcur.x-Lrb.Raster2.rawcur.x)
-FORMULA rast12y (Lrb.Raster.rawcur.y-Lrb.Raster2.rawcur.y)
+#FORMULA rast12x (Lrb.Raster.rawcur.x-Lrb.Raster2.rawcur.x)
+#FORMULA rast12y (Lrb.Raster.rawcur.y-Lrb.Raster2.rawcur.y)
 
-FORMULA rast12xmm (Lrb.Raster.rawcur.x-Lrb.Raster2.rawcur.x)/7131.
-FORMULA rast12ymm (Lrb.Raster.rawcur.y-Lrb.Raster2.rawcur.y)/6364.
+#FORMULA rast12xmm (Lrb.Raster.rawcur.x-Lrb.Raster2.rawcur.x)/7131.
+#FORMULA rast12ymm (Lrb.Raster.rawcur.y-Lrb.Raster2.rawcur.y)/6364.
 
-TH2F frastxy12 'Fast Raster 1+2 Y vs X (current)' rast12x rast12y  60 -20000 -20000 60 20000 20000
-TH2F frastxy12mm 'Fast Raster 1+2 Y vs X (mm)' rast12xmm rast12ymm  60 -3 3 60 -3 3
-TH1F frastx12 'Fast Raster 2 X (current)' rast12x 120 -20000 20000 
-TH1F frasty12 'Fast Raster 2 Y (current)' rast12y 120 -20000 20000 
+#TH2F frastxy12 'Fast Raster 1+2 Y vs X (current)' rast12x rast12y  60 -20000 -20000 60 20000 20000
+#TH2F frastxy12mm 'Fast Raster 1+2 Y vs X (mm)' rast12xmm rast12ymm  60 -3 3 60 -3 3
+#TH1F frastx12 'Fast Raster 2 X (current)' rast12x 120 -20000 20000 
+#TH1F frasty12 'Fast Raster 2 Y (current)' rast12y 120 -20000 20000 
 
-#FORMULA targx 1000.*(SBSrb.BPMB.x-SBSrb.BPMA.x)/4.083*5.969+1000.*SBSrb.BPMA.x
-#FORMULA targy 1000.*(SBSrb.BPMB.y-SBSrb.BPMA.y)/4.083*5.969+1000.*SBSrb.BPMA.y
-#TH2F targ_xy 'Position at target [mm]' targx targy 200 -2. 2. 2000 -2. 2.
+# FORMULA targx 1000.*(SBSrb.BPMB.x-SBSrb.BPMA.x)/4.083*5.969+1000.*SBSrb.BPMA.x
+# FORMULA targy 1000.*(SBSrb.BPMB.y-SBSrb.BPMA.y)/4.083*5.969+1000.*SBSrb.BPMA.y
+# TH2F targ_xy 'Position at target [mm]' targx targy 200 -2. 2. 2000 -2. 2.
 
 # for GEN
 FORMULA ax_new  1.82-0.97*1000*Lrb.BPMA.x
 FORMULA bx_new  0.68-0.67*1000*Lrb.BPMB.x
-#FORMULA targx ((0.68-0.67*1000*Lrb.BPMB.x)-(1.82-0.97*1000*Lrb.BPMA.x))/5.15*7.53+1.82-0.97*1000*Lrb.BPMA.x
+# FORMULA targx ((0.68-0.67*1000*Lrb.BPMB.x)-(1.82-0.97*1000*Lrb.BPMA.x))/5.15*7.53+1.82-0.97*1000*Lrb.BPMA.x
 FORMULA ay_new  -0.69+0.93*1000*Lrb.BPMA.y
 FORMULA by_new  -1.44+0.67*1000*Lrb.BPMB.y
-#FORMULA targy ((-1.44+0.67*1000*Lrb.BPMB.y)-(-0.69+0.93*1000*Lrb.BPMA.y))/5.15*7.53+-0.69+0.93*1000*Lrb.BPMA.y
+# FORMULA targy ((-1.44+0.67*1000*Lrb.BPMB.y)-(-0.69+0.93*1000*Lrb.BPMA.y))/5.15*7.53+-0.69+0.93*1000*Lrb.BPMA.y
 FORMULA targx 1000.*(Lrb.BPMB.x-Lrb.BPMA.x)/5.15*7.53+1000.*Lrb.BPMA.x
 FORMULA targy 1000.*(Lrb.BPMB.y-Lrb.BPMA.y)/5.15*7.53+1000.*Lrb.BPMA.y
 TH2F targ_xy 'Position at target [mm]' targx targy 200 -7. 7. 200 -7. 7.
 
 
 
-#FORMULA Lrb.BPMA.x_acc ((Lrb.BPMA.rotpos1*18.81/18.87+0.331)-(Lrb.BPMA.rotpos2*18.81/18.87+0.301))/sqrt(2)+0.25
-#FORMULA Lrb.BPMA.y_acc ((Lrb.BPMA.rotpos1*18.81/18.87+0.331)+(Lrb.BPMA.rotpos2*18.81/18.87+0.301))/sqrt(2)-0.9
-#FORMULA Lrb.BPMB.x_acc ((Lrb.BPMB.rotpos1*18.81/18.87-0.219)-(Lrb.BPMB.rotpos2*18.81/18.87-0.031))/sqrt(2)+0.47
-#FORMULA Lrb.BPMB.y_acc ((Lrb.BPMB.rotpos1*18.81/18.87-0.219)+(Lrb.BPMB.rotpos2*18.81/18.87-0.031))/sqrt(2)-0.77
+# FORMULA Lrb.BPMA.x_acc ((Lrb.BPMA.rotpos1*18.81/18.87+0.331)-(Lrb.BPMA.rotpos2*18.81/18.87+0.301))/sqrt(2)+0.25
+# FORMULA Lrb.BPMA.y_acc ((Lrb.BPMA.rotpos1*18.81/18.87+0.331)+(Lrb.BPMA.rotpos2*18.81/18.87+0.301))/sqrt(2)-0.9
+# FORMULA Lrb.BPMB.x_acc ((Lrb.BPMB.rotpos1*18.81/18.87-0.219)-(Lrb.BPMB.rotpos2*18.81/18.87-0.031))/sqrt(2)+0.47
+# FORMULA Lrb.BPMB.y_acc ((Lrb.BPMB.rotpos1*18.81/18.87-0.219)+(Lrb.BPMB.rotpos2*18.81/18.87-0.031))/sqrt(2)-0.77
 
-#th1d h_Iunser_Vs_Time 'beam current (unser) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.unser.rate 
-#th1d h_Iu1_Vs_Time 'beam current (u1) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.u1.rate 
-#th1d h_Iunew_Vs_Time 'beam current (unew) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.unew.rate 
-#th1d h_Idnew_Vs_Time 'beam current (dnew) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.dnew.rate 
-#th1d h_Id1_Vs_Time 'beam current (d1) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.d1.rate 
-#th1d h_Id3_Vs_Time 'beam current (d3) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.d3.rate 
-#th1d h_Id10_Vs_Time 'beam current (d10) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.d10.rate 
+# th1d h_Iunser_Vs_Time 'beam current (unser) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.unser.rate 
+# th1d h_Iu1_Vs_Time 'beam current (u1) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.u1.rate 
+# th1d h_Iunew_Vs_Time 'beam current (unew) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.unew.rate 
+# th1d h_Idnew_Vs_Time 'beam current (dnew) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.dnew.rate 
+# th1d h_Id1_Vs_Time 'beam current (d1) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.d1.rate 
+# th1d h_Id3_Vs_Time 'beam current (d3) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.d3.rate 
+# th1d h_Id10_Vs_Time 'beam current (d10) vs time' sbs.4MHz_CLK.scaler 1000 0, 2.4e8 sbs.bcm.d10.rate 

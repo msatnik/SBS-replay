@@ -1,5 +1,9 @@
 # Date/Time = Tue Aug  23 11:00:00 2005
 
+-------[ 2021-01-01 00:00:00 ] # beginning of SBS history
+
+ TSROC 21
+
 #==== Crate 4 type fastbus
 # ADCs (And optional TDCs) for BBPS, BBSH
 # slot  model   clear   header  mask    nchan   ndata
@@ -14,6 +18,7 @@
 # TDCs for BBTH (+ADCs for )
   2    1190  	1190
   3    1190  	1190
+  4    1190  	1190
  14    250 	250
  15    250 	250
  16    250 	250
@@ -59,10 +64,21 @@
 #  4    792  1 0x000 0xffffffff 32  2048
 #  17    792  792
 #  18    792  792
+#  13    250     250  # GRINCH FADC
+# Need to keep old GRINCH entries to preserve analyzability of GEN/GMN data!
   13    250     250  # GRINCH FADC
   14    250     250  # GRINCH FADC
   15    250     250  # GRINCH FADC
   16    250     250  # GRINCH FADC
+# AJRP: I'm restoring the old version of this entry, since the crate map time-stamp functionality has been
+# fixed by Ole (4/17/2024)
+
+#AJRP commenting out these GEnRP-specific entries; see new entry appropriate for GEN-RP below:
+#  14    250     250  # GEnRP FADC
+#  15    250     250  # GEnRP FADC
+#  16    250     250  # GEnRP FADC
+#  17    250     250  # GEnRP FADC
+#  18    250     250  # GEnRP FADC
 
 # LHRS crate (includes beam line signals) 
 ==== Crate 10 type vme
@@ -163,4 +179,31 @@
   18    250     3
   19    250     3
   20    250     3
+
+----------[ 2024-03-31 00:00:00 ] # approximate start of GEN-RP: switch former GRINCH adc channels in crate 7 to new usage:
+
+==== Crate 7 type vme Bank Decoding
+# TDCs for GRINCH - VETROCModule (id 526) now in analyzer
+# slot model clear header mask     nchan ndata
+#  3    526  1 0x00000000 0x00000000 128 12800
+#  4    526  1 0x00000000 0x00000000 128 12800
+#  5    526  1 0x00000000 0x00000000 128 12800
+#  6    526  1 0x00000000 0x00000000 128 12800
+# slot model bank
+  3    526   526
+  4    526   526
+  5    526   526
+  6    526   526
+# v792 QDC for GRINCH
+#  3    792  1 0x000 0xffffffff 32  2048
+#  4    792  1 0x000 0xffffffff 32  2048
+#  17    792  792
+#  18    792  792
+#  13    250     250  # GRINCH FADC
+  14    250     250  # GEnRP FADC
+  15    250     250  # GEnRP FADC
+  16    250     250  # GEnRP FADC
+  17    250     250  # GEnRP FADC
+  18    250     250  # GEnRP FADC
+
 

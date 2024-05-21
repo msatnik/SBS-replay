@@ -1,0 +1,48 @@
+#rpHodo detector map (adc only)
+## crate slot start_channel end_channel
+sbs.hodoPR_adc.detmap =
+  7     14     0     15  -1
+  7     15     0     15  -1
+  7     16     0     15  -1
+
+sbs.hodoPR_adc.chanmap =
+        0  1   2   3   4   5   6   7  40  41  42  43  44  45  46 47    
+        8   9   10  11  12  13  14 15 32 33  34  35  36  37  38  39  
+        16 17  18  19  20  21  22  23 24  25  26  27  28  29  30 31 
+
+#sbs.hodoPR_adc.model_in_detmap = 1
+sbs.hodoPR_adc.position = 0 0 0  ## This needs to be fixed
+sbs.hodoPR_adc.size = 10 10 10 ## This needs to be fixed
+sbs.hodoPR_adc.xyz = -0.9145 -0.124 0.0 #m # we don't really need z
+sbs.hodoPR_adc.dxdydz = 1 1 1 # Meh, just so it won't crash
+
+#rpHodo geometry info
+sbs.hodoPR_adc.nrows = 2
+sbs.hodoPR_adc.ncols = 24
+
+## adc channels to mV assume F250 set fot 0.5V for 4096
+sbs.hodoPR_adc.adc.conv = 0.24414
+
+# Threshold for pulse finding in waveform (mV)
+sbs.hodoPR_adc.adc.thres = 10.
+
+# Number of bins (bin=4ns) at the beginning of waveform used to determing average Pedestal
+sbs.hodoPR_adc.adc.NPedBin = 4
+
+# Number of bins (bin=4ns) before Threshold Bin to use in integrating pulse
+sbs.hodoPR_adc.adc.NSB = 3
+
+# Number of bins (bin=4ns) before Threshold Bin to use in integrating pulse
+sbs.hodoPR_adc.adc.NSA = 12
+
+# Number of bin for fixed Threshold if no Threshold Crossing is found
+sbs.hodoPR_adc.adc.FixThresBin = 14
+
+# Convert adc integral in pC to GeV
+sbs.hodoPR_adc.adc.gain = 1.0
+
+
+sbs.hodoPR_adc.adc.pedestal =
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

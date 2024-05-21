@@ -1,0 +1,37 @@
+#rpHodo detector map
+
+## crate slot start_channel end_channel
+sbs.hodoPR_tdc.detmap =
+  5     4     0   127 0
+
+#May 2 2024 00:00 Third row in map was moved to fifth row.  Need to add timestamps to DB!!  Also
+#found mistake in the overall mapping. row 1 was 0-15 should have been as below.  Same for other rows
+#Bill Henry
+
+sbs.hodoPR_tdc.chanmap =
+         0  1   2   3   4   5   6   7  40  41  42  43  44  45  46 47    
+         8   9   10  11  12  13  14 15 32 33  34  35  36  37  38  39  
+        -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   
+        -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   
+        16 17  18  19  20  21  22  23 24  25  26  27  28  29  30 31
+        -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   
+        -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   
+        -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   
+
+sbs.hodoPR_tdc.chanmap_start = 0
+#sbs.hodoPR_tdc.model_in_detmap = 1
+sbs.hodoPR_tdc.tdc.calib = 1
+sbs.hodoPR_tdc.tdc.offset = 0
+
+sbs.hodoPR_tdc.position = 0 0 0  ## This needs to be fixed
+sbs.hodoPR_tdc.size = 10 10 10 ## This needs to be fixed
+sbs.hodoPR_tdc.xyz = -0.9145 -0.124 0.0 #m # we don't really need z
+sbs.hodoPR_tdc.dxdydz = 1 1 1 # Meh, just so it won't crash
+
+
+#rpHodo geometry info
+sbs.hodoPR_tdc.nrows = 24
+sbs.hodoPR_tdc.ncols =2
+sbs.hodoPR_tdc.nlayers = 1
+
+

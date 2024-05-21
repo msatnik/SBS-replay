@@ -6,6 +6,9 @@
 #include "replay_hcal.odef"
 #include "replay_hodo_mc.odef"
 #include "replay_bb.odef"
+#include "replay_cepolfront_gem.odef"
+#include "replay_cepolrear_gem.odef"
+#include "replay_sbs.odef"
 
 block MC.simc*
 block MC.mc*

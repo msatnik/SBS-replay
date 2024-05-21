@@ -1,0 +1,33 @@
+#activeAna detector map
+## crate slot start_channel end_channel
+sbs.activeAna_tdc.detmap =
+ 5  4  0  127  0
+
+sbs.activeAna_tdc.chanmap =
+         -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   #HODO
+         -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   #HODO
+         -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   #HODO
+         -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   #Trigger Logic
+         -1 -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1  -1   #AA Top Row
+         -1 -1  -1  -1   0   1   2   3  -1  -1  -1  -1  28  29  30  31   #AA Bottom Row
+	 -1 -1  -1  -1   4   5   6   7   8   9  10  11  12  13  14  15   #AA Top 
+      	 16 17  18  19  20  21  22  23  24  25  26  27  -1  -1  -1  -1   #AA Bottom
+
+
+sbs.activeAna_tdc.chanmap_start = 0
+#sbs.activeAna_tdc.model_in_detmap = 1
+sbs.activeAna_tdc.tdc.calib = 1
+sbs.activeAna_tdc.tdc.offset = 0
+
+sbs.activeAna_tdc.position = 0 0 0  ## This needs to be fixed
+sbs.activeAna_tdc.size = 10 10 10 ## This needs to be fixed
+sbs.activeAna_tdc.xyz = -0.9145 -0.124 0.0 #m # we don't really need z
+sbs.activeAna_tdc.dxdydz = 1 1 1 # Meh, just so it won't crash
+
+
+#activeAna geometry info
+sbs.activeAna_tdc.nrows = 8
+sbs.activeAna_tdc.ncols = 4
+sbs.activeAna_tdc.nlayers = 1
+
+

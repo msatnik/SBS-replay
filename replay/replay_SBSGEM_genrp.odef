@@ -1,0 +1,271 @@
+# tree variables: Front inline gems 
+block sbs.gemCeF.track.*
+block sbs.gemCeF.hit.*
+variable sbs.gemCeF.nlayershit
+variable sbs.gemCeF.nlayershitu
+variable sbs.gemCeF.nlayershitv
+variable sbs.gemCeF.nlayershituv
+variable sbs.gemCeF.nstripsu_layer
+variable sbs.gemCeF.nstripsv_layer
+variable sbs.gemCeF.nclustu_layer
+variable sbs.gemCeF.nclustv_layer
+variable sbs.gemCeF.n2Dhit_layer
+# block sbs.gemCeF.*.time.T0_by_APV
+# block sbs.gemCeF.*.time.Tref_coarse
+# block sbs.gemCeF.*.time.Tcoarse_by_APV
+# block sbs.gemCeF.*.time.Tfine_by_APV
+# block sbs.gemCeF.*.time.EventCount_by_APV
+# block sbs.gemCeF.*.time.T_ns_by_APV
+# block sbs.gemCeF.*.strip.nstripsfired
+# block sbs.gemCeF.*.strip.nstrips_keep
+# block sbs.gemCeF.*.strip.nstrips_keep_lmax
+# block sbs.gemCeF.*.strip.nstrips_keepU
+# block sbs.gemCeF.*.strip.nstrips_keepV
+# block sbs.gemCeF.*.strip.nstrips_keep_lmaxU
+# block sbs.gemCeF.*.strip.nstrips_keep_lmaxV
+block sbs.gemCeF.*.strip.nstripsfired
+block sbs.gemCeF.*.strip.nstrips_keep
+block sbs.gemCeF.*.strip.nstrips_keep_lmax
+block sbs.gemCeF.*.strip.nstrips_keepU
+block sbs.gemCeF.*.strip.nstrips_keepV
+block sbs.gemCeF.*.strip.nstrips_keep_lmaxU
+block sbs.gemCeF.*.strip.nstrips_keep_lmaxV
+block sbs.gemCeF.*.clust.nclustu
+block sbs.gemCeF.*.clust.nclustv
+block sbs.gemCeF.*.clust.nclustu_tot
+block sbs.gemCeF.*.clust.nclustv_tot
+
+
+
+# tree variables: Rear Inline gems
+block sbs.gemCeR.track.*
+block sbs.gemCeR.hit.*
+variable sbs.gemCeR.nlayershit
+variable sbs.gemCeR.nlayershitu
+variable sbs.gemCeR.nlayershitv
+variable sbs.gemCeR.nlayershituv
+variable sbs.gemCeR.nstripsu_layer
+variable sbs.gemCeR.nstripsv_layer
+variable sbs.gemCeR.nclustu_layer
+variable sbs.gemCeR.nclustv_layer
+variable sbs.gemCeR.n2Dhit_layer
+# block sbs.gemCeR.*.time.T0_by_APV
+# block sbs.gemCeR.*.time.Tref_coarse
+# block sbs.gemCeR.*.time.Tcoarse_by_APV
+# block sbs.gemCeR.*.time.Tfine_by_APV
+# block sbs.gemCeR.*.time.EventCount_by_APV
+# block sbs.gemCeR.*.time.T_ns_by_APV
+# block sbs.gemCeR.*.strip.nstripsfired
+# block sbs.gemCeR.*.strip.nstrips_keep
+# block sbs.gemCeR.*.strip.nstrips_keep_lmax
+# block sbs.gemCeR.*.strip.nstrips_keepU
+# block sbs.gemCeR.*.strip.nstrips_keepV
+# block sbs.gemCeR.*.strip.nstrips_keep_lmaxU
+# block sbs.gemCeR.*.strip.nstrips_keep_lmaxV
+
+
+block sbs.gemCeR.*.strip.nstripsfired
+block sbs.gemCeR.*.strip.nstrips_keep
+block sbs.gemCeR.*.strip.nstrips_keep_lmax
+block sbs.gemCeR.*.strip.nstrips_keepU
+block sbs.gemCeR.*.strip.nstrips_keepV
+block sbs.gemCeR.*.strip.nstrips_keep_lmaxU
+block sbs.gemCeR.*.strip.nstrips_keep_lmaxV
+block sbs.gemCeR.*.clust.nclustu
+block sbs.gemCeR.*.clust.nclustv
+block sbs.gemCeR.*.clust.nclustu_tot
+block sbs.gemCeR.*.clust.nclustv_tot
+
+
+
+
+# tree variables: Side gems
+block sbs.gemPR.track.*
+block sbs.gemPR.hit.*
+variable sbs.gemPR.nlayershit
+variable sbs.gemPR.nlayershitu
+variable sbs.gemPR.nlayershitv
+variable sbs.gemPR.nlayershituv
+variable sbs.gemPR.nstripsu_layer
+variable sbs.gemPR.nstripsv_layer
+variable sbs.gemPR.nclustu_layer
+variable sbs.gemPR.nclustv_layer
+variable sbs.gemPR.n2Dhit_layer
+# block sbs.gemPR.*.time.T0_by_APV
+# block sbs.gemPR.*.time.Tref_coarse
+# block sbs.gemPR.*.time.Tcoarse_by_APV
+# block sbs.gemPR.*.time.Tfine_by_APV
+# block sbs.gemPR.*.time.EventCount_by_APV
+# block sbs.gemPR.*.time.T_ns_by_APV
+block sbs.gemPR.*.strip.nstripsfired
+block sbs.gemPR.*.strip.nstrips_keep
+block sbs.gemPR.*.strip.nstrips_keep_lmax
+block sbs.gemPR.*.strip.nstrips_keepU
+block sbs.gemPR.*.strip.nstrips_keepV
+block sbs.gemPR.*.strip.nstrips_keep_lmaxU
+block sbs.gemPR.*.strip.nstrips_keep_lmaxV
+block sbs.gemPR.*.clust.nclustu
+block sbs.gemPR.*.clust.nclustv
+block sbs.gemPR.*.clust.nclustu_tot
+block sbs.gemPR.*.clust.nclustv_tot
+
+
+#th2d hsbs_gemCeF_NstripsU_layer ';layer;Number U/X strips fired' [I] sbs.gemCeF.nstripsu_layer[I] 4 -0.5 3.5 2000 -0 4000
+#th2d hsbs_gemCeF_NstripsV_layer ';layer;Number V/X
+
+# let's built a "barebones" set of histograms for SBS GEMs:
+#
+
+# Front GEM stuff:
+th2d hsbs_gemCeF_NstripsU_layer ';layer;Number U/X strips fired' [I] sbs.gemCeF.nstripsu_layer[I] 4 -0.5 3.5 2001 -0.5 2000.5
+th2d hsbs_gemCeF_NstripsV_layer ';layer;Number V/Y strips fired' [I] sbs.gemCeF.nstripsv_layer[I] 4 -0.5 3.5 2001 -0.5 2000.5
+
+th1d hsbs_gemCeF_clustwidthU 'U/X clusters on track; cluster size' sbs.gemCeF.hit.nstripu 10 0.5 10.5
+th1d hsbs_gemCeF_clustwidthV 'V/Y clusters on track; cluster size' sbs.gemCeF.hit.nstripv 10 0.5 10.5
+
+th1d hsbs_gemCeF_iSampMaxU 'U/X clusters on track; max time sample' sbs.gemCeF.hit.isampmaxUstrip 6 -0.5 5.5
+th1d hsbs_gemCeF_iSampMaxV 'V/Y clusters on track; max time sample' sbs.gemCeF.hit.isampmaxVstrip 6 -0.5 5.5
+th1d hsbs_gemCeF_ADCmaxU 'U/X clusters on track; Max Strip Max ADC sample' sbs.gemCeF.hit.ADCmaxsampU 400 0 4000
+th1d hsbs_gemCeF_ADCmaxV 'V/Y clusters on track; Max Strip Max ADC sample' sbs.gemCeF.hit.ADCmaxsampV 400 0 4000
+
+th2d hsbs_gemCeF_iSampMaxU_vs_mod 'U/X max strip in cluster on track; module; max time samp' sbs.gemCeF.hit.module sbs.gemCeF.hit.isampmaxUstrip 10 -0.5 9.5 6 -0.5 5.5
+th2d hsbs_gemCeF_iSampMaxV_vs_mod 'V/Y max strip in cluster on track; module; max time samp' sbs.gemCeF.hit.module sbs.gemCeF.hit.isampmaxVstrip 10 -0.5 9.5 6 -0.5 5.5
+
+th2d hsbs_gemCeF_ADCmaxU_vs_mod 'U/X max strip in cluster on track; module; ADC max' sbs.gemCeF.hit.module sbs.gemCeF.hit.ADCmaxsampU 10 -0.5 9.5 400 0 4000
+th2d hsbs_gemCeF_ADCmaxV_vs_mod 'V/Y max strip in cluster on track; module; ADC max' sbs.gemCeF.hit.module sbs.gemCeF.hit.ADCmaxsampV 10 -0.5 9.5 400 0 4000
+
+th2d hsbs_gemCeF_Utime_vs_mod 'U/X max strip in cluster on track; module; max strip time' sbs.gemCeF.hit.module sbs.gemCeF.hit.UtimeMaxStrip 10 -0.5 9.5 150 0 150
+th2d hsbs_gemCeF_Vtime_vs_mod 'V/Y max strip in cluster on track; module; max strip time' sbs.gemCeF.hit.module sbs.gemCeF.hit.VtimeMaxStrip 10 -0.5 9.5 150 0 150
+
+# tracking results:
+th1d hsbs_gemCeF_ntracks ';N tracks found' sbs.gemCeF.track.ntrack 11 -0.5 10.5
+th1d hsbs_gemCeF_xtrack 'SBS front GEMs; All Tracks X (m);' sbs.gemCeF.track.x 250 -1.0 1.0
+th1d hsbs_gemCeF_ytrack 'SBS front GEMs; All Tracks Y (m);' sbs.gemCeF.track.y 250 -0.3 0.3
+th1d hsbs_gemCeF_xptrack 'SBS front GEMs; All Tracks dx/dz;' sbs.gemCeF.track.xp 250 -1 1
+th1d hsbs_gemCeF_yptrack 'SBS front GEMs; All Tracks dy/dz;' sbs.gemCeF.track.yp 250 -0.2 0.2
+th1d hsbs_gemCeF_tracknhits 'SBS front GEMs ;N hits on track;' sbs.gemCeF.track.nhits 5 -0.5 4.5
+
+th2d hsbs_gemCeF_xytrack 'SBS front GEMs; Track Y (m); Track X (m)' sbs.gemCeF.track.y sbs.gemCeF.track.x 100 -0.3 0.3 100 -1.0 1.0
+
+th1d hsbs_gemCeF_trchi2 'SBS front GEMs; All Tracks chi2/ndf;' sbs.gemCeF.track.chi2ndf 200 0 50
+
+th1d hsbs_gemCeF_allstrips_ADCmax_m0 'SBS front GEMs Module 0; All strips ADC max;' sbs.gemCeF.m0.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m1 'SBS front GEMs Module 1; All strips ADC max;' sbs.gemCeF.m1.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m2 'SBS front GEMs Module 2; All strips ADC max;' sbs.gemCeF.m2.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m3 'SBS front GEMs Module 3; All strips ADC max;' sbs.gemCeF.m3.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m4 'SBS front GEMs Module 4; All strips ADC max;' sbs.gemCeF.m4.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m5 'SBS front GEMs Module 5; All strips ADC max;' sbs.gemCeF.m5.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m6 'SBS front GEMs Module 6; All strips ADC max;' sbs.gemCeF.m6.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m7 'SBS front GEMs Module 7; All strips ADC max;' sbs.gemCeF.m7.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeF_allstrips_ADCmax_m8 'SBS front GEMs Module 8; All strips ADC max;' sbs.gemCeF.m8.strip.ADCmax 400 0 4000  
+th1d hsbs_gemCeF_allstrips_ADCmax_m9 'SBS front GEMs Module 9; All strips ADC max;' sbs.gemCeF.m9.strip.ADCmax 400 0 4000
+
+th1d hsbs_gemCeF_stripsfiredU_m0 'SBS front Module 0; Strip heat map;' sbs.gemCeF.m0.strip.istrip[I] 3968 -0.5 3967.5 sbs.gemCeF.m0.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m1 'SBS front Module 1; Strip heat map;' sbs.gemCeF.m1.strip.istrip[I] 3968 -0.5 3967.5 sbs.gemCeF.m1.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m2 'SBS front Module 2; Strip heat map;' sbs.gemCeF.m2.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m2.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m3 'SBS front Module 3; Strip heat map;' sbs.gemCeF.m3.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m3.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m4 'SBS front Module 4; Strip heat map;' sbs.gemCeF.m4.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m4.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m5 'SBS front Module 5; Strip heat map;' sbs.gemCeF.m5.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m5.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m6 'SBS front Module 6; Strip heat map;' sbs.gemCeF.m6.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m6.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m7 'SBS front Module 7; Strip heat map;' sbs.gemCeF.m7.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m7.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m8 'SBS front Module 8; Strip heat map;' sbs.gemCeF.m8.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m8.strip.IsU[I]
+th1d hsbs_gemCeF_stripsfiredU_m9 'SBS front Module 9; Strip heat map;' sbs.gemCeF.m9.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeF.m9.strip.IsU[I]
+
+th1d hsbs_gemCeF_stripsfiredV_m0 'SBS front Module 0; Strip heat map;' sbs.gemCeF.m0.strip.istrip[I] 3456 -0.5 3455.5 sbs.gemCeF.m0.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m1 'SBS front Module 1; Strip heat map;' sbs.gemCeF.m1.strip.istrip[I] 3456 -0.5 3455.5 sbs.gemCeF.m1.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m2 'SBS front Module 2; Strip heat map;' sbs.gemCeF.m2.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m2.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m3 'SBS front Module 3; Strip heat map;' sbs.gemCeF.m3.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m3.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m4 'SBS front Module 4; Strip heat map;' sbs.gemCeF.m4.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m4.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m5 'SBS front Module 5; Strip heat map;' sbs.gemCeF.m5.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m5.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m6 'SBS front Module 6; Strip heat map;' sbs.gemCeF.m6.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m6.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m7 'SBS front Module 7; Strip heat map;' sbs.gemCeF.m7.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m7.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m8 'SBS front Module 8; Strip heat map;' sbs.gemCeF.m8.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m8.strip.IsV[I]
+th1d hsbs_gemCeF_stripsfiredV_m9 'SBS front Module 9; Strip heat map;' sbs.gemCeF.m9.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeF.m9.strip.IsV[I]
+
+
+# Rear GEM stuff:
+th2d hsbs_gemCeR_NstripsU_layer ';layer;Number U/X strips fired' [I] sbs.gemCeR.nstripsu_layer[I] 4 -0.5 3.5 2001 -0.5 2000.5
+th2d hsbs_gemCeR_NstripsV_layer ';layer;Number V/Y strips fired' [I] sbs.gemCeR.nstripsv_layer[I] 4 -0.5 3.5 2001 -0.5 2000.5
+
+th1d hsbs_gemCeR_clustwidthU 'U/X clusters on track; cluster size' sbs.gemCeR.hit.nstripu 10 0.5 10.5
+th1d hsbs_gemCeR_clustwidthV 'V/Y clusters on track; cluster size' sbs.gemCeR.hit.nstripv 10 0.5 10.5
+
+th1d hsbs_gemCeR_iSampMaxU 'U/X clusters on track; max time sample' sbs.gemCeR.hit.isampmaxUstrip 6 -0.5 5.5
+th1d hsbs_gemCeR_iSampMaxV 'V/Y clusters on track; max time sample' sbs.gemCeR.hit.isampmaxVstrip 6 -0.5 5.5
+th1d hsbs_gemCeR_ADCmaxU 'U/X clusters on track; Max Strip Max ADC sample' sbs.gemCeR.hit.ADCmaxsampU 400 0 4000
+th1d hsbs_gemCeR_ADCmaxV 'V/Y clusters on track; Max Strip Max ADC sample' sbs.gemCeR.hit.ADCmaxsampV 400 0 4000
+
+th2d hsbs_gemCeR_iSampMaxU_vs_mod 'U/X max strip in cluster on track; module; max time samp' sbs.gemCeR.hit.module sbs.gemCeR.hit.isampmaxUstrip 16 -0.5 15.5 6 -0.5 5.5
+th2d hsbs_gemCeR_iSampMaxV_vs_mod 'V/Y max strip in cluster on track; module; max time samp' sbs.gemCeR.hit.module sbs.gemCeR.hit.isampmaxVstrip 16 -0.5 15.5 6 -0.5 5.5
+
+th2d hsbs_gemCeR_ADCmaxU_vs_mod 'U/X max strip in cluster on track; module; ADC max' sbs.gemCeR.hit.module sbs.gemCeR.hit.ADCmaxsampU 16 -0.5 15.5 400 0 4000
+th2d hsbs_gemCeR_ADCmaxV_vs_mod 'V/Y max strip in cluster on track; module; ADC max' sbs.gemCeR.hit.module sbs.gemCeR.hit.ADCmaxsampV 16 -0.5 15.5 400 0 4000
+
+th2d hsbs_gemCeR_Utime_vs_mod 'U/X max strip in cluster on track; module; max strip time' sbs.gemCeR.hit.module sbs.gemCeR.hit.UtimeMaxStrip 16 -0.5 15.5 150 0 150
+th2d hsbs_gemCeR_Vtime_vs_mod 'V/Y max strip in cluster on track; module; max strip time' sbs.gemCeR.hit.module sbs.gemCeR.hit.VtimeMaxStrip 16 -0.5 15.5 150 0 150
+
+# tracking results:
+th1d hsbs_gemCeR_ntracks ';N tracks found' sbs.gemCeR.track.ntrack 11 -0.5 10.5
+th1d hsbs_gemCeR_xtrack 'SBS rear GEMs; All Tracks X (m);' sbs.gemCeR.track.x 250 -1.0 1.0
+th1d hsbs_gemCeR_ytrack 'SBS rear GEMs; All Tracks Y (m);' sbs.gemCeR.track.y 250 -0.3 0.3
+th1d hsbs_gemCeR_xptrack 'SBS rear GEMs; All Tracks dx/dz;' sbs.gemCeR.track.xp 250 -1 1
+th1d hsbs_gemCeR_yptrack 'SBS rear GEMs; All Tracks dy/dz;' sbs.gemCeR.track.yp 250 -0.2 0.2
+th1d hsbs_gemCeR_tracknhits 'SBS rear GEMs ;N hits on track;' sbs.gemCeR.track.nhits 5 -0.5 4.5
+
+th2d hsbs_gemCeR_xytrack 'SBS rear GEMs; Track Y (m); Track X (m)' sbs.gemCeR.track.y sbs.gemCeR.track.x 100 -0.3 0.3 100 -1.0 1.0
+
+th1d hsbs_gemCeR_trchi2 'SBS rear GEMs; All Tracks chi2/ndf;' sbs.gemCeR.track.chi2ndf 200 0 50
+
+th1d hsbs_gemCeR_allstrips_ADCmax_m0 'SBS rear GEMs Module 0; All strips ADC max;' sbs.gemCeR.m0.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m1 'SBS rear GEMs Module 1; All strips ADC max;' sbs.gemCeR.m1.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m2 'SBS rear GEMs Module 2; All strips ADC max;' sbs.gemCeR.m2.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m3 'SBS rear GEMs Module 3; All strips ADC max;' sbs.gemCeR.m3.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m4 'SBS rear GEMs Module 4; All strips ADC max;' sbs.gemCeR.m4.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m5 'SBS rear GEMs Module 5; All strips ADC max;' sbs.gemCeR.m5.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m6 'SBS rear GEMs Module 6; All strips ADC max;' sbs.gemCeR.m6.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m7 'SBS rear GEMs Module 7; All strips ADC max;' sbs.gemCeR.m7.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m8 'SBS rear GEMs Module 8; All strips ADC max;' sbs.gemCeR.m8.strip.ADCmax 400 0 4000  
+th1d hsbs_gemCeR_allstrips_ADCmax_m9 'SBS rear GEMs Module 9; All strips ADC max;' sbs.gemCeR.m9.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m10 'SBS rear GEMs Module 10; All strips ADC max;' sbs.gemCeR.m10.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m11 'SBS rear GEMs Module 11; All strips ADC max;' sbs.gemCeR.m11.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m12 'SBS rear GEMs Module 12; All strips ADC max;' sbs.gemCeR.m12.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m13 'SBS rear GEMs Module 13; All strips ADC max;' sbs.gemCeR.m13.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m14 'SBS rear GEMs Module 14; All strips ADC max;' sbs.gemCeR.m14.strip.ADCmax 400 0 4000
+th1d hsbs_gemCeR_allstrips_ADCmax_m15 'SBS rear GEMs Module 15; All strips ADC max;' sbs.gemCeR.m15.strip.ADCmax 400 0 4000
+
+
+
+th1d hsbs_gemCeR_stripsfiredU_m0 'SBS rear Module 0; Strip heat map;' sbs.gemCeR.m0.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m0.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m1 'SBS rear Module 1; Strip heat map;' sbs.gemCeR.m1.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m1.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m2 'SBS rear Module 2; Strip heat map;' sbs.gemCeR.m2.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m2.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m3 'SBS rear Module 3; Strip heat map;' sbs.gemCeR.m3.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m3.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m4 'SBS rear Module 4; Strip heat map;' sbs.gemCeR.m4.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m4.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m5 'SBS rear Module 5; Strip heat map;' sbs.gemCeR.m5.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m5.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m6 'SBS rear Module 6; Strip heat map;' sbs.gemCeR.m6.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m6.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m7 'SBS rear Module 7; Strip heat map;' sbs.gemCeR.m7.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m7.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m8 'SBS rear Module 8; Strip heat map;' sbs.gemCeR.m8.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m8.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m9 'SBS rear Module 9; Strip heat map;' sbs.gemCeR.m9.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m9.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m10 'SBS rear Module 10; Strip heat map;' sbs.gemCeR.m10.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m10.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m11 'SBS rear Module 11; Strip heat map;' sbs.gemCeR.m11.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m11.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m12 'SBS rear Module 12; Strip heat map;' sbs.gemCeR.m12.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m12.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m13 'SBS rear Module 13; Strip heat map;' sbs.gemCeR.m13.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m13.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m14 'SBS rear Module 14; Strip heat map;' sbs.gemCeR.m14.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m14.strip.IsU[I]
+th1d hsbs_gemCeR_stripsfiredU_m15 'SBS rear Module 15; Strip heat map;' sbs.gemCeR.m15.strip.istrip[I] 1280 -0.5 1279.5 sbs.gemCeR.m15.strip.IsU[I]
+
+th1d hsbs_gemCeR_stripsfiredV_m0 'SBS rear Module 0; Strip heat map;' sbs.gemCeR.m0.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m0.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m1 'SBS rear Module 1; Strip heat map;' sbs.gemCeR.m1.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m1.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m2 'SBS rear Module 2; Strip heat map;' sbs.gemCeR.m2.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m2.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m3 'SBS rear Module 3; Strip heat map;' sbs.gemCeR.m3.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m3.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m4 'SBS rear Module 4; Strip heat map;' sbs.gemCeR.m4.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m4.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m5 'SBS rear Module 5; Strip heat map;' sbs.gemCeR.m5.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m5.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m6 'SBS rear Module 6; Strip heat map;' sbs.gemCeR.m6.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m6.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m7 'SBS rear Module 7; Strip heat map;' sbs.gemCeR.m7.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m7.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m8 'SBS rear Module 8; Strip heat map;' sbs.gemCeR.m8.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m8.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m9 'SBS rear Module 9; Strip heat map;' sbs.gemCeR.m9.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m9.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m10 'SBS rear Module 10; Strip heat map;' sbs.gemCeR.m10.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m10.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m11 'SBS rear Module 11; Strip heat map;' sbs.gemCeR.m11.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m11.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m12 'SBS rear Module 12; Strip heat map;' sbs.gemCeR.m12.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m12.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m13 'SBS rear Module 13; Strip heat map;' sbs.gemCeR.m13.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m13.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m14 'SBS rear Module 14; Strip heat map;' sbs.gemCeR.m14.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m14.strip.IsV[I]
+th1d hsbs_gemCeR_stripsfiredV_m15 'SBS rear Module 15; Strip heat map;' sbs.gemCeR.m15.strip.istrip[I] 1536 -0.5 1535.5 sbs.gemCeR.m15.strip.IsV[I]
+

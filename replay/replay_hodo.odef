@@ -16,6 +16,8 @@ variable bb.hodotdc.nclus
 block bb.hodotdc.clus.*
 variable bb.hodotdc.nclus
 
+block bb.hodotdc.Ref.*
+
 #-----------------------------------------------------------------------------
 # 2D TDC histograms
 #-----------------------------------------------------------------------------

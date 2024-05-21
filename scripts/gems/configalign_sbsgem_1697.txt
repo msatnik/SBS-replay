@@ -1,4 +1,4 @@
-/chafs2/work1/sbs/Rootfiles/gen_replayed_1697_all.root
+/chafs2/work1/sbs/Rootfiles/gen_replayed_6314_50k_events.root
 endlist
 prefix sbs.gem
 nlayers 8
@@ -28,13 +28,13 @@ mod_uangle 180 180 180 180 180 180 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #mod_uangle 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 mod_vangle 90.0 90.0 90.0 -90.0 -90.0 -90.0 90.0 90.0 90.0 90.0 -90.0 -90.0 -90.0 -90.0 90.0 90.0 90.0 90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0 -90.0
 niter 10000
-minchi2change 1.e-4
+minchi2change 1.e-5
 minposchange 1.e-6
 minanglechange 1.e-5
 offsetsonly 0
 sigma 0.15e-3
 NMAX 10000000
 endconfig
-sbs.gem.track.chi2ndf<100&&sbs.gem.track.ntrack==1&&sbs.gem.track.nhits>=4
+sbs.gem.track.chi2ndf<30&&sbs.gem.track.ntrack==1&&sbs.gem.track.nhits>=4
 #sbs.gem.track.chi2ndf<3000&&sbs.gem.track.nhits>=4
 endcut

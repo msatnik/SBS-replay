@@ -39,7 +39,10 @@ void replay_all_GEMs(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=1
   SBSBigBite   *bb = new SBSBigBite("bb", "Generic apparatus");
   //SBSGEMStand *gems = new SBSGEMStand("gems", "Collection of GEMs in stand");
   SBSGEMSpectrometerTracker *bbgem = new SBSGEMSpectrometerTracker("gem", "BigBite Hall A GEM data");
-    
+  bool pm =  ( pedestalmode != 0 );
+  //this will override the database setting:
+  bbgem->SetPedestalMode( pm );
+  bbgem->SetMakeCommonModePlots( cmplots );
   bb->AddDetector(bbgem);
 
   //Add trigger TDC info:
@@ -66,6 +69,7 @@ void replay_all_GEMs(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=1
   //bool pm =  ( pedestalmode != 0 );
   //this will override the database setting:
   ( static_cast<SBSGEMTrackerBase *> (bbgem) )->SetPedestalMode( pedestalmode );
+  
 
     SBSEArm *harm = new SBSEArm("sbs","Hadron Arm with HCal");
   SBSHCal* hcal =  new SBSHCal("hcal","HCAL");
@@ -80,9 +84,10 @@ void replay_all_GEMs(UInt_t runnum=10491, Long_t nevents=-1, Long_t firstevent=1
   harm->AddDetector( sbstrig );  
 
   SBSGEMSpectrometerTracker *sbsgem = new SBSGEMSpectrometerTracker("gem", "Super BigBite Hall A GEM data");
-  ( static_cast<SBSGEMTrackerBase *> (sbsgem) )->SetPedestalMode( pedestalmode );
-  
-  harm->AddDetector(sbsgem);
+
+  sbsgem->SetPedestalMode( pm );
+  sbsgem->SetMakeCommonModePlots( cmplots );  
+  if (usesbsgems != 0 ) harm->AddDetector(sbsgem);
 
   gHaApps->Add(harm);
   

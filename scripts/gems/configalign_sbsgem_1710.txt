@@ -49,6 +49,6 @@ offsetsonly 0
 sigma 0.15e-3
 NMAX 10000000
 endconfig
-sbs.gem.track.chi2ndf<30&&sbs.gem.track.ntrack==1&&sbs.gem.track.nhits>=6
+sbs.gem.track.chi2ndf<30&&sbs.gem.track.ntrack==1&&sbs.gem.track.nhits>=4
 #sbs.gem.track.chi2ndf<3000&&sbs.gem.track.nhits>=4
 endcut

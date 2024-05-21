@@ -512,6 +512,9 @@ void ElasticEventSelection_MultiCluster( const char *configfilename, const char 
   double runnumber;
   C->SetBranchAddress("g.runnum", &runnumber);
 
+  C->SetBranchStatus("MC.mc_nucl",1);
+  C->SetBranchStatus("MC.mc_fnucl",1);
+  
   C->SetBranchStatus("bb.grinch_tdc.nclus",1);
   C->SetBranchStatus("bb.grinch_tdc.clus.*",1);
   
@@ -782,6 +785,7 @@ void ElasticEventSelection_MultiCluster( const char *configfilename, const char 
   double T_grinch_xmean;
   double T_grinch_ymean;
   double T_grinch_adc;
+  double T_epsilon,T_epsilon_inel;
   
   int bestHCALcluster;
   int HCALcut;
@@ -794,7 +798,9 @@ void ElasticEventSelection_MultiCluster( const char *configfilename, const char 
   Tout->Branch( "HCALcut", &HCALcut, "HCALcut/I");
   Tout->Branch( "BBcut", &BBcut, "BBcut/I");
   Tout->Branch( "Ebeam", &T_ebeam, "Ebeam/D" );
-  Tout->Branch( "Q2", &T_Q2, "Q2/D"); 
+  Tout->Branch( "Q2", &T_Q2, "Q2/D");
+  Tout->Branch( "epsilon", &T_epsilon, "epsilon/D");
+  Tout->Branch( "epsilon_inel", &T_epsilon_inel, "epsilon/D");
   Tout->Branch( "etheta", &T_etheta, "etheta/D");
   Tout->Branch( "ephi", &T_ephi, "ephi/D");
   Tout->Branch( "ep_recon", &T_precon, "ep_recon/D");
@@ -900,7 +906,7 @@ void ElasticEventSelection_MultiCluster( const char *configfilename, const char 
   Tout->Branch( "grinch_clsize", &T_grinch_clustersize, "grinch_clsize/I");
   Tout->Branch( "grinch_tridx", &T_grinch_tridx, "grinch_tridx/I");
   Tout->Branch( "grinch_tmean", &T_grinch_tmean, "grinch_tmean/D");
-  Tout->Branch( "grinch_xmean", &T_grinch_xmean, "grinch_xmean/D");
+  Tout->Branch( "grinch_xmean", &T_grinch_xmean, "grinch_xmean/D"); 
   Tout->Branch( "grinch_ymean", &T_grinch_ymean, "grinch_ymean/D");
   Tout->Branch( "grinch_adc", &T_grinch_adc, "grinch_adc/D");
 
@@ -1003,6 +1009,12 @@ void ElasticEventSelection_MultiCluster( const char *configfilename, const char 
       T_Q2 = Q2recon;
       T_W2 = W2recon;
 
+      //1 + nu^2 / Q^2 = 1 + Q^4/(4M^2 Q^2) = 1 + tau
+      
+      T_epsilon_inel = pow(1.0+2.0*(1.0+pow(nu_recon,2)/Q2recon)*pow(tan(etheta/2.0),2),-1);
+
+      T_epsilon = pow(1.0+2.0*(1.0+Q2recon/(4.0*pow(Mp,2)))*pow(tan(etheta/2.0),2),-1);
+      
       T_xfp = xfp[0];
       T_yfp = yfp[0];
       T_thfp = thfp[0];

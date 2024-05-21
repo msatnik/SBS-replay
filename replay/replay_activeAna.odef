@@ -1,0 +1,32 @@
+# Sample outout definition file
+
+block sbs.activeAna_tdc.*
+block sbs.activeAna_adc.*
+
+#-----------------------------------------------------------------------------
+# 2D FADC histograms
+#-----------------------------------------------------------------------------
+TH2D activeAna_fadc_int_id  'Active Analyzer FADC Pulse Integral' sbs.activeAna_adc.adcelemID[I] sbs.activeAna_adc.a_p[I] 32 -0.5 31.5 50 0.1 300
+TH2D activeAna_fadc_amp_id  'Active Analyzer FADC Amplitude' sbs.activeAna_adc.adcelemID[I] sbs.activeAna_adc.a_amp_p[I] 32 -0.5 31.5 50 0.1 400
+TH2D activeAna_fadc_ped_id  'Active Analyzer FADC Pedestal' sbs.activeAna_adc.adcelemID[I] sbs.activeAna_adc.ped[I] 32 -0.5 31.5 25 0.1 50
+TH2D activeAna_fadc_mult_id 'Active Analyzer FADC Multiplicity' sbs.activeAna_adc.adcelemID[I] sbs.activeAna_adc.a_mult[I] 32 -0.5 31.5 5 -0.5 4.5
+
+TH1D activeAna_fadc_hits_int  'Active Analyzer FADC All Hits Pulse Integral' sbs.activeAna_adc.hits.a[I] 50 0.1 300
+TH1D activeAna_fadc_hits_amp  'Active Analyzer FADC All Hits Pulse Amplitude' sbs.activeAna_adc.hits.a_amp[I] 50 0.1 400
+TH1D activeAna_fadc_hits_time  'Active Analyzer FADC All Hits Pulse Time' sbs.activeAna_adc.hits.a_time[I] 100 0.1 1600
+TH1D activeAna_fadc_elemid  'Active Analyzer FADC Good Hits; Element ID' sbs.activeAna_adc.adcelemID[I] 32 -.5 31.5
+
+TH1D activeAna_fadc_nhits  'Active Analyzer FADC Hits' sbs.activeAna_adc.nhits 50 0.1 50
+TH1D activeAna_tdc_nhits  'Active Analyzer TDC Hits' sbs.activeAna_tdc.nhits 50 0.1 50
+
+TH1D activeAna_tdc_hits_time  'Active Analyzer TDC All Hits Time; time (ns)' sbs.activeAna_tdc.hits.t[I] 100 0.1 13000
+TH1D activeAna_tdc_elemid  'Active Analyzer TDC All Hits; Element ID' sbs.activeAna_tdc.hits.TDCelemID[I] 32 -.5 31.5
+
+TH1D activeAna_h1_int 'Active Analyzer FADC Pulse Integral 1D' sbs.activeAna_adc.a_p[I] 50 0.1 300
+TH1D activeAna_h1_amp 'Active Analyzer FADC Amplitude 1D' sbs.activeAna_adc.a_amp_p[I] 50 0.1 400
+TH1D activeAna_h1_ped 'Active Analyzer FADC Pedestal 1D' sbs.activeAna_adc.ped[I] 25 0.1 50
+TH1D activeAna_h1_mult 'Active Analyzer FADC Multiplicity 1D' sbs.activeAna_adc.a_mult[I] 5 -0.5 4.5
+
+
+
+
