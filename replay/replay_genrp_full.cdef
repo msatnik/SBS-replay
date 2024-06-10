@@ -13,8 +13,9 @@ RawDecode_master 1
 Block: Decode 
 Decode_master 1
 
-Block: CoarseReconstruct 
-CoarseReconstruct_master 1
+Block: CoarseReconstruct
+GoodHCALtime (g.trigbits==1||g.trigbits==4)&&sbs.hcal.nclus>0&&bb.sh.nclus>0&&abs(sbs.hcal.atimeblk-bb.sh.atimeblk-42.)<14.0&&sbs.hcal.e>0.025 
+CoarseReconstruct_master GoodHCALtime
 
 Block: Physics
 BigBiteSingles g.trigbits==1
@@ -24,6 +25,7 @@ GoodShower    bb.sh.ngoodADChits>0
 GoodBBCAL     GoodPreShower||GoodShower
 CutPreShower  bb.ps.e>0.2
 GoodTrack BB.gold.index>-1
+GoodTrackSBS sbs.tr.n>0
 GoodElectron  GoodTrack&&CutPreShower
 GoodHCAL      sbs.hcal.nclus>0
 # GoodSBSTrack  sbs.gem.track.ntrack>0
@@ -32,4 +34,4 @@ HitsGrinchAndElectron bb.grinch_tdc.ngoodhits>0&&bb.tr.n>=1.&&bb.ps.e>0.2
 # Physics_master GoodBBCAL
 # Physics_master (BigBiteSingles||Coincidence)
 #Physics_master 1
-Physics_master GoodTrack
+Physics_master (GoodTrack||GoodTrackSBS)

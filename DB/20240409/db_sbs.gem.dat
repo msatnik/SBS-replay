@@ -697,15 +697,15 @@ sbs.gem.m33.vgain = 1  1  1  1  1  1  1  1  1  1
 
 ############ parameters searched by SBSGEMModule::ReadDatabase() #################
 ############ offline thresholds: ############
-sbs.gem.threshold_sample = 100.0
-sbs.gem.threshold_stripsum = 300.
-sbs.gem.threshold_clustersum 600.
+sbs.gem.threshold_sample =   75.0
+sbs.gem.threshold_stripsum = 250.
+sbs.gem.threshold_clustersum 500.
 
 
 sbs.gem.ADCasym_cut = 0.8 
 sbs.gem.deltat_cut = 25.0
 sbs.gem.corrcoeff_cut = 0.5
-sbs.gem.filterflag1D = 1 # -1 = no filtering: don't require 1D hits to pass any cuts other than basic zero suppression
+sbs.gem.filterflag1D = -1 # -1 = no filtering: don't require 1D hits to pass any cuts other than basic zero suppression
 sbs.gem.filterflag2D = -1  # 1 = "hard" filtering: require 2D hits to pass all cuts
 
 sbs.gem.peakprominence_minsigma = 3.0 
@@ -722,7 +722,7 @@ sbs.gem.maxnv_pos = 3
 sbs.gem.sigmahitpos = 0.0001
 sbs.gem.sigmahitshape = 0.0004
 sbs.gem.zerosuppress = 1
-sbs.gem.zerosuppress_nsigma = 5.0
+sbs.gem.zerosuppress_nsigma = 3.0
 sbs.gem.onlinezerosuppress = 1 # note that this parameter only provides a default value, actual behavior is determined by the flags seen in the raw data:
 
 sbs.gem.plot_common_mode = 0
@@ -764,7 +764,7 @@ sbs.gem.tryfasttrack = 1  #May get errors before a good alignment. So may be hel
  sbs.gem.gridbinwidthy = 0.005
  sbs.gem.gridedgetolerancex = 0.0015
  sbs.gem.gridedgetolerancey = 0.0015
- sbs.gem.trackchi2cut = 50.0
+ sbs.gem.trackchi2cut = 20.0
 
 # For initial alignment with cosmics, we want to start with no constraints on track-finding:
 sbs.gem.useconstraint = 1
@@ -1994,6 +1994,18 @@ sbs.gem.m22.chanmap =
 
 ---------[ 2024-04-10 00:00:00 ] # initial alignment (positions only)
 
+sbs.gem.maxhitcombos_total = 1.e23
+
+sbs.gem.m26.threshold_sample = 100000.
+sbs.gem.m27.threshold_sample = 100000.
+sbs.gem.m28.threshold_sample = 100000.
+sbs.gem.m29.threshold_sample = 100000.
+
+sbs.gem.m30.threshold_sample = 100000.
+sbs.gem.m31.threshold_sample = 100000.
+sbs.gem.m32.threshold_sample = 100000.
+sbs.gem.m33.threshold_sample = 100000.
+
 sbs.gem.trackchi2cut = 20.0
 
 sbs.gem.m0.position =    -9.92407e-05       -0.014948    0.0003420129
@@ -2070,7 +2082,7 @@ sbs.gem.m33.angle =        89.99964               0               0
 
 
 #                 nhits = 4    5    6    7    8    9   10       
-sbs.gem.trackchi2cut = 10.0 25.0 25.0 25.0 25.0 25.0 25.0 
+sbs.gem.trackchi2cut = 20.0 
 
 sbs.gem.minhitsontrack = 4
 
@@ -2092,7 +2104,7 @@ sbs.gem.gridbinwidthy = 0.005
 sbs.gem.gridedgetolerancex = 0.0015
 sbs.gem.gridedgetolerancey = 0.0015
 
-sbs.gem.maxhitcombos_total = 1.e20
+sbs.gem.maxhitcombos_total = 1.e23
 
 sbs.gem.suppressfirstlast = 1
 
@@ -2113,3 +2125,11 @@ sbs.gem.sigmatrackt0 = 5.0
 sbs.gem.cuttrackt0 = 25.0
 
 sbs.gem.filterflag1D = -1
+
+--------[ 2024-04-18 23:51:00 ] # zero field:
+sbs.gem.useopticsconstraint = 0
+#sbs.gem.suppressfirstlast = 0
+#sbs.gem.usestriptimingcut = 0
+
+--------[ 2024-04-19 3:30:00 ] # back to full field
+sbs.gem.useopticsconstraint = 1

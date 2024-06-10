@@ -2269,6 +2269,17 @@ bb.forwardoptics_parameters =
  -1.9538371e-16 -9.9286714e-17  1.3550367e-16  2.9860708e-17  0 0 0 0 2
 
 
+---------[ 2024-04-18 23:51:00 ] # start zero-field, single-foil
+
+bb.frontconstraintwidth_x = 0.12
+bb.frontconstraint_x0 = -0.122
+bb.frontconstraintwidth_y = 0.1
+
+---------[ 2024-04-19 3:30:00 ] # back to full-field running
+
+bb.frontconstraint_x0 = 0.047
+bb.frontconstraintwidth_y = 0.075
+bb.frontconstraintwidth_x = 0.09
 
 ---------[ 2024-04-22 10:30:00 ] # start zero-field running on single-foil
 

@@ -311,6 +311,18 @@ sbs.frontconstraintwidth_y = 0.15
 sbs.frontconstraint_x0 = 0.0
 sbs.frontconstraint_y0 = 0.0
 
+------------[ 2024-04-18 23:51:00 ] # zero-field running, single foil. Target is front constraint:
+sbs.dynamicth0 = 0.0
+# open these up a bit until we figure out how to center them for zero-field data:
+sbs.frontconstraintwidth_x = 0.13
+sbs.frontconstraintwidth_y = 0.13
+
+sbs.frontconstraint_x0 = 0.0164 
+sbs.frontconstraint_y0 = 0.0
+
+
+------------[ 2024-04-19 3:30:00 ] # back to full-field running
+sbs.dynamicth0 = -0.051
 
 ------------[ 2024-04-19 07:30:00 ] # analyzer installed
 
