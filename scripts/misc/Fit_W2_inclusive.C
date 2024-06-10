@@ -143,7 +143,8 @@ void GetElasticCounts( const char *rootfilename, double W2min=0.4, double W2max 
  
   TString cutstring; 
 
-  cutstring.Form("%g<W2&&W2<%g&&%g<deltay&&deltay<%g",W2min,W2max, dymin, dymax);
+  cutstring.Form("%g<W2&&W2<%g",W2min,W2max);
+  //  cutstring.Form("%g<W2&&W2<%g&&%g<deltay&&deltay<%g",W2min,W2max, dymin, dymax);
 
   TCut Wcut = cutstring.Data();
 
