@@ -2,238 +2,238 @@
 -------[ 2023-12-31 00:00:00 ]
 
 ## A chamber is a "Tracker-Plane" composed of vertically stacked modules
-sbs.cepolfront_gem.is_mc = 1
-sbs.cepolfront_gem.onlinezerosuppress = 0
-sbs.cepolfront_gem.pedestalmode = 0
-sbs.cepolfront_gem.commonmode_flag = -1
-sbs.cepolfront_gem.modules = m0     m1     m2 m3 m4 m5     m6 m7 m8 m9
+sbs.gemCeF.is_mc = 1
+sbs.gemCeF.onlinezerosuppress = 0
+sbs.gemCeF.pedestalmode = 0
+sbs.gemCeF.commonmode_flag = -1
+sbs.gemCeF.modules = m0     m1     m2 m3 m4 m5     m6 m7 m8 m9
 
-sbs.cepolfront_gem.useconstraint = 1
+sbs.gemCeF.useconstraint = 1
 
-sbs.cepolfront_gem.gridbinwidthx = 0.01
-sbs.cepolfront_gem.gridbinwidthy = 0.01
-sbs.cepolfront_gem.gridedgetolerancex = 0.003
-sbs.cepolfront_gem.gridedgetolerancey = 0.003
+sbs.gemCeF.gridbinwidthx = 0.01
+sbs.gemCeF.gridbinwidthy = 0.01
+sbs.gemCeF.gridedgetolerancex = 0.003
+sbs.gemCeF.gridedgetolerancey = 0.003
 
-sbs.cepolfront_gem.minhitsontrack = 3
+sbs.gemCeF.minhitsontrack = 3
 
-sbs.cepolfront_gem.corrcoeff_cut = 0.5
-sbs.cepolfront_gem.ADCasym_cut = 0.5
-sbs.cepolfront_gem.deltat_cut = 30.0
-sbs.cepolfront_gem.filterflag1D = 0
-sbs.cepolfront_gem.filterflag2D = 0
+sbs.gemCeF.corrcoeff_cut = 0.5
+sbs.gemCeF.ADCasym_cut = 0.5
+sbs.gemCeF.deltat_cut = 30.0
+sbs.gemCeF.filterflag1D = 0
+sbs.gemCeF.filterflag2D = 0
 
-sbs.cepolfront_gem.threshold_stripsum = 240
-sbs.cepolfront_gem.threshold_sample = 100
-sbs.cepolfront_gem.threshold_clustersum = 400.0
+sbs.gemCeF.threshold_stripsum = 240
+sbs.gemCeF.threshold_sample = 100
+sbs.gemCeF.threshold_clustersum = 400.0
 
-sbs.cepolfront_gem.peakprominence_minsigma = 5.0
-sbs.cepolfront_gem.peakprominence_minfraction = 0.2
-sbs.cepolfront_gem.trackchi2cut = 150.0
+sbs.gemCeF.peakprominence_minsigma = 5.0
+sbs.gemCeF.peakprominence_minfraction = 0.2
+sbs.gemCeF.trackchi2cut = 150.0
 
-sbs.cepolfront_gem.maxnu_charge = 4
-sbs.cepolfront_gem.maxnv_charge = 4
+sbs.gemCeF.maxnu_charge = 4
+sbs.gemCeF.maxnv_charge = 4
 
-sbs.cepolfront_gem.maxnu_pos = 2
-sbs.cepolfront_gem.maxnv_pos = 2
+sbs.gemCeF.maxnu_pos = 2
+sbs.gemCeF.maxnv_pos = 2
 
-sbs.cepolfront_gem.m0.pedu = 1500
-sbs.cepolfront_gem.m0.rmsu = 8
-sbs.cepolfront_gem.m0.pedv = 1500
-sbs.cepolfront_gem.m0.rmsv = 8
+sbs.gemCeF.m0.pedu = 1500
+sbs.gemCeF.m0.rmsu = 8
+sbs.gemCeF.m0.pedv = 1500
+sbs.gemCeF.m0.rmsv = 8
 
-sbs.cepolfront_gem.m1.pedu = 1500
-sbs.cepolfront_gem.m1.rmsu = 8
-sbs.cepolfront_gem.m1.pedv = 1500
-sbs.cepolfront_gem.m1.rmsv = 8
+sbs.gemCeF.m1.pedu = 1500
+sbs.gemCeF.m1.rmsu = 8
+sbs.gemCeF.m1.pedv = 1500
+sbs.gemCeF.m1.rmsv = 8
 
-sbs.cepolfront_gem.m2.pedu = 1500
-sbs.cepolfront_gem.m2.rmsu = 8
-sbs.cepolfront_gem.m2.pedv = 1500
-sbs.cepolfront_gem.m2.rmsv = 8
+sbs.gemCeF.m2.pedu = 1500
+sbs.gemCeF.m2.rmsu = 8
+sbs.gemCeF.m2.pedv = 1500
+sbs.gemCeF.m2.rmsv = 8
 
-sbs.cepolfront_gem.m3.pedu = 1500
-sbs.cepolfront_gem.m3.rmsu = 8
-sbs.cepolfront_gem.m3.pedv = 1500
-sbs.cepolfront_gem.m3.rmsv = 8
+sbs.gemCeF.m3.pedu = 1500
+sbs.gemCeF.m3.rmsu = 8
+sbs.gemCeF.m3.pedv = 1500
+sbs.gemCeF.m3.rmsv = 8
 
-sbs.cepolfront_gem.m4.pedu = 1500
-sbs.cepolfront_gem.m4.rmsu = 8
-sbs.cepolfront_gem.m4.pedv = 1500
-sbs.cepolfront_gem.m4.rmsv = 8
+sbs.gemCeF.m4.pedu = 1500
+sbs.gemCeF.m4.rmsu = 8
+sbs.gemCeF.m4.pedv = 1500
+sbs.gemCeF.m4.rmsv = 8
 
-sbs.cepolfront_gem.m5.pedu = 1500
-sbs.cepolfront_gem.m5.rmsu = 8
-sbs.cepolfront_gem.m5.pedv = 1500
-sbs.cepolfront_gem.m5.rmsv = 8
+sbs.gemCeF.m5.pedu = 1500
+sbs.gemCeF.m5.rmsu = 8
+sbs.gemCeF.m5.pedv = 1500
+sbs.gemCeF.m5.rmsv = 8
 
-sbs.cepolfront_gem.m6.pedu = 1500
-sbs.cepolfront_gem.m6.rmsu = 8
-sbs.cepolfront_gem.m6.pedv = 1500
-sbs.cepolfront_gem.m6.rmsv = 8
+sbs.gemCeF.m6.pedu = 1500
+sbs.gemCeF.m6.rmsu = 8
+sbs.gemCeF.m6.pedv = 1500
+sbs.gemCeF.m6.rmsv = 8
 
-sbs.cepolfront_gem.m7.pedu = 1500
-sbs.cepolfront_gem.m7.rmsu = 8
-sbs.cepolfront_gem.m7.pedv = 1500
-sbs.cepolfront_gem.m7.rmsv = 8
+sbs.gemCeF.m7.pedu = 1500
+sbs.gemCeF.m7.rmsu = 8
+sbs.gemCeF.m7.pedv = 1500
+sbs.gemCeF.m7.rmsv = 8
 
-sbs.cepolfront_gem.m8.pedu = 1500
-sbs.cepolfront_gem.m8.rmsu = 8
-sbs.cepolfront_gem.m8.pedv = 1500
-sbs.cepolfront_gem.m8.rmsv = 8
+sbs.gemCeF.m8.pedu = 1500
+sbs.gemCeF.m8.rmsu = 8
+sbs.gemCeF.m8.pedv = 1500
+sbs.gemCeF.m8.rmsv = 8
 
-sbs.cepolfront_gem.m9.pedu = 1500
-sbs.cepolfront_gem.m9.rmsu = 8
-sbs.cepolfront_gem.m9.pedv = 1500
-sbs.cepolfront_gem.m9.rmsv = 8
+sbs.gemCeF.m9.pedu = 1500
+sbs.gemCeF.m9.rmsu = 8
+sbs.gemCeF.m9.pedv = 1500
+sbs.gemCeF.m9.rmsv = 8
 
-sbs.cepolfront_gem.m0.layer = 0
+sbs.gemCeF.m0.layer = 0
 
-sbs.cepolfront_gem.m1.layer = 1
+sbs.gemCeF.m1.layer = 1
 
-sbs.cepolfront_gem.m2.layer = 2
-sbs.cepolfront_gem.m3.layer = 2
-sbs.cepolfront_gem.m4.layer = 2
-sbs.cepolfront_gem.m5.layer = 2
+sbs.gemCeF.m2.layer = 2
+sbs.gemCeF.m3.layer = 2
+sbs.gemCeF.m4.layer = 2
+sbs.gemCeF.m5.layer = 2
 
-sbs.cepolfront_gem.m6.layer = 3
-sbs.cepolfront_gem.m7.layer = 3
-sbs.cepolfront_gem.m8.layer = 3
-sbs.cepolfront_gem.m9.layer = 3
+sbs.gemCeF.m6.layer = 3
+sbs.gemCeF.m7.layer = 3
+sbs.gemCeF.m8.layer = 3
+sbs.gemCeF.m9.layer = 3
 
 #MC
-sbs.cepolfront_gem.m0.apvmap = 3
+sbs.gemCeF.m0.apvmap = 3
 
-sbs.cepolfront_gem.m1.apvmap = 3
+sbs.gemCeF.m1.apvmap = 3
 
-sbs.cepolfront_gem.m2.apvmap = 3
-sbs.cepolfront_gem.m3.apvmap = 3
-sbs.cepolfront_gem.m4.apvmap = 3
-sbs.cepolfront_gem.m5.apvmap = 3
+sbs.gemCeF.m2.apvmap = 3
+sbs.gemCeF.m3.apvmap = 3
+sbs.gemCeF.m4.apvmap = 3
+sbs.gemCeF.m5.apvmap = 3
 
-sbs.cepolfront_gem.m6.apvmap = 3
-sbs.cepolfront_gem.m7.apvmap = 3
-sbs.cepolfront_gem.m8.apvmap = 3
-sbs.cepolfront_gem.m9.apvmap = 3
+sbs.gemCeF.m6.apvmap = 3
+sbs.gemCeF.m7.apvmap = 3
+sbs.gemCeF.m8.apvmap = 3
+sbs.gemCeF.m9.apvmap = 3
 
 #sizes
-sbs.cepolfront_gem.m0.size = 1.536 0.4096 0.001
+sbs.gemCeF.m0.size = 1.536 0.4096 0.001
 
-sbs.cepolfront_gem.m1.size = 1.536 0.4096 0.001
+sbs.gemCeF.m1.size = 1.536 0.4096 0.001
 
-sbs.cepolfront_gem.m2.size = 0.512 0.6144 0.001
-sbs.cepolfront_gem.m3.size = 0.512 0.6144 0.001
-sbs.cepolfront_gem.m4.size = 0.512 0.6144 0.001
-sbs.cepolfront_gem.m5.size = 0.512 0.6144 0.001
+sbs.gemCeF.m2.size = 0.512 0.6144 0.001
+sbs.gemCeF.m3.size = 0.512 0.6144 0.001
+sbs.gemCeF.m4.size = 0.512 0.6144 0.001
+sbs.gemCeF.m5.size = 0.512 0.6144 0.001
 
-sbs.cepolfront_gem.m6.size = 0.512 0.6144 0.001
-sbs.cepolfront_gem.m7.size = 0.512 0.6144 0.001
-sbs.cepolfront_gem.m8.size = 0.512 0.6144 0.001
-sbs.cepolfront_gem.m9.size = 0.512 0.6144 0.001
+sbs.gemCeF.m6.size = 0.512 0.6144 0.001
+sbs.gemCeF.m7.size = 0.512 0.6144 0.001
+sbs.gemCeF.m8.size = 0.512 0.6144 0.001
+sbs.gemCeF.m9.size = 0.512 0.6144 0.001
 
 
 #positions #m0 and m4 have a temporary offset
-sbs.cepolfront_gem.m0.position = 0.0 0.0 0.0
+sbs.gemCeF.m0.position = 0.0 0.0 0.0
 
-sbs.cepolfront_gem.m1.position = 0.0 0.0 0.1
+sbs.gemCeF.m1.position = 0.0 0.0 0.1
 
-sbs.cepolfront_gem.m2.position = -0.768 0.0 0.2
-sbs.cepolfront_gem.m3.position = -0.256 0.0 0.2
-sbs.cepolfront_gem.m4.position =  0.256 0.0 0.2
-sbs.cepolfront_gem.m5.position =  0.768 0.0 0.2
+sbs.gemCeF.m2.position = -0.768 0.0 0.2
+sbs.gemCeF.m3.position = -0.256 0.0 0.2
+sbs.gemCeF.m4.position =  0.256 0.0 0.2
+sbs.gemCeF.m5.position =  0.768 0.0 0.2
 
-sbs.cepolfront_gem.m6.position = -0.768 0.0 0.3
-sbs.cepolfront_gem.m7.position = -0.256 0.0 0.3
-sbs.cepolfront_gem.m8.position =  0.256 0.0 0.3
-sbs.cepolfront_gem.m9.position =  0.768 0.0 0.3
+sbs.gemCeF.m6.position = -0.768 0.0 0.3
+sbs.gemCeF.m7.position = -0.256 0.0 0.3
+sbs.gemCeF.m8.position =  0.256 0.0 0.3
+sbs.gemCeF.m9.position =  0.768 0.0 0.3
 
-sbs.cepolfront_gem.m0.angle = 0.0 0.0 0.0
+sbs.gemCeF.m0.angle = 0.0 0.0 0.0
 
-sbs.cepolfront_gem.m1.angle = 0.0 0.0 0.0
+sbs.gemCeF.m1.angle = 0.0 0.0 0.0
 
-sbs.cepolfront_gem.m2.angle = 0.0 0.0 0.0
-sbs.cepolfront_gem.m3.angle = 0.0 0.0 0.0
-sbs.cepolfront_gem.m4.angle = 0.0 0.0 0.0
-sbs.cepolfront_gem.m5.angle = 0.0 0.0 0.0
+sbs.gemCeF.m2.angle = 0.0 0.0 0.0
+sbs.gemCeF.m3.angle = 0.0 0.0 0.0
+sbs.gemCeF.m4.angle = 0.0 0.0 0.0
+sbs.gemCeF.m5.angle = 0.0 0.0 0.0
 
-sbs.cepolfront_gem.m6.angle = 0.0 0.0 0.0
-sbs.cepolfront_gem.m7.angle = 0.0 0.0 0.0
-sbs.cepolfront_gem.m8.angle = 0.0 0.0 0.0
-sbs.cepolfront_gem.m9.angle = 0.0 0.0 0.0
+sbs.gemCeF.m6.angle = 0.0 0.0 0.0
+sbs.gemCeF.m7.angle = 0.0 0.0 0.0
+sbs.gemCeF.m8.angle = 0.0 0.0 0.0
+sbs.gemCeF.m9.angle = 0.0 0.0 0.0
 
 #angles
 # the "U" angle should be -30 + 180 degrees or -30 - 180 degrees = 150 or -210 degrees
 # the "V" angle should be 30 - 180 degrees or 30 + 180 degrees = 210 or -150 degrees
-sbs.cepolfront_gem.m0.uangle = 330.0
-sbs.cepolfront_gem.m0.vangle = 30.0
+sbs.gemCeF.m0.uangle = 330.0
+sbs.gemCeF.m0.vangle = 30.0
 
 # for the INFN X/Y modules only the X-axis direction needs to be reversed
-sbs.cepolfront_gem.m1.uangle = 330.0
-sbs.cepolfront_gem.m1.vangle = 30.0
+sbs.gemCeF.m1.uangle = 330.0
+sbs.gemCeF.m1.vangle = 30.0
 
 # for the UVA X/Y modules the "X" axis coincides with the direction of transport coordinates but the "Y" axis is opposite the direction of transport coordinates:
 # as confirmed by Sean Jeffas:
 
-sbs.cepolfront_gem.m2.uangle =  0.0
-sbs.cepolfront_gem.m2.vangle = 90.0
-sbs.cepolfront_gem.m3.uangle =  0.0
-sbs.cepolfront_gem.m3.vangle = 90.0
-sbs.cepolfront_gem.m4.uangle =  0.0
-sbs.cepolfront_gem.m4.vangle = 90.0
-sbs.cepolfront_gem.m5.uangle =  0.0
-sbs.cepolfront_gem.m5.vangle = 90.0
+sbs.gemCeF.m2.uangle =  0.0
+sbs.gemCeF.m2.vangle = 90.0
+sbs.gemCeF.m3.uangle =  0.0
+sbs.gemCeF.m3.vangle = 90.0
+sbs.gemCeF.m4.uangle =  0.0
+sbs.gemCeF.m4.vangle = 90.0
+sbs.gemCeF.m5.uangle =  0.0
+sbs.gemCeF.m5.vangle = 90.0
 
-sbs.cepolfront_gem.m6.uangle =  0.0
-sbs.cepolfront_gem.m6.vangle = 90.0
-sbs.cepolfront_gem.m7.uangle =  0.0
-sbs.cepolfront_gem.m7.vangle = 90.0
-sbs.cepolfront_gem.m8.uangle =  0.0
-sbs.cepolfront_gem.m8.vangle = 90.0
-sbs.cepolfront_gem.m9.uangle =  0.0
-sbs.cepolfront_gem.m9.vangle = 90.0
+sbs.gemCeF.m6.uangle =  0.0
+sbs.gemCeF.m6.vangle = 90.0
+sbs.gemCeF.m7.uangle =  0.0
+sbs.gemCeF.m7.vangle = 90.0
+sbs.gemCeF.m8.uangle =  0.0
+sbs.gemCeF.m8.vangle = 90.0
+sbs.gemCeF.m9.uangle =  0.0
+sbs.gemCeF.m9.vangle = 90.0
 
 #nstrips
-sbs.cepolfront_gem.m0.nstripsu = 3840
-sbs.cepolfront_gem.m0.nstripsv = 3840
+sbs.gemCeF.m0.nstripsu = 3840
+sbs.gemCeF.m0.nstripsv = 3840
 
-sbs.cepolfront_gem.m1.nstripsu = 3840
-sbs.cepolfront_gem.m1.nstripsv = 3840
+sbs.gemCeF.m1.nstripsu = 3840
+sbs.gemCeF.m1.nstripsv = 3840
 
-sbs.cepolfront_gem.m2.nstripsu = 1280
-sbs.cepolfront_gem.m2.nstripsv = 1536
-sbs.cepolfront_gem.m3.nstripsu = 1280
-sbs.cepolfront_gem.m3.nstripsv = 1536
-sbs.cepolfront_gem.m4.nstripsu = 1280
-sbs.cepolfront_gem.m4.nstripsv = 1536
-sbs.cepolfront_gem.m5.nstripsu = 1280
-sbs.cepolfront_gem.m5.nstripsv = 1536
+sbs.gemCeF.m2.nstripsu = 1280
+sbs.gemCeF.m2.nstripsv = 1536
+sbs.gemCeF.m3.nstripsu = 1280
+sbs.gemCeF.m3.nstripsv = 1536
+sbs.gemCeF.m4.nstripsu = 1280
+sbs.gemCeF.m4.nstripsv = 1536
+sbs.gemCeF.m5.nstripsu = 1280
+sbs.gemCeF.m5.nstripsv = 1536
 
-sbs.cepolfront_gem.m6.nstripsu = 1280
-sbs.cepolfront_gem.m6.nstripsv = 1536
-sbs.cepolfront_gem.m7.nstripsu = 1280
-sbs.cepolfront_gem.m7.nstripsv = 1536
-sbs.cepolfront_gem.m8.nstripsu = 1280
-sbs.cepolfront_gem.m8.nstripsv = 1536
-sbs.cepolfront_gem.m9.nstripsu = 1280
-sbs.cepolfront_gem.m9.nstripsv = 1536
+sbs.gemCeF.m6.nstripsu = 1280
+sbs.gemCeF.m6.nstripsv = 1536
+sbs.gemCeF.m7.nstripsu = 1280
+sbs.gemCeF.m7.nstripsv = 1536
+sbs.gemCeF.m8.nstripsu = 1280
+sbs.gemCeF.m8.nstripsv = 1536
+sbs.gemCeF.m9.nstripsu = 1280
+sbs.gemCeF.m9.nstripsv = 1536
 
 
 # all modules have the same strip pitch along both dimensions, 0.4 mm:
-sbs.cepolfront_gem.upitch = 0.0004
-sbs.cepolfront_gem.vpitch = 0.0004
+sbs.gemCeF.upitch = 0.0004
+sbs.gemCeF.vpitch = 0.0004
 
 # tracking parameters:
-sbs.cepolfront_gem.threshold_sample = 50.0
-sbs.cepolfront_gem.threshold_stripsum = 250.0
-sbs.cepolfront_gem.threshold_clustersum = 500.0
+sbs.gemCeF.threshold_sample = 50.0
+sbs.gemCeF.threshold_stripsum = 250.0
+sbs.gemCeF.threshold_clustersum = 500.0
 
-sbs.cepolfront_gem.ADCasym_cut = 0.5
-sbs.cepolfront_gem.deltat_cut = 30.0
-sbs.cepolfront_gem.corrcoeff_cut = 0.5
-sbs.cepolfront_gem.filterflag1D = 1
-sbs.cepolfront_gem.filterflag2D = 0
+sbs.gemCeF.ADCasym_cut = 0.5
+sbs.gemCeF.deltat_cut = 30.0
+sbs.gemCeF.corrcoeff_cut = 0.5
+sbs.gemCeF.filterflag1D = 1
+sbs.gemCeF.filterflag2D = 0
 
-sbs.cepolfront_gem.m0.chanmap = 
+sbs.gemCeF.m0.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (3840 x-strips, 3840 y-strips)
       20    0   0   0   0   0   0   0    0 # Strip    0- 127
       20    0   0   0   1   0   1   0    0 # Strip  128- 255
@@ -297,7 +297,7 @@ sbs.cepolfront_gem.m0.chanmap =
       20    3   3   0  11   0  29   0    1 # Strip 3712-3839
 
 
-sbs.cepolfront_gem.m1.chanmap = 
+sbs.gemCeF.m1.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (3840 x-strips, 3840 y-strips)
       20    3   3   0  12   0   0   0    0 # Strip    0- 127
       20    3   3   0  13   0   1   0    0 # Strip  128- 255
@@ -361,7 +361,7 @@ sbs.cepolfront_gem.m1.chanmap =
       20    7   7   0   7   0  29   0    1 # Strip 3712-3839
 
 
-sbs.cepolfront_gem.m2.chanmap = 
+sbs.gemCeF.m2.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       20    7   7   0   8   0   0   0    0 # Strip    0- 127
       20    7   7   0   9   0   1   0    0 # Strip  128- 255
@@ -386,7 +386,7 @@ sbs.cepolfront_gem.m2.chanmap =
       20    8   8   0  12   0  10   0    1 # Strip 1280-1407
       20    8   8   0  13   0  11   0    1 # Strip 1408-1535
 
-sbs.cepolfront_gem.m3.chanmap = 
+sbs.gemCeF.m3.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       20    8   8   0  14   0   0   0    0 # Strip    0- 127
       20    8   8   0  15   0   1   0    0 # Strip  128- 255
@@ -411,7 +411,7 @@ sbs.cepolfront_gem.m3.chanmap =
       20   10  10   0   2   0  10   0    1 # Strip 1280-1407
       20   10  10   0   3   0  11   0    1 # Strip 1408-1535
 
-sbs.cepolfront_gem.m4.chanmap = 
+sbs.gemCeF.m4.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       20   10  10   0   4   0   0   0    0 # Strip    0- 127
       20   10  10   0   5   0   1   0    0 # Strip  128- 255
@@ -437,7 +437,7 @@ sbs.cepolfront_gem.m4.chanmap =
       20   11  11   0   9   0  11   0    1 # Strip 1408-1535
 
 
-sbs.cepolfront_gem.m5.chanmap = 
+sbs.gemCeF.m5.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1536 y-strips)
       20   11  11   0  10   0   0   0    0 # Strip 
       20   11  11   0  11   0   1   0    0 # Strip 
@@ -463,7 +463,7 @@ sbs.cepolfront_gem.m5.chanmap =
       20   12  12   0  15   0  11   0    1 # Strip 
 
 
-sbs.cepolfront_gem.m6.chanmap = 
+sbs.gemCeF.m6.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1024 y-strips)
       20   13  13   0   0   0   0   0    0 # Strip 
       20   13  13   0   1   0   1   0    0 # Strip 
@@ -488,7 +488,7 @@ sbs.cepolfront_gem.m6.chanmap =
       20   14  14   0   4   0  10   0    1 # Strip 
       20   14  14   0   5   0  11   0    1 # Strip 
 
-sbs.cepolfront_gem.m7.chanmap = 
+sbs.gemCeF.m7.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1024 y-strips)
       20   14  14   0   6   0   0   0    0 # Strip 
       20   14  14   0   7   0   1   0    0 # Strip 
@@ -514,7 +514,7 @@ sbs.cepolfront_gem.m7.chanmap =
       20   15  15   0  11   0  11   0    1 # Strip 
 
 
-sbs.cepolfront_gem.m8.chanmap = 
+sbs.gemCeF.m8.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1024 y-strips)
       20   15  15   0  12   0   0   0    0 # Strip    0- 127
       20   15  15   0  13   0   1   0    0 # Strip  128- 255
@@ -540,7 +540,7 @@ sbs.cepolfront_gem.m8.chanmap =
       20   17  17   0   1   0  11   0    1 # Strip 1408-1535
 
 
-sbs.cepolfront_gem.m9.chanmap = 
+sbs.gemCeF.m9.chanmap = 
 ## Crate Slot mpd gem adc i2c pos inv axis # (1280 x-strips, 1024 y-strips)
       20   17  17   0   2   0   0   0    0 # Strip    0- 127
       20   17  17   0   3   0   1   0    0 # Strip  128- 255

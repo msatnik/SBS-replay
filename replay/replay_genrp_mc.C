@@ -51,11 +51,11 @@ void replay_genrp_mc(const char* filebase, uint nev = -1, TString experiment="ge
   gHaApps->Add(bigbite);
   
   SBSEArm *harm = new SBSEArm("sbs","Hadron Arm with HCal");
-  harm->AddDetector( new SBSTimingHodoscope("prpolscint_farside","side scintillator") );// OK? 
-  harm->AddDetector( new SBSGEMSpectrometerTracker("prpolgem_farside", "side gem") );// placeholder
+  harm->AddDetector( new SBSTimingHodoscope("hodoPR","side recoil proton scintillator") );// OK? 
+  harm->AddDetector( new SBSGEMSpectrometerTracker("gemPR", "side recoil proton gem") );// placeholder
   harm->AddDetector( new SBSCalorimeter("active_ana","active analyzer") );// OK? PlaceHolder?
-  harm->AddDetector( new SBSGEMSpectrometerTracker("cepolfront_gem", "charge exchange front GEMs") );// OK
-  harm->AddDetector( new SBSGEMPolarimeterTracker("cepolrear_gem", "charge exchange rear GEMs") );// placeholder
+  harm->AddDetector( new SBSGEMSpectrometerTracker("gemCeF", "charge exchange front GEMs") );// OK
+  harm->AddDetector( new SBSGEMSpectrometerTracker("gemCeR", "charge exchange rear GEMs") );// placeholder
   harm->AddDetector( new SBSHCal("hcal","HCAL") );
   
   gHaApps->Add(harm);

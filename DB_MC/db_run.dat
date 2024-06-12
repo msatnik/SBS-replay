@@ -1,6 +1,7 @@
 # Sample run database
 --------[ 1995-07-26 17:50:14 ]
 
+experiment = gmn
 ebeam = 11.0
 
 sbs.theta = -30
@@ -17,6 +18,8 @@ bb.magdist = 1.85
 
 
 --------[ 2021-10-18 16:00:00 ] ## Starting SBS-4 kinematics for GMN
+
+experiment = gmn
 
 ebeam = 3.7393 # from good run list
 sbs.theta = -31.9
@@ -40,6 +43,8 @@ sbs.hcaldist = 11.0
 
 --------[ 2021-11-12 00:00:00 ] ## Starting SBS-7 kinematics for GMN:
 
+experiment = gmn
+
 ebeam = 7.9308  # from good run list
 
 sbs.pcentral = 6.2
@@ -55,6 +60,8 @@ bb.magdist = 1.84896 # from survey
 
 --------[ 2021-11-23 00:00:00 ] ## starting SBS-11 kinematics for GMN
 
+experiment = gmn
+
 ebeam = 9.889  # from good run list
 sbs.theta = -13.3 
 sbs.pcentral = 8.1
@@ -68,6 +75,8 @@ bb.magdist = 1.55146 # meters, from survey
 bb.pcentral = 2.67
 
 --------[ 2022-01-06 12:00:00 ] ## starting SBS-14 kinematics for GMN
+
+experiment = gmn
 
 ebeam = 5.9828  # from good run list
 sbs.theta = -17.3 # degrees
@@ -86,6 +95,8 @@ bb.pcentral = 2.0 # GeV
 
 --------[ 2022-01-21 12:00:00 ] ## starting SBS-8 kinematics:
 
+experiment = gmn
+
 ebeam = 5.9826  # from good run list
 sbs.theta = -29.9
 sbs.pcentral = 3.22
@@ -103,6 +114,8 @@ bb.pcentral = 3.6 # GeV
 --------[ 2022-02-01 12:00:00 ] ## starting SBS-9 kinematics:
 
 # very, very preliminary settings:
+
+experiment = gmn
 
 ebeam = 4.0268  # from good run list
 sbs.theta = -22.5
@@ -126,6 +139,9 @@ bb.pcentral = 1.63
 --------[ 2022-10-05 00:00:00 ] 
 
 # Settings for GEN2
+
+experiment = gen
+
 ebeam = 4.291
 
 sbs.theta = -34.7
@@ -145,6 +161,8 @@ bb.magdist = 1.63
 ###                               GEN-3                                     ###
 ###############################################################################
 --------[ 2022-11-08 00:00:00 ] 
+
+experiment = gen
 
 ebeam = 6.373
 
@@ -166,6 +184,8 @@ bb.magdist = 1.63
 ###                               GEN-4                                     ###
 ###############################################################################
 --------[ 2023-01-01 00:00:00 ] 
+
+experiment = gen
 
 ebeam = 8.451
 

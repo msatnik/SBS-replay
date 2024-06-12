@@ -1,93 +1,93 @@
-sbs.prpolscint_farside.nchan = 48
-sbs.prpolscint_farside.is_mc = 1
+sbs.hodoPR.nchan = 48
+sbs.hodoPR.is_mc = 1
 
 ## Detector map, format:
 ## crate slot start_channel end_channel refindex
-sbs.prpolscint_farside.detmap = 
+sbs.hodoPR.detmap = 
 ## Detmap for the TDCs
   9     1     1     48     0 ## 90 channels (Left  PMTs) with reference index
 
-#sbs.prpolscint_farside.start_chanmap = 0
-sbs.prpolscint_farside.chanmap =  0  1  2  3  4  5  6  7 
+#sbs.hodoPR.start_chanmap = 0
+sbs.hodoPR.chanmap =  0  1  2  3  4  5  6  7 
 			          8  9 10 11 12 13 14 15 
 				 16 17 18 19 20 21 22 23 
 				 24 25 26 27 28 29 30 31 
 				 32 33 34 35 36 37 38 39
 		 		 40 41 42 43 44 45 46 47
 
-sbs.prpolscint_farside.horizposbarcut = 3.0
-sbs.prpolscint_farside.timeref = 80.0
-sbs.prpolscint_farside.timebarcut = 10000.0
+sbs.hodoPR.horizposbarcut = 3.0
+sbs.hodoPR.timeref = 80.0
+sbs.hodoPR.timebarcut = 10000.0
 
-sbs.prpolscint_farside.maxclussize = 5
-sbs.prpolscint_farside.maxyposdiff_clus = 0.05
-sbs.prpolscint_farside.maxtimediff_clus = 10.0
+sbs.hodoPR.maxclussize = 5
+sbs.hodoPR.maxyposdiff_clus = 0.05
+sbs.hodoPR.maxtimediff_clus = 10.0
 
-sbs.prpolscint_farside.trackmatchcutX = 0.05
-sbs.prpolscint_farside.trackmatchcutY = 0.6
+sbs.hodoPR.trackmatchcutX = 0.05
+sbs.hodoPR.trackmatchcutY = 0.6
 
 ## Specify the number of bars
-sbs.prpolscint_farside.nbars = 24
-sbs.prpolscint_farside.nrows = 2
-sbs.prpolscint_farside.ncols = 24
+sbs.hodoPR.nbars = 24
+sbs.hodoPR.nrows = 2
+sbs.hodoPR.ncols = 24
 
-sbs.prpolscint_farside.position = -0.765 0 5.269636 # Just a test, but should be the origin of this detector
-sbs.prpolscint_farside.size = 0.03 2.064 0.50 
-sbs.prpolscint_farside.xyz  =  -0.765 -0.989 5.269636
+sbs.hodoPR.position = -0.765 0 5.269636 # Just a test, but should be the origin of this detector
+sbs.hodoPR.size = 0.03 2.064 0.50 
+sbs.hodoPR.xyz  =  -0.765 -0.989 5.269636
 ## The following assumes an hypothetical coordinate system 
 ## centered on the active analyzer pointing towards the hodoscope 
-sbs.prpolscint_farside.position = 0 0 0.765 # Just a test, but should be the origin of this detector
-# sbs.prpolscint_farside.angle = 0.0 -90.0 0.0 ## Seems optional, otherwise it assumes no additional angle
-# sbs.prpolscint_farside.xyz  =  0.0 -0.989 0.765
-# sbs.prpolscint_farside.size = 0.5 2.064 0.03 
-sbs.prpolscint_farside.dxdydz  =  0.0 0.086 0.0 ## Spacing between modules in local coordinates
+sbs.hodoPR.position = 0 0 0.765 # Just a test, but should be the origin of this detector
+# sbs.hodoPR.angle = 0.0 -90.0 0.0 ## Seems optional, otherwise it assumes no additional angle
+# sbs.hodoPR.xyz  =  0.0 -0.989 0.765
+# sbs.hodoPR.size = 0.5 2.064 0.03 
+sbs.hodoPR.dxdydz  =  0.0 0.086 0.0 ## Spacing between modules in local coordinates
 
-#sbs.prpolscint_farside.ypos = 
+#sbs.hodoPR.ypos = 
 
 ## Not sure what the units are for this (I'm guessing radians?
 ## So I chose 42 for fun, but they should probably be changed to
 ## their real values.
-sbs.prpolscint_farside.hit_acceptance = 42 42
+sbs.hodoPR.hit_acceptance = 42 42
 
-sbs.prpolscint_farside.speed_of_light = 2e8 ## Speed of light in each bar
-sbs.prpolscint_farside.attenuation = 0.0 ## Attenuation length. Code defaults to 0 for some reason...
+sbs.hodoPR.speed_of_light = 2e8 ## Speed of light in each bar
+sbs.hodoPR.attenuation = 0.0 ## Attenuation length. Code defaults to 0 for some reason...
 
 
 ## Since it's only one entry, the dimensions will apply to all blocks.
 ## But the code will increment the center positions based on dx dy dz
 ## defined above.  [Note, this will not be automatically done if all positions
 ## for each bar are specified]
-sbs.prpolscint_farside.bar_geom =
+sbs.hodoPR.bar_geom =
 ## x       y      z      wx     wy     wz
 -0.765  -0.989  5.269636  0.03  0.086  0.5
 ## The following assumes an hypothetical coordinate system 
 ## centered on the active analyzer pointing towards the hodoscope 
-# sbs.prpolscint_farside.bar_geom =
+# sbs.hodoPR.bar_geom =
 #  0.0  -0.989 0.765  0.5  0.086  0.03
 
 ## Reference channel calibrations
-sbs.prpolscint_farside.ref_ch_res = 1.0   # Resolution of 1 for all channels
+sbs.hodoPR.ref_ch_res = 1.0   # Resolution of 1 for all channels
 
 ## PMT Specific calibration values
-sbs.prpolscint_farside.left_calib =
+sbs.hodoPR.left_calib =
 ## res  lowtdclim   uptdclim  wrap
    1.0      0         65536    0   ## What value is wrap supposed to be?
-sbs.prpolscint_farside.left_gain = 1.0
-sbs.prpolscint_farside.left_toff = 0.0
-sbs.prpolscint_farside.left_walkcor  = 0.0
-sbs.prpolscint_farside.left_walkexp  = 0.0
-sbs.prpolscint_farside.left_pedestal = 0.0
+sbs.hodoPR.left_gain = 1.0
+sbs.hodoPR.left_toff = 0.0
+sbs.hodoPR.left_walkcor  = 0.0
+sbs.hodoPR.left_walkexp  = 0.0
+sbs.hodoPR.left_pedestal = 0.0
 
-sbs.prpolscint_farside.right_calib =
+sbs.hodoPR.right_calib =
 ## res  lowtdclim   uptdclim   wrap
    1.0      0         65536     0  ## What value is wrap supposed to be?
-sbs.prpolscint_farside.right_pedestal = 0.000
-sbs.prpolscint_farside.right_gain = 1.0
-sbs.prpolscint_farside.right_toff = 0.0
-sbs.prpolscint_farside.right_walkcor  = 0.0
-sbs.prpolscint_farside.right_walkexp  = 0.0
+sbs.hodoPR.right_pedestal = 0.000
+sbs.hodoPR.right_gain = 1.0
+sbs.hodoPR.right_toff = 0.0
+sbs.hodoPR.right_walkcor  = 0.0
+sbs.hodoPR.right_walkexp  = 0.0
 
-sbs.prpolscint_farside.tdc.offset = 
+sbs.hodoPR.tdc.offset = 
 		   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
 		   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
 		   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
@@ -95,7 +95,7 @@ sbs.prpolscint_farside.tdc.offset =
 		   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
 		   0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
 
-sbs.prpolscint_farside.tdc.cal = 
+sbs.hodoPR.tdc.cal = 
 		   0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 
 		   0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 
 		   0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 
@@ -104,7 +104,7 @@ sbs.prpolscint_farside.tdc.cal =
 		   0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 
 
 
-sbs.prpolscint_farside.timewalk0map =
+sbs.hodoPR.timewalk0map =
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
@@ -112,7 +112,7 @@ sbs.prpolscint_farside.timewalk0map =
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
 
-sbs.prpolscint_farside.timewalk1map =
+sbs.hodoPR.timewalk1map =
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
