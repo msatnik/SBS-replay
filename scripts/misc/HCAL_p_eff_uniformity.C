@@ -12,7 +12,16 @@
 #include <iostream>
 #include <fstream>
 
+#include "TStyle.h"
+
 void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
+  TH1::SetDefaultSumw2();
+
+  gStyle->SetMarkerStyle(20);
+  gStyle->SetLineColor(1);
+  gStyle->SetMarkerColor(1);
+  gROOT->ForceStyle();
+  
   ifstream setupfile(setupfilename);
   
   if( !setupfile ) return;
@@ -83,7 +92,7 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
 	  fid_ymin = sval.Atof();
 	}
 
-	if( skey == "fid_xmax" ){
+	if( skey == "fid_ymax" ){
 	  fid_ymax = sval.Atof();
 	}
 
@@ -149,9 +158,9 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
   TH1D *hdxcut = new TH1D("hdxcut", "Global +HCAL cuts; #Deltax (m);", 250,-3,2);
   TH1D *hdxacut = new TH1D("hdxacut", "Global +!HCAL cuts; #Deltax (m);", 250,-3,2);
 
-  TH1D *hdyall = new TH1D("hdyall", "Global cut; #Deltax (m);", 250,-1.25,1.25);
-  TH1D *hdycut = new TH1D("hdycut", "Global +HCAL cuts; #Deltax (m);", 250,-1.25,1.25);
-  TH1D *hdyacut = new TH1D("hdyacut", "Global +!HCAL cuts; #Deltax (m);", 250,-1.25,1.25);
+  TH1D *hdyall = new TH1D("hdyall", "Global cut; #Deltay (m);", 250,-1.25,1.25);
+  TH1D *hdycut = new TH1D("hdycut", "Global +HCAL cuts; #Deltay (m);", 250,-1.25,1.25);
+  TH1D *hdyacut = new TH1D("hdyacut", "Global +!HCAL cuts; #Deltay (m);", 250,-1.25,1.25);
   
   TH2D *hdxdyall = new TH2D("hdxdyall", "Global cut; #Delta y (m); #Delta x (m)", 250,-1.25,1.25,250,-3,2); 
   TH2D *hdxdycut = new TH2D("hdxdycut", "Global + HCAL cut; #Delta y (m); #Delta x (m)", 250,-1.25,1.25,250,-3,2); 
@@ -307,14 +316,39 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
   heff_vs_xexpect->SetName( "heff_vs_xexpect" );
   heff_vs_xexpect->Divide( hxHCAL_expect_cut, hxHCAL_expect_all );
 
+  //Calculate correct error for efficiency determination:
+  
+  for( int i=1; i<=heff_vs_xexpect->GetNbinsX(); i++ ){
+    double eff = heff_vs_xexpect->GetBinContent(i);
+    double N = std::max(1.0,hxHCAL_expect_all->GetBinContent(i));
+    heff_vs_xexpect->SetBinError(i,sqrt(eff*(1.0-eff)/N));
+  }
+
   TH1D *heff_vs_yexpect = new TH1D( *hyHCAL_expect_cut );
   heff_vs_yexpect->SetName( "heff_vs_yexpect" );
   heff_vs_yexpect->Divide( hyHCAL_expect_cut, hyHCAL_expect_all );
 
+  for( int i=1; i<=heff_vs_yexpect->GetNbinsX(); i++ ){
+    double eff = heff_vs_yexpect->GetBinContent(i);
+    //prevent divide-by-zero errors
+    double N = std::max(1.0,hyHCAL_expect_all->GetBinContent(i));
+    heff_vs_yexpect->SetBinError(i,sqrt(eff*(1.0-eff)/N));
+  }
+  
   TH2D *heff_vs_xyexpect = new TH2D( *hxyHCAL_expect_cut );
   heff_vs_xyexpect->SetName("heff_vs_xyexpect" );
   heff_vs_xyexpect->Divide( hxyHCAL_expect_cut, hxyHCAL_expect_all );
 
+  for( int i=1; i<=heff_vs_xyexpect->GetNbinsX(); i++ ){
+    for( int j=1; j<=heff_vs_xyexpect->GetNbinsY(); j++ ){
+
+      int bin = heff_vs_xyexpect->GetBin(i,j);
+      
+      double eff = heff_vs_xyexpect->GetBinContent(bin);
+      double N = std::max(1.0,hxyHCAL_expect_all->GetBinContent(bin));
+      heff_vs_xyexpect->SetBinError(bin,sqrt(eff*(1.0-eff)/N));
+    }
+  }
 
   TH1D *heff_vs_x = new TH1D( *hxHCAL_cut );
   heff_vs_x->SetName("heff_vs_x");
@@ -341,6 +375,16 @@ void HCAL_p_eff_uniformity(const char *setupfilename, const char *outfilename){
   heff_vs_rowcol->Divide( hrowcolHCAL_cut, hrowcolHCAL_all );
 
 
+  TH1D *heff_vs_W2 = new TH1D( *hW2_hcalcut );
+  heff_vs_W2->SetName("heff_vs_W2");
+  heff_vs_W2->Divide( hW2_hcalcut, hW2_globalcut );
+
+  for( int i=1; i<=heff_vs_W2->GetNbinsX(); i++ ){
+    double eff = heff_vs_W2->GetBinContent(i);
+    double N = std::max(1.0,hW2_globalcut->GetBinContent(i));
+    heff_vs_W2->SetBinError(i,sqrt(eff*(1.0-eff)/N));
+  }
+  
   fout->Write();
 
   

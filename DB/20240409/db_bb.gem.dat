@@ -3261,6 +3261,7 @@ bb.gem.trackchi2cut = 300.0
 # this will need to be adjusted before beam; at minimum, turn on the main constraint.
 
 ---------[ 2024-04-16 18:00:00 ] # Before Beam Checkout before GEN-RP
+
 bb.gem.usetrigtime = 1
 #bb.gem.trigtime_slope = 1.0
 bb.gem.trigtime_slope = 0.5
@@ -3763,3 +3764,12 @@ bb.gem.constraintwidth_phi = 0.05
 
 bb.gem.pmin = 0.6
 bb.gem.pmax = 4.5
+
+---------[ 2024-04-18 23:51:00 ] # start zero-field running
+
+bb.gem.useopticsconstraint = 0
+bb.gem.useslopeconstraint = 0
+
+---------[ 2024-04-19 3:30:00 ] # back to full-field running
+bb.gem.useopticsconstraint = 1
+bb.gem.useslopeconstraint = 1

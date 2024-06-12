@@ -9,6 +9,15 @@ void overlay(TString hist1name, TString hist2name, TString legentry1="", TString
   H2->SetStats(false);
   H1->SetTitle("");
   H2->SetTitle("");
+
+  H1->SetMarkerStyle(20);
+  H2->SetMarkerStyle(21);
+  H1->SetMarkerColor(1);
+  H1->SetLineColor(1);
+  H2->SetMarkerColor(2);
+  H2->SetLineColor(2);
+
+  TString DrawOpt="HIST";
   
   if(golden){
     H1->SetLineColor(30);
@@ -18,7 +27,7 @@ void overlay(TString hist1name, TString hist2name, TString legentry1="", TString
     H2->SetFillColor(46);
     H2->SetFillStyle(3027);
   } else {
-    H1->SetLineColor(4);
+    H1->SetLineColor(1);
     H2->SetLineColor(2);
     
     H1->SetLineWidth(2);
@@ -37,24 +46,26 @@ void overlay(TString hist1name, TString hist2name, TString legentry1="", TString
 
   if(golden){
     if(!samestr.Contains("sames")) samestr += "sames";
-    H1->Draw(samestr);
-    H2->Draw(samestr);
+    DrawOpt += samestr;
+    
+    H1->Draw(DrawOpt);
+    H2->Draw(DrawOpt);
   } else {
     if(!golden && !samestr.Contains("sames")){
       // pick which hist to draw first:
       if(H1->GetMaximum() > H2->GetMaximum()){
-	H1->Draw(samestr);
+	H1->Draw(DrawOpt);
 	if(!samestr.Contains("sames")) samestr += "sames";
-	H2->Draw(samestr);
+	H2->Draw(DrawOpt+samestr);
       } else {
-	H2->Draw(samestr);
+	H2->Draw(DrawOpt);
 	if(!samestr.Contains("sames")) samestr += "sames";
-	H1->Draw(samestr);
+	H1->Draw(DrawOpt+samestr);
       }
     } else {
-      H1->Draw(samestr);
+      H1->Draw(DrawOpt);
       if(!samestr.Contains("sames")) samestr += "sames";
-      H2->Draw(samestr);
+      H2->Draw(DrawOpt+samestr);
     }
   }
 
