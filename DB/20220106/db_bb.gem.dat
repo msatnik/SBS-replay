@@ -2205,6 +2205,8 @@ bb.gem.deconvolution_flag = 0
 
 --------[ 2022-01-30 17:05:00 ] # Full readout runs for negative pulse study
 
+bb.gem.useforwardopticsconstraint = 0
+bb.gem.useopticsconstraint = 0
 bb.gem.pedsub_online = 0
 bb.gem.suppressfirstlast = 0
 

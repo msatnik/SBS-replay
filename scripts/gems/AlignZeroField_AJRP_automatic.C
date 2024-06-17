@@ -23,6 +23,7 @@
 #include "TEllipse.h"
 #include "TFitResult.h"
 #include "TTreeFormula.h"
+#include "TRotation.h"
 #include <iostream>
 #include <fstream>
 
@@ -56,19 +57,43 @@ void CHI2_FCN( int &npar, double *gin, double &f, double *par, int flag ){
   TVector3 GEMPOS(par[0], par[1], par[2] );
   
   double ZSIEVE = par[3];
-  double thetaGEM = par[4];
-  double phiGEM = par[5]; 
+  double ax = par[4];
+  double ay = par[5]; 
+  double az = par[6];
 
+  TRotation Rtot;
+  //In the BigBite case, we start with the y-axis rotation, as that
+  //is the biggest one (roughly 10 degrees):
+  //Rtot.RotateX(ax);
+  Rtot.RotateY(ay);
+  Rtot.RotateZ(az);
+  Rtot.RotateX(ax);
+
+  //For the usual convention of a CW rotation as viewed from upstream (right-hand rule) being defined positive, the GEM z axis is rotated
+  // by ~-10 degrees wrt TRANSPORT.
+  // With this convention, the COLUMNS of the rotation matrix
+  // (or the ROWS of the inverse rotation)
+  // become the unit vectors;
+  TVector3 GEM_zaxis( Rtot.XZ(), Rtot.YZ(), Rtot.ZZ() );
+  TVector3 GEM_yaxis( Rtot.XY(), Rtot.YY(), Rtot.ZY() );
+  TVector3 GEM_xaxis( Rtot.XX(), Rtot.YX(), Rtot.ZX() );
+
+  //Inverse matrix not needed for this purpose (I think)
+  // TRotation Rinv = Rtot.Inverse();
+  
   //Define unit vectors along the GEM internal axes with respect to the global system:
-  TVector3 GEM_zaxis( sin(thetaGEM)*cos(phiGEM), sin(thetaGEM)*sin(phiGEM), cos(thetaGEM) );
-
+  //Obsolete; switch to new definition of coordinate transformation
+  //TVector3 GEM_zaxis( sin(thetaGEM)*cos(phiGEM), sin(thetaGEM)*sin(phiGEM), cos(thetaGEM) );
+  
   TVector3 Global_yaxis(0,1,0);
   //Not clear if we will need these:
   TVector3 Global_xaxis(1,0,0);
   TVector3 Global_zaxis(0,0,1); 
   
-  TVector3 GEM_xaxis = (Global_yaxis.Cross( GEM_zaxis )).Unit();
-  TVector3 GEM_yaxis = (GEM_zaxis.Cross( GEM_xaxis )).Unit();
+  //  TVector3 GEM_xaxis = (Global_yaxis.Cross( GEM_zaxis )).Unit();
+  //  TVector3 GEM_yaxis = (GEM_zaxis.Cross( GEM_xaxis )).Unit();
+
+  
   
   chi2 = 0.0;
 
@@ -116,7 +141,10 @@ void AlignZeroField( const char *configfilename ){
   double YOFFSIEVE = 0.0; 
   double GEMtheta = 10.0*PI/180.0; //this will become the pitch angle
   double GEMphi = 180.0*PI/180.0; 
-
+  double GEMax = 0.0;
+  double GEMay = -10.0*PI/180.0;
+  double GEMaz = 0.0;
+  
   TCut globalcut = "";
   
   if( configfile ){
@@ -179,6 +207,21 @@ void AlignZeroField( const char *configfilename ){
 	  if( skey == "GEMphi" ){
 	    TString stemp = ( (TObjString*) (*tokens)[1] )->GetString();
 	    GEMphi = stemp.Atof()*PI/180.0;
+	  }
+
+	  if( skey == "GEMax" ){
+	    TString stemp = ( (TObjString*) (*tokens)[1] )->GetString();
+	    GEMax = stemp.Atof()*PI/180.0;
+	  }
+
+	  if( skey == "GEMay" ){
+	    TString stemp = ( (TObjString*) (*tokens)[1] )->GetString();
+	    GEMay = stemp.Atof()*PI/180.0;
+	  }
+
+	  if( skey == "GEMaz" ){
+	    TString stemp = ( (TObjString*) (*tokens)[1] )->GetString();
+	    GEMaz = stemp.Atof()*PI/180.0;
 	  }
 	  
 	}
@@ -261,9 +304,17 @@ void AlignZeroField( const char *configfilename ){
   TVector3 Global_xaxis(1,0,0);
   TVector3 Global_zaxis(0,0,1);
 
-  TVector3 GEMzaxis( sin(GEMtheta)*cos(GEMphi), sin(GEMtheta)*sin(GEMphi), cos(GEMtheta) );
-  TVector3 GEMxaxis = (Global_yaxis.Cross(GEMzaxis)).Unit();
-  TVector3 GEMyaxis = (GEMzaxis.Cross(GEMxaxis)).Unit();
+  TRotation Rtot;
+  Rtot.RotateY( GEMay );
+  Rtot.RotateZ( GEMaz );
+  Rtot.RotateX( GEMax );
+
+  TVector3 GEMzaxis( Rtot.XZ(), Rtot.YZ(), Rtot.ZZ() );
+  TVector3 GEMyaxis( Rtot.XY(), Rtot.YY(), Rtot.ZY() );
+  TVector3 GEMxaxis( Rtot.XX(), Rtot.YX(), Rtot.ZX() );
+  //  TVector3 GEMzaxis( sin(GEMtheta)*cos(GEMphi), sin(GEMtheta)*sin(GEMphi), cos(GEMtheta) );
+  //TVector3 GEMxaxis = (Global_yaxis.Cross(GEMzaxis)).Unit();
+  //TVector3 GEMyaxis = (GEMzaxis.Cross(GEMxaxis)).Unit();
   TVector3 GEMorigin( GEMX0, GEMY0, GEMZ0 );
   TVector3 SieveOrigin(0,0,ZSIEVE);
 
@@ -431,10 +482,10 @@ void AlignZeroField( const char *configfilename ){
       //define bin range as xcent +/ 0.04, 
       // ycent +/- 0.03
 
-      double ylo = ys_cent[iy] - 0.75*yspace;
-      double yhi = ys_cent[iy] + 0.75*yspace;
-      double xlo = xs_cent[ix] - 0.75*xspace;
-      double xhi = xs_cent[ix] + 0.75*xspace;
+      double ylo = ys_cent[iy] - 0.5*yspace;
+      double yhi = ys_cent[iy] + 0.5*yspace;
+      double xlo = xs_cent[ix] - 0.5*xspace;
+      double xhi = xs_cent[ix] + 0.5*xspace;
 
       TString histname;
 
@@ -638,7 +689,7 @@ void AlignZeroField( const char *configfilename ){
 
 
   //do the thing
-  TMinuit *FitZeroField = new TMinuit( 6 );
+  TMinuit *FitZeroField = new TMinuit( 7 );
   
   FitZeroField->SetFCN( CHI2_FCN );
   
@@ -648,9 +699,10 @@ void AlignZeroField( const char *configfilename ){
   FitZeroField->mnparm( 1, "GEMY0", GEMY0, 0.03,0,0,ierflg ); //start with 3-cm uncertainty for y position
   FitZeroField->mnparm( 2, "GEMZ0", GEMZ0, 0.01,0,0,ierflg );
   FitZeroField->mnparm( 3, "ZSIEVE", ZSIEVE, 0.01,0,0,ierflg );
-  FitZeroField->mnparm( 4, "GEMtheta", GEMtheta, 0.3*PI/180.0, 0, 0, ierflg ); //guesstimate 0.3 degrees as initial angular accuracy
-  FitZeroField->mnparm( 5, "GEMphi", GEMphi, 0.3*PI/180.0, 0, 0, ierflg );
-    
+  FitZeroField->mnparm( 4, "GEMax", GEMax, 0.3*PI/180.0, 0, 0, ierflg ); //guesstimate 0.3 degrees as initial angular accuracy
+  FitZeroField->mnparm( 5, "GEMay", GEMay, 0.3*PI/180.0, 0, 0, ierflg );
+  FitZeroField->mnparm( 6, "GEMaz", GEMaz, 0.3*PI/180.0, 0, 0, ierflg );
+  
   double arglist[10];
   arglist[0]=1;
   FitZeroField->mnexcm("SET ERR",arglist,1,ierflg);
@@ -662,14 +714,14 @@ void AlignZeroField( const char *configfilename ){
   FitZeroField->mnexcm("MIGRAD",arglist,2,ierflg);
   
   //TODO: grab parameters, write them out to file. Profit.
-  double fitpar[6];
-  double fitparerr[6];
+  double fitpar[7];
+  double fitparerr[7];
 
   ofstream outfile("ZeroFieldAlign_results_new.txt");
 
   TString outline;
   
-  for (int ii=0;ii<6;ii++){
+  for (int ii=0;ii<7;ii++){
   //fitpar[ii]=FitZeroField->GetParameter(ii);fitparerr[ii]=FitZeroField->GetParameter(ii);?????
     FitZeroField->GetParameter(ii,fitpar[ii],fitparerr[ii]);
   }
@@ -689,14 +741,18 @@ void AlignZeroField( const char *configfilename ){
   outfile << outline << endl;
   cout << outline << endl;
 
-  outline.Form("GEMtheta = %18.9g +/- %18.9g",fitpar[4]*TMath::RadToDeg(), fitparerr[4]*TMath::RadToDeg());
+  outline.Form("GEMax = %18.9g +/- %18.9g",fitpar[4]*TMath::RadToDeg(), fitparerr[4]*TMath::RadToDeg());
   outfile << outline << endl;
   cout << outline << endl;
 
-  outline.Form("GEMphi = %18.9g +/- %18.9g",fitpar[5]*TMath::RadToDeg(), fitparerr[5]*TMath::RadToDeg());
+  outline.Form("GEMay = %18.9g +/- %18.9g",fitpar[5]*TMath::RadToDeg(), fitparerr[5]*TMath::RadToDeg());
   outfile << outline << endl;
   cout << outline << endl;
 
+  outline.Form("GEMaz = %18.9g +/- %18.9g",fitpar[6]*TMath::RadToDeg(), fitparerr[6]*TMath::RadToDeg());
+  outfile << outline << endl;
+  cout << outline << endl;
+  
   outline.Form("Implied magnet distance = %18.9g +/- %18.9g",fitpar[3]+0.3882-0.75*0.0254, fitparerr[3]);
   outfile << outline << endl;
   cout << outline << endl;

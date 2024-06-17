@@ -1096,6 +1096,10 @@ bb.gemorigin_xyz = -0.21323 0.03872 3.11940
 bb.gemtheta = 8.81847
 bb.gemphi = 179.534
 
+# new straight-track results using x,y,z angles instead of theta,phi:
+#bb.gemorigin_xyz = -0.21364 0.03929 3.119995
+#bb.gemangles_xyz = -0.09598 -8.82304 0.23577
+
 # NOTE: ZSIEVE = 1.59074
 
 # starting model for SBS-8 from g4sbs: updated with scale factor 0.9644 for BB field map in simulation and also distance 1.9594 m
