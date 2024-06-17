@@ -15,6 +15,11 @@
 #include "TTreeFormula.h"
 #include "TVector3.h"
 #include "TRotation.h"
+#include "TMatrixD.h"
+#include "TVectorD.h"
+#include "TDecompSVD.h"
+#include <iostream>
+#include <fstream>
 
 const double PI = TMath::Pi();
 
@@ -40,10 +45,11 @@ void CHI2_FCN( int &npar, double *gin, double &f, double *par, int flag ){
 
   //assuming these angles represent small misalignments, it basically doesn't matter in what order we apply the rotations.
   TRotation Rtot;
-  Rtot.RotateZ(az);
-  Rtot.RotateY(ay);
   Rtot.RotateX(ax);
+  Rtot.RotateY(ay);
+  Rtot.RotateZ(az);
 
+  TRotation Rinv = Rtot.Inverse();
   // TVector3 GEM_zaxis( sin(thetaGEM)*cos(phiGEM), 
   // 		      sin(thetaGEM)*sin(phiGEM),
   // 		      cos(thetaGEM) );
@@ -73,14 +79,14 @@ void CHI2_FCN( int &npar, double *gin, double &f, double *par, int flag ){
     TVector3 TrackDirLocal(XPTRACK[i],YPTRACK[i],1.0);
     TrackDirLocal = TrackDirLocal.Unit();
     
-    TVector3 TrackDirGlobal = TrackDirLocal.X() * GEM_xaxis +
-      TrackDirLocal.Y() * GEM_yaxis + 
-      TrackDirLocal.Z() * GEM_zaxis;
-
+    //    TVector3 TrackDirGlobal = TrackDirLocal.X() * GEM_xaxis +
+    //  TrackDirLocal.Y() * GEM_yaxis + 
+    //  TrackDirLocal.Z() * GEM_zaxis;
+    //For the direction we need to apply the INVERSE of the total rotation:
+    TVector3 TrackDirGlobal = Rinv * TrackDirLocal;
+    
     TVector3 TrackPosLocal(XTRACK[i], YTRACK[i], 0.0 );
-    TVector3 TrackPosGlobal = GEMPOS + 
-      TrackPosLocal.X() * GEM_xaxis + 
-      TrackPosLocal.Y() * GEM_yaxis;
+    TVector3 TrackPosGlobal = GEMPOS + Rtot * TrackPosLocal;
 
     //Now calculate track intersection with the xy plane: 
 
@@ -106,7 +112,7 @@ void CHI2_FCN( int &npar, double *gin, double &f, double *par, int flag ){
   f = chi2;
 }
 
-void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename ){
+void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename, const char *outfilename = "ZeroFieldAlign_SBS_nosieve_temp.root" ){
   TChain *C = new TChain("T");
 
   double GEMX0=0.0, GEMY0=0.0, GEMZ0=4.11;
@@ -248,8 +254,13 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
     C->SetBranchAddress( "sbs.hcal.x",&xhcal);
     C->SetBranchAddress( "sbs.hcal.y",&yhcal);
 
-    TFile *fout = new TFile("ZeroFieldAlign_SBS_nosieve_temp.root","RECREATE");
+    TFile *fout = new TFile(outfilename,"RECREATE");
 
+    TString dbfilename = outfilename;
+    dbfilename.ReplaceAll(".root",".dat");
+
+    ofstream dbfile(dbfilename);
+    
     TH1D *hxtar_old = new TH1D("hxtar_old","Old alignment; Target x (m);",250,-0.2,0.2);
     TH1D *hytar_old = new TH1D("hytar_old","Old alignment; Target y (m);",250,-0.2,0.2);
     TH2D *hxytar_old = new TH2D("hxytar_old", "Old alignment; Target y (m); Target x (m)", 250,-0.2,0.2, 250,-0.2,0.2);
@@ -292,17 +303,32 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
     YPTRACK.clear();
     NTRACKS = 0;
 
+    //Let's try a linearized alignment procedure: 
+    
+    int niter = 10;
+    TMatrixD M_LHS(6,6);
+    TVectorD b_RHS(6);
+    
+    //    for( int iter=0; iter<niter; iter++ ){
+      
+    for( int ipar=0; ipar<6; ipar++ ){
+      for( int jpar=0; jpar<6; jpar++ ){
+	M_LHS(ipar,jpar) = 0.0;
+      }
+      b_RHS(ipar) = 0.0;
+    }
+    
     while( C->GetEntry(nevent++) ){
       if( nevent % 10000 == 0 ) cout << "Event " << nevent << endl;
-
+      
       currenttreenum = C->GetTreeNumber();
       if( currenttreenum != treenum ){
 	treenum = currenttreenum;
 	GlobalCut->UpdateFormulaLeaves();
       }
-
+      
       bool passed_cut = GlobalCut->EvalInstance(0) != 0;
-
+      
       if( passed_cut ){
 	if( NTRACKS < NMAX && int(ntrack)>0 ){
 	  XTRACK.push_back( trackX[0] );
@@ -313,7 +339,7 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
 	  yHCAL.push_back( yhcal );
 	  NTRACKS++;
 	}
-
+	
 	TVector3 GEMPOS(GEMX0,GEMY0,GEMZ0);
 	//	TVector3 GEMdir(tan(GEMtheta), tan(GEMphi), 1.0 );
 	//GEMdir = GEMdir.Unit();
@@ -323,46 +349,51 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
 	TVector3 zaxis_g(0,0,1);
 	
 	TRotation R;
-	R.RotateZ(GEMaz);
-	R.RotateY(GEMay);
 	R.RotateX(GEMax);
-
-	TVector3 GEMdir = R * zaxis_g;
-
-	//	TVector3 xaxis_gem = yaxis_g.Cross(GEMdir).Unit();
+	R.RotateY(GEMay);
+	R.RotateZ(GEMaz);
+	
+	TRotation Rinverse = R.Inverse();
+	//Rinverse.Invert();
+	
+	TVector3 GEMdir = Rinverse * zaxis_g;
+	
+	//TVector3 xaxis_gem = yaxis_g.Cross(GEMdir).Unit();
 	//TVector3 yaxis_gem = GEMdir.Cross(xaxis_gem).Unit();
-	TVector3 xaxis_gem = R * xaxis_g;
-	TVector3 yaxis_gem = R * yaxis_g;
+	TVector3 xaxis_gem = Rinverse * xaxis_g;
+	TVector3 yaxis_gem = Rinverse * yaxis_g;
 
-	TVector3 TrackPosGlobal = GEMPOS + trackX[0]*xaxis_gem + trackY[0]*yaxis_gem;
+	TVector3 TrackPosLocal(trackX[0],trackY[0],0.0);
+	
+	TVector3 TrackPosGlobal = GEMPOS + R * TrackPosLocal;
 	TVector3 TrackDirLocal(trackXp[0],trackYp[0],1.0);
 	TrackDirLocal = TrackDirLocal.Unit();
-	TVector3 TrackDirGlobal = TrackDirLocal.X() * xaxis_gem + 
-	  TrackDirLocal.Y() * yaxis_gem + TrackDirLocal.Z() * GEMdir;
-	
+	  
+	TVector3 TrackDirGlobal = Rinverse * TrackDirLocal;
+	  
 	double sintersect = -TrackPosGlobal.Dot( zaxis_g ) / TrackDirGlobal.Dot( zaxis_g );
 	TVector3 TrackIntersectGlobal = TrackPosGlobal + sintersect * TrackDirGlobal;
 	
+	//if( iter == 0 ){
 	hxtar_old->Fill( TrackIntersectGlobal.X() );
 	hytar_old->Fill( TrackIntersectGlobal.Y() );
 	hxytar_old->Fill( TrackIntersectGlobal.Y(), TrackIntersectGlobal.X() );
-
+	
 	double xtar = TrackIntersectGlobal.X();
 	double ytar = TrackIntersectGlobal.Y();
 	hxtar_x_old->Fill( trackX[0], xtar );
 	hxtar_y_old->Fill( trackY[0], xtar );
 	hxtar_th_old->Fill( trackXp[0], xtar );
 	hxtar_ph_old->Fill( trackYp[0], xtar );
-
+	
 	hytar_x_old->Fill( trackX[0], ytar );
 	hytar_y_old->Fill( trackY[0], ytar );
 	hytar_th_old->Fill( trackXp[0], ytar );
 	hytar_ph_old->Fill( trackYp[0], ytar );
-	
-
-      }
       
+      }
     }
+     
 
     TMinuit *FitFunc = new TMinuit( 9 );
     FitFunc->SetFCN( CHI2_FCN );
@@ -408,7 +439,42 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
     FitFunc->GetParameter( 8, HCALZ0, dHCALZ0 );
 
     
+    std::cout << "After fit: (GEMX0,GEMY0,GEMZ0)=(" << GEMX0 << ", " << GEMY0
+	      << ", " << GEMZ0 << ")" << std::endl;
+    std::cout << "After fit: (GEMax,GEMay,GEMaz)=(" << GEMax << ", " << GEMay
+	      << ", " << GEMaz << ")" << std::endl;
 
+    TVector3 xaxis_g(1,0,0);
+    TVector3 yaxis_g(0,1,0);
+    TVector3 zaxis_g(0,0,1);
+    
+    TRotation Rtot; 
+    Rtot.RotateX(GEMax);
+    Rtot.RotateY(GEMay);
+    Rtot.RotateZ(GEMaz);
+
+    TRotation Rinv = Rtot.Inverse();
+    
+    TVector3 GEMdir = Rtot * zaxis_g;
+    
+    //	TVector3 xaxis_gem = yaxis_g.Cross(GEMdir).Unit();
+    //TVector3 yaxis_gem = GEMdir.Cross(xaxis_gem).Unit();
+    
+    TVector3 xaxis_gem = Rtot * xaxis_g;
+    TVector3 yaxis_gem = Rtot * yaxis_g;
+
+    std::cout << "Total rotation = " << std::endl;
+    std::cout << "| R_xx,  R_xy,  R_xz | = |" << Rtot.XX() << ", " << Rtot.XY() << ", " << Rtot.XZ() << "|" << std::endl
+	      << "| R_yx,  R_yy,  R_yz | = |" << Rtot.YX() << ", " << Rtot.YY() << ", " << Rtot.YZ() << "|" << std::endl
+	      << "| R_zx,  R_zy,  R_zz | = |" << Rtot.ZX() << ", " << Rtot.ZY() << ", " << Rtot.ZZ() << "|" << std::endl;
+
+    std::cout << "GEM x axis = \n";
+    xaxis_gem.Print();
+    std::cout << "GEM y axis = \n";
+    yaxis_gem.Print(); 
+    std::cout << "GEM z axis = \n";
+    GEMdir.Print();
+    
     nevent=0; 
 
     currenttreenum = -1;
@@ -430,28 +496,24 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
 	//TVector3 GEMdir(tan(GEMtheta), tan(GEMphi), 1.0 );
 	//GEMdir = GEMdir.Unit();
 	
-	TVector3 xaxis_g(1,0,0);
-	TVector3 yaxis_g(0,1,0);
-	TVector3 zaxis_g(0,0,1);
-	
-	TRotation Rtot; 
-	Rtot.RotateZ(GEMaz);
-	Rtot.RotateY(GEMay);
-	Rtot.RotateX(GEMax);
+	TVector3 TrackPosLocal( trackX[0], trackY[0], 0.0 );
 
-	TVector3 GEMdir = Rtot * zaxis_g;
-
-	//	TVector3 xaxis_gem = yaxis_g.Cross(GEMdir).Unit();
-	//TVector3 yaxis_gem = GEMdir.Cross(xaxis_gem).Unit();
-	
-	TVector3 xaxis_gem = Rtot * xaxis_g;
-	TVector3 yaxis_gem = Rtot * yaxis_g;
-
-	TVector3 TrackPosGlobal = GEMPOS + trackX[0]*xaxis_gem + trackY[0]*yaxis_gem;
+	TVector3 TrackPosGlobal = GEMPOS + Rtot * TrackPosLocal;
 	TVector3 TrackDirLocal(trackXp[0],trackYp[0],1.0);
 	TrackDirLocal = TrackDirLocal.Unit();
-	TVector3 TrackDirGlobal = TrackDirLocal.X() * xaxis_gem + 
-	  TrackDirLocal.Y() * yaxis_gem + TrackDirLocal.Z() * GEMdir;
+	TVector3 TrackDirGlobal = Rinv * TrackDirLocal;
+	//TVector3 TrackDirGlobal = TrackDirLocal.X() * xaxis_gem + 
+	//  TrackDirLocal.Y() * yaxis_gem + TrackDirLocal.Z() * GEMdir;
+	// std::cout << "Event " << nevent << std::endl;
+	// std::cout << "Track position, local = ";
+	// TrackPosLocal.Print();
+	// std::cout << "Track position, global = ";
+	// TrackPosGlobal.Print();
+	
+	// std::cout << "Track direction, BEFORE rotation = ";
+	// TrackDirLocal.Print();
+	// std::cout << "Track direction, AFTER rotation = ";
+	// TrackDirGlobal.Print();
 	
 	double sintersect = -TrackPosGlobal.Dot( zaxis_g ) / TrackDirGlobal.Dot( zaxis_g );
 	TVector3 TrackIntersectGlobal = TrackPosGlobal + sintersect * TrackDirGlobal;
@@ -480,7 +542,15 @@ void AlignZeroField_SBSGEM_StraightThrough_NoSieve( const char *configfilename )
 
     fout->Write();
 
-
+    TString posout;
+    posout.Form("sbs.gemorigin_xyz = %12.6g %12.6g %12.6g",GEMX0,GEMY0,GEMZ0);
+    dbfile << posout.Data() << endl;
+    TString rotout;
+    // Output angles in degrees since that seems to be the usual convention
+    // for database angles in Podd:
+    rotout.Form("sbs.gemangles_xyz = %12.6g %12.6g %12.6g", GEMax*180.0/PI, GEMay*180.0/PI, GEMaz*180.0/PI);
+    dbfile << rotout.Data() << endl;
+    
   } else {
     return;
   }
