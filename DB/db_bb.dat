@@ -1097,8 +1097,8 @@ bb.gemtheta = 8.81847
 bb.gemphi = 179.534
 
 # new straight-track results using x,y,z angles instead of theta,phi:
-#bb.gemorigin_xyz = -0.21364 0.03929 3.119995
-#bb.gemangles_xyz = -0.09598 -8.82304 0.23577
+bb.gemorigin_xyz = -0.21364 0.03929 3.119995
+bb.gemangles_xyz = -0.09598 -8.82304 0.23577
 
 # NOTE: ZSIEVE = 1.59074
 
@@ -1378,10 +1378,13 @@ bb.C_pth1 = 0.0
 #bb.gemphi = 179.534
 
 # new straight-track alignment:
-bb.gemorigin_xyz = -0.20603 0.04289 2.70386
+#bb.gemorigin_xyz = -0.20603 0.04289 2.70386
 # note: ZSIEVE = 1.18572
-bb.gemtheta = 8.7696
-bb.gemphi = 178.704
+#bb.gemtheta = 8.7696
+#bb.gemphi = 178.704
+
+bb.gemorigin_xyz = -0.19821 0.03879 2.69704
+bb.gemangles_xyz = -0.11286 -8.61695 0.09501
 
 bb.optics_order = 2
 #bb.optics_parameters = 
